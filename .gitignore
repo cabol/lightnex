@@ -42,3 +42,4 @@ lightnex-*.tar
 /config
 Elixir*
 /lnd/
+/docker/data/
