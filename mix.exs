@@ -85,6 +85,10 @@ defmodule Lightnex.MixProject do
         "coveralls.html",
         "sobelow --skip --exit Low",
         "dialyzer --format short"
+      ],
+      "lightnex.protos.setup": [
+        "lightnex.protos.fetch",
+        "lightnex.protos.generate --clean --include-docs --verbose"
       ]
     ]
   end
