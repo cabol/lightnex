@@ -158,7 +158,7 @@ defmodule Mix.Tasks.Lightnex.Protos.GenerateTest do
         assert_namespace_transformation(
           lightning_file,
           "Lnrpc",
-          "Lightnex.RPC.Lightning"
+          "Lightnex.LNRPC.Lightning"
         )
       end)
     end
@@ -284,7 +284,7 @@ defmodule Mix.Tasks.Lightnex.Protos.GenerateTest do
         end)
 
         content = File.read!(Path.join(output_dir, "lightning.pb.ex"))
-        assert content =~ "defmodule Lightnex.RPC.Lightning.GetInfoRequest"
+        assert content =~ "defmodule Lightnex.LNRPC.Lightning.GetInfoRequest"
         assert content =~ "use GRPC.Service, name: \"lnrpc.Lightning\""
         refute content =~ "defmodule Lnrpc."
       end)
@@ -312,8 +312,8 @@ defmodule Mix.Tasks.Lightnex.Protos.GenerateTest do
         end)
 
         content = File.read!(Path.join(output_dir, "walletunlocker.pb.ex"))
-        assert content =~ "defmodule Lightnex.RPC.WalletUnlocker.InitWalletRequest"
-        assert content =~ "type: Lightnex.RPC.Lightning.ChanBackupSnapshot"
+        assert content =~ "defmodule Lightnex.LNRPC.WalletUnlocker.InitWalletRequest"
+        assert content =~ "type: Lightnex.LNRPC.Lightning.ChanBackupSnapshot"
         assert content =~ "use GRPC.Service, name: \"lnrpc.WalletUnlocker\""
       end)
     end

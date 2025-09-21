@@ -1,4 +1,4 @@
-defmodule Lightnex.RPC.Peers.UpdateAction do
+defmodule Lightnex.LNRPC.Peers.UpdateAction do
   @moduledoc """
   UpdateAction is used to determine the kind of action we are referring to.
   """
@@ -9,7 +9,7 @@ defmodule Lightnex.RPC.Peers.UpdateAction do
   field :REMOVE, 1
 end
 
-defmodule Lightnex.RPC.Peers.FeatureSet do
+defmodule Lightnex.LNRPC.Peers.FeatureSet do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :SET_INIT, 0
@@ -19,30 +19,30 @@ defmodule Lightnex.RPC.Peers.FeatureSet do
   field :SET_INVOICE_AMP, 4
 end
 
-defmodule Lightnex.RPC.Peers.UpdateAddressAction do
+defmodule Lightnex.LNRPC.Peers.UpdateAddressAction do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :action, 1, type: Lightnex.RPC.Peers.UpdateAction, enum: true
+  field :action, 1, type: Lightnex.LNRPC.Peers.UpdateAction, enum: true
   field :address, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Peers.UpdateFeatureAction do
+defmodule Lightnex.LNRPC.Peers.UpdateFeatureAction do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :action, 1, type: Lightnex.RPC.Peers.UpdateAction, enum: true
+  field :action, 1, type: Lightnex.LNRPC.Peers.UpdateAction, enum: true
 
   field :feature_bit, 2,
-    type: Lightnex.RPC.Lightning.FeatureBit,
+    type: Lightnex.LNRPC.Lightning.FeatureBit,
     json_name: "featureBit",
     enum: true
 end
 
-defmodule Lightnex.RPC.Peers.NodeAnnouncementUpdateRequest do
+defmodule Lightnex.LNRPC.Peers.NodeAnnouncementUpdateRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :feature_updates, 1,
     repeated: true,
-    type: Lightnex.RPC.Peers.UpdateFeatureAction,
+    type: Lightnex.LNRPC.Peers.UpdateFeatureAction,
     json_name: "featureUpdates"
 
   field :color, 2, type: :string
@@ -50,17 +50,17 @@ defmodule Lightnex.RPC.Peers.NodeAnnouncementUpdateRequest do
 
   field :address_updates, 4,
     repeated: true,
-    type: Lightnex.RPC.Peers.UpdateAddressAction,
+    type: Lightnex.LNRPC.Peers.UpdateAddressAction,
     json_name: "addressUpdates"
 end
 
-defmodule Lightnex.RPC.Peers.NodeAnnouncementUpdateResponse do
+defmodule Lightnex.LNRPC.Peers.NodeAnnouncementUpdateResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :ops, 1, repeated: true, type: Lightnex.RPC.Lightning.Op
+  field :ops, 1, repeated: true, type: Lightnex.LNRPC.Lightning.Op
 end
 
-defmodule Lightnex.RPC.Peers.Service do
+defmodule Lightnex.LNRPC.Peers.Service do
   @moduledoc """
   Peers is a service that can be used to get information and interact
   with the other nodes of the network.
@@ -69,10 +69,10 @@ defmodule Lightnex.RPC.Peers.Service do
   use GRPC.Service, name: "peersrpc.Peers", protoc_gen_elixir_version: "0.15.0"
 
   rpc :UpdateNodeAnnouncement,
-      Lightnex.RPC.Peers.NodeAnnouncementUpdateRequest,
-      Lightnex.RPC.Peers.NodeAnnouncementUpdateResponse
+      Lightnex.LNRPC.Peers.NodeAnnouncementUpdateRequest,
+      Lightnex.LNRPC.Peers.NodeAnnouncementUpdateResponse
 end
 
-defmodule Lightnex.RPC.Peers.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.Peers.Service
+defmodule Lightnex.LNRPC.Peers.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.Peers.Service
 end

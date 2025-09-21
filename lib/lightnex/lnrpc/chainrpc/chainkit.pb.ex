@@ -1,10 +1,10 @@
-defmodule Lightnex.RPC.ChainKit.GetBlockRequest do
+defmodule Lightnex.LNRPC.ChainKit.GetBlockRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :block_hash, 1, type: :bytes, json_name: "blockHash"
 end
 
-defmodule Lightnex.RPC.ChainKit.GetBlockResponse do
+defmodule Lightnex.LNRPC.ChainKit.GetBlockResponse do
   @moduledoc """
   TODO(ffranr): The neutrino GetBlock response includes many
   additional helpful fields. Consider adding them here also.
@@ -15,42 +15,42 @@ defmodule Lightnex.RPC.ChainKit.GetBlockResponse do
   field :raw_block, 1, type: :bytes, json_name: "rawBlock"
 end
 
-defmodule Lightnex.RPC.ChainKit.GetBlockHeaderRequest do
+defmodule Lightnex.LNRPC.ChainKit.GetBlockHeaderRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :block_hash, 1, type: :bytes, json_name: "blockHash"
 end
 
-defmodule Lightnex.RPC.ChainKit.GetBlockHeaderResponse do
+defmodule Lightnex.LNRPC.ChainKit.GetBlockHeaderResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :raw_block_header, 1, type: :bytes, json_name: "rawBlockHeader"
 end
 
-defmodule Lightnex.RPC.ChainKit.GetBestBlockRequest do
+defmodule Lightnex.LNRPC.ChainKit.GetBestBlockRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.ChainKit.GetBestBlockResponse do
+defmodule Lightnex.LNRPC.ChainKit.GetBestBlockResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :block_hash, 1, type: :bytes, json_name: "blockHash"
   field :block_height, 2, type: :int32, json_name: "blockHeight"
 end
 
-defmodule Lightnex.RPC.ChainKit.GetBlockHashRequest do
+defmodule Lightnex.LNRPC.ChainKit.GetBlockHashRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :block_height, 1, type: :int64, json_name: "blockHeight"
 end
 
-defmodule Lightnex.RPC.ChainKit.GetBlockHashResponse do
+defmodule Lightnex.LNRPC.ChainKit.GetBlockHashResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :block_hash, 1, type: :bytes, json_name: "blockHash"
 end
 
-defmodule Lightnex.RPC.ChainKit.Service do
+defmodule Lightnex.LNRPC.ChainKit.Service do
   @moduledoc """
   ChainKit is a service that can be used to get information from the
   chain backend.
@@ -58,21 +58,21 @@ defmodule Lightnex.RPC.ChainKit.Service do
 
   use GRPC.Service, name: "chainrpc.ChainKit", protoc_gen_elixir_version: "0.15.0"
 
-  rpc :GetBlock, Lightnex.RPC.ChainKit.GetBlockRequest, Lightnex.RPC.ChainKit.GetBlockResponse
+  rpc :GetBlock, Lightnex.LNRPC.ChainKit.GetBlockRequest, Lightnex.LNRPC.ChainKit.GetBlockResponse
 
   rpc :GetBlockHeader,
-      Lightnex.RPC.ChainKit.GetBlockHeaderRequest,
-      Lightnex.RPC.ChainKit.GetBlockHeaderResponse
+      Lightnex.LNRPC.ChainKit.GetBlockHeaderRequest,
+      Lightnex.LNRPC.ChainKit.GetBlockHeaderResponse
 
   rpc :GetBestBlock,
-      Lightnex.RPC.ChainKit.GetBestBlockRequest,
-      Lightnex.RPC.ChainKit.GetBestBlockResponse
+      Lightnex.LNRPC.ChainKit.GetBestBlockRequest,
+      Lightnex.LNRPC.ChainKit.GetBestBlockResponse
 
   rpc :GetBlockHash,
-      Lightnex.RPC.ChainKit.GetBlockHashRequest,
-      Lightnex.RPC.ChainKit.GetBlockHashResponse
+      Lightnex.LNRPC.ChainKit.GetBlockHashRequest,
+      Lightnex.LNRPC.ChainKit.GetBlockHashResponse
 end
 
-defmodule Lightnex.RPC.ChainKit.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.ChainKit.Service
+defmodule Lightnex.LNRPC.ChainKit.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.ChainKit.Service
 end

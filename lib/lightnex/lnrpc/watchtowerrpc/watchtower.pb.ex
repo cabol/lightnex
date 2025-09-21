@@ -1,8 +1,8 @@
-defmodule Lightnex.RPC.Watchtower.GetInfoRequest do
+defmodule Lightnex.LNRPC.Watchtower.GetInfoRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Watchtower.GetInfoResponse do
+defmodule Lightnex.LNRPC.Watchtower.GetInfoResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pubkey, 1, type: :bytes
@@ -10,7 +10,7 @@ defmodule Lightnex.RPC.Watchtower.GetInfoResponse do
   field :uris, 3, repeated: true, type: :string
 end
 
-defmodule Lightnex.RPC.Watchtower.Service do
+defmodule Lightnex.LNRPC.Watchtower.Service do
   @moduledoc """
   Watchtower is a service that grants access to the watchtower server
   functionality of the daemon.
@@ -33,9 +33,11 @@ defmodule Lightnex.RPC.Watchtower.Service do
 
   use GRPC.Service, name: "watchtowerrpc.Watchtower", protoc_gen_elixir_version: "0.15.0"
 
-  rpc :GetInfo, Lightnex.RPC.Watchtower.GetInfoRequest, Lightnex.RPC.Watchtower.GetInfoResponse
+  rpc :GetInfo,
+      Lightnex.LNRPC.Watchtower.GetInfoRequest,
+      Lightnex.LNRPC.Watchtower.GetInfoResponse
 end
 
-defmodule Lightnex.RPC.Watchtower.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.Watchtower.Service
+defmodule Lightnex.LNRPC.Watchtower.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.Watchtower.Service
 end

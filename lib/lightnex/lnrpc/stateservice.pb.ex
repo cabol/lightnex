@@ -1,4 +1,4 @@
-defmodule Lightnex.RPC.State.WalletState do
+defmodule Lightnex.LNRPC.State.WalletState do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :NON_EXISTING, 0
@@ -9,27 +9,27 @@ defmodule Lightnex.RPC.State.WalletState do
   field :WAITING_TO_START, 255
 end
 
-defmodule Lightnex.RPC.State.SubscribeStateRequest do
+defmodule Lightnex.LNRPC.State.SubscribeStateRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.State.SubscribeStateResponse do
+defmodule Lightnex.LNRPC.State.SubscribeStateResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :state, 1, type: Lightnex.RPC.State.WalletState, enum: true
+  field :state, 1, type: Lightnex.LNRPC.State.WalletState, enum: true
 end
 
-defmodule Lightnex.RPC.State.GetStateRequest do
+defmodule Lightnex.LNRPC.State.GetStateRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.State.GetStateResponse do
+defmodule Lightnex.LNRPC.State.GetStateResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :state, 1, type: Lightnex.RPC.State.WalletState, enum: true
+  field :state, 1, type: Lightnex.LNRPC.State.WalletState, enum: true
 end
 
-defmodule Lightnex.RPC.State.State.Service do
+defmodule Lightnex.LNRPC.State.State.Service do
   @moduledoc """
   State service is a always running service that exposes the current state of
   the wallet and RPC server.
@@ -53,12 +53,12 @@ defmodule Lightnex.RPC.State.State.Service do
   use GRPC.Service, name: "lnrpc.State", protoc_gen_elixir_version: "0.15.0"
 
   rpc :SubscribeState,
-      Lightnex.RPC.State.SubscribeStateRequest,
-      stream(Lightnex.RPC.State.SubscribeStateResponse)
+      Lightnex.LNRPC.State.SubscribeStateRequest,
+      stream(Lightnex.LNRPC.State.SubscribeStateResponse)
 
-  rpc :GetState, Lightnex.RPC.State.GetStateRequest, Lightnex.RPC.State.GetStateResponse
+  rpc :GetState, Lightnex.LNRPC.State.GetStateRequest, Lightnex.LNRPC.State.GetStateResponse
 end
 
-defmodule Lightnex.RPC.State.State.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.State.State.Service
+defmodule Lightnex.LNRPC.State.State.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.State.State.Service
 end

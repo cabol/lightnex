@@ -6,7 +6,7 @@
   "skip_files": [
     "lib/lightnex.ex",
     "lib/mix/lightnex.ex",
-    "lib/lightnex/rpc/*",
+    "lib/lightnex/lnrpc/*",
     "test/support/*"
   ]
 }

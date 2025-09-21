@@ -1,4 +1,4 @@
-defmodule Lightnex.RPC.Router.FailureDetail do
+defmodule Lightnex.LNRPC.Router.FailureDetail do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UNKNOWN, 0
@@ -26,7 +26,7 @@ defmodule Lightnex.RPC.Router.FailureDetail do
   field :CIRCULAR_ROUTE, 22
 end
 
-defmodule Lightnex.RPC.Router.PaymentState do
+defmodule Lightnex.LNRPC.Router.PaymentState do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :IN_FLIGHT, 0
@@ -38,7 +38,7 @@ defmodule Lightnex.RPC.Router.PaymentState do
   field :FAILED_INSUFFICIENT_BALANCE, 6
 end
 
-defmodule Lightnex.RPC.Router.ResolveHoldForwardAction do
+defmodule Lightnex.LNRPC.Router.ResolveHoldForwardAction do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :SETTLE, 0
@@ -47,7 +47,7 @@ defmodule Lightnex.RPC.Router.ResolveHoldForwardAction do
   field :RESUME_MODIFIED, 3
 end
 
-defmodule Lightnex.RPC.Router.ChanStatusAction do
+defmodule Lightnex.LNRPC.Router.ChanStatusAction do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :ENABLE, 0
@@ -55,14 +55,14 @@ defmodule Lightnex.RPC.Router.ChanStatusAction do
   field :AUTO, 2
 end
 
-defmodule Lightnex.RPC.Router.MissionControlConfig.ProbabilityModel do
+defmodule Lightnex.LNRPC.Router.MissionControlConfig.ProbabilityModel do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :APRIORI, 0
   field :BIMODAL, 1
 end
 
-defmodule Lightnex.RPC.Router.HtlcEvent.EventType do
+defmodule Lightnex.LNRPC.Router.HtlcEvent.EventType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UNKNOWN, 0
@@ -71,21 +71,21 @@ defmodule Lightnex.RPC.Router.HtlcEvent.EventType do
   field :FORWARD, 3
 end
 
-defmodule Lightnex.RPC.Router.SendPaymentRequest.DestCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Router.SendPaymentRequest.DestCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Router.SendPaymentRequest.FirstHopCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Router.SendPaymentRequest.FirstHopCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Router.SendPaymentRequest do
+defmodule Lightnex.LNRPC.Router.SendPaymentRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :dest, 1, type: :bytes
@@ -100,12 +100,12 @@ defmodule Lightnex.RPC.Router.SendPaymentRequest do
 
   field :route_hints, 10,
     repeated: true,
-    type: Lightnex.RPC.Lightning.RouteHint,
+    type: Lightnex.LNRPC.Lightning.RouteHint,
     json_name: "routeHints"
 
   field :dest_custom_records, 11,
     repeated: true,
-    type: Lightnex.RPC.Router.SendPaymentRequest.DestCustomRecordsEntry,
+    type: Lightnex.LNRPC.Router.SendPaymentRequest.DestCustomRecordsEntry,
     json_name: "destCustomRecords",
     map: true
 
@@ -116,7 +116,7 @@ defmodule Lightnex.RPC.Router.SendPaymentRequest do
 
   field :dest_features, 16,
     repeated: true,
-    type: Lightnex.RPC.Lightning.FeatureBit,
+    type: Lightnex.LNRPC.Lightning.FeatureBit,
     json_name: "destFeatures",
     enum: true
 
@@ -131,25 +131,25 @@ defmodule Lightnex.RPC.Router.SendPaymentRequest do
 
   field :first_hop_custom_records, 25,
     repeated: true,
-    type: Lightnex.RPC.Router.SendPaymentRequest.FirstHopCustomRecordsEntry,
+    type: Lightnex.LNRPC.Router.SendPaymentRequest.FirstHopCustomRecordsEntry,
     json_name: "firstHopCustomRecords",
     map: true
 end
 
-defmodule Lightnex.RPC.Router.TrackPaymentRequest do
+defmodule Lightnex.LNRPC.Router.TrackPaymentRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :payment_hash, 1, type: :bytes, json_name: "paymentHash"
   field :no_inflight_updates, 2, type: :bool, json_name: "noInflightUpdates"
 end
 
-defmodule Lightnex.RPC.Router.TrackPaymentsRequest do
+defmodule Lightnex.LNRPC.Router.TrackPaymentsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :no_inflight_updates, 1, type: :bool, json_name: "noInflightUpdates"
 end
 
-defmodule Lightnex.RPC.Router.RouteFeeRequest do
+defmodule Lightnex.LNRPC.Router.RouteFeeRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :dest, 1, type: :bytes
@@ -158,80 +158,80 @@ defmodule Lightnex.RPC.Router.RouteFeeRequest do
   field :timeout, 4, type: :uint32
 end
 
-defmodule Lightnex.RPC.Router.RouteFeeResponse do
+defmodule Lightnex.LNRPC.Router.RouteFeeResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :routing_fee_msat, 1, type: :int64, json_name: "routingFeeMsat"
   field :time_lock_delay, 2, type: :int64, json_name: "timeLockDelay"
 
   field :failure_reason, 5,
-    type: Lightnex.RPC.Lightning.PaymentFailureReason,
+    type: Lightnex.LNRPC.Lightning.PaymentFailureReason,
     json_name: "failureReason",
     enum: true
 end
 
-defmodule Lightnex.RPC.Router.SendToRouteRequest.FirstHopCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Router.SendToRouteRequest.FirstHopCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Router.SendToRouteRequest do
+defmodule Lightnex.LNRPC.Router.SendToRouteRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :payment_hash, 1, type: :bytes, json_name: "paymentHash"
-  field :route, 2, type: Lightnex.RPC.Lightning.Route
+  field :route, 2, type: Lightnex.LNRPC.Lightning.Route
   field :skip_temp_err, 3, type: :bool, json_name: "skipTempErr"
 
   field :first_hop_custom_records, 4,
     repeated: true,
-    type: Lightnex.RPC.Router.SendToRouteRequest.FirstHopCustomRecordsEntry,
+    type: Lightnex.LNRPC.Router.SendToRouteRequest.FirstHopCustomRecordsEntry,
     json_name: "firstHopCustomRecords",
     map: true
 end
 
-defmodule Lightnex.RPC.Router.SendToRouteResponse do
+defmodule Lightnex.LNRPC.Router.SendToRouteResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :preimage, 1, type: :bytes
-  field :failure, 2, type: Lightnex.RPC.Lightning.Failure
+  field :failure, 2, type: Lightnex.LNRPC.Lightning.Failure
 end
 
-defmodule Lightnex.RPC.Router.ResetMissionControlRequest do
+defmodule Lightnex.LNRPC.Router.ResetMissionControlRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.ResetMissionControlResponse do
+defmodule Lightnex.LNRPC.Router.ResetMissionControlResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.QueryMissionControlRequest do
+defmodule Lightnex.LNRPC.Router.QueryMissionControlRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.QueryMissionControlResponse do
+defmodule Lightnex.LNRPC.Router.QueryMissionControlResponse do
   @moduledoc """
   QueryMissionControlResponse contains mission control state.
   """
 
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :pairs, 2, repeated: true, type: Lightnex.RPC.Router.PairHistory
+  field :pairs, 2, repeated: true, type: Lightnex.LNRPC.Router.PairHistory
 end
 
-defmodule Lightnex.RPC.Router.XImportMissionControlRequest do
+defmodule Lightnex.LNRPC.Router.XImportMissionControlRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :pairs, 1, repeated: true, type: Lightnex.RPC.Router.PairHistory
+  field :pairs, 1, repeated: true, type: Lightnex.LNRPC.Router.PairHistory
   field :force, 2, type: :bool
 end
 
-defmodule Lightnex.RPC.Router.XImportMissionControlResponse do
+defmodule Lightnex.LNRPC.Router.XImportMissionControlResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.PairHistory do
+defmodule Lightnex.LNRPC.Router.PairHistory do
   @moduledoc """
   PairHistory contains the mission control state for a particular node pair.
   """
@@ -240,10 +240,10 @@ defmodule Lightnex.RPC.Router.PairHistory do
 
   field :node_from, 1, type: :bytes, json_name: "nodeFrom"
   field :node_to, 2, type: :bytes, json_name: "nodeTo"
-  field :history, 7, type: Lightnex.RPC.Router.PairData
+  field :history, 7, type: Lightnex.LNRPC.Router.PairData
 end
 
-defmodule Lightnex.RPC.Router.PairData do
+defmodule Lightnex.LNRPC.Router.PairData do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :fail_time, 1, type: :int64, json_name: "failTime"
@@ -254,27 +254,27 @@ defmodule Lightnex.RPC.Router.PairData do
   field :success_amt_msat, 7, type: :int64, json_name: "successAmtMsat"
 end
 
-defmodule Lightnex.RPC.Router.GetMissionControlConfigRequest do
+defmodule Lightnex.LNRPC.Router.GetMissionControlConfigRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.GetMissionControlConfigResponse do
+defmodule Lightnex.LNRPC.Router.GetMissionControlConfigResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :config, 1, type: Lightnex.RPC.Router.MissionControlConfig
+  field :config, 1, type: Lightnex.LNRPC.Router.MissionControlConfig
 end
 
-defmodule Lightnex.RPC.Router.SetMissionControlConfigRequest do
+defmodule Lightnex.LNRPC.Router.SetMissionControlConfigRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :config, 1, type: Lightnex.RPC.Router.MissionControlConfig
+  field :config, 1, type: Lightnex.LNRPC.Router.MissionControlConfig
 end
 
-defmodule Lightnex.RPC.Router.SetMissionControlConfigResponse do
+defmodule Lightnex.LNRPC.Router.SetMissionControlConfigResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.MissionControlConfig do
+defmodule Lightnex.LNRPC.Router.MissionControlConfig do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :EstimatorConfig, 0
@@ -288,12 +288,12 @@ defmodule Lightnex.RPC.Router.MissionControlConfig do
     type: :uint64,
     json_name: "minimumFailureRelaxInterval"
 
-  field :model, 6, type: Lightnex.RPC.Router.MissionControlConfig.ProbabilityModel, enum: true
-  field :apriori, 7, type: Lightnex.RPC.Router.AprioriParameters, oneof: 0
-  field :bimodal, 8, type: Lightnex.RPC.Router.BimodalParameters, oneof: 0
+  field :model, 6, type: Lightnex.LNRPC.Router.MissionControlConfig.ProbabilityModel, enum: true
+  field :apriori, 7, type: Lightnex.LNRPC.Router.AprioriParameters, oneof: 0
+  field :bimodal, 8, type: Lightnex.LNRPC.Router.BimodalParameters, oneof: 0
 end
 
-defmodule Lightnex.RPC.Router.BimodalParameters do
+defmodule Lightnex.LNRPC.Router.BimodalParameters do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :node_weight, 1, type: :double, json_name: "nodeWeight"
@@ -301,7 +301,7 @@ defmodule Lightnex.RPC.Router.BimodalParameters do
   field :decay_time, 3, type: :uint64, json_name: "decayTime"
 end
 
-defmodule Lightnex.RPC.Router.AprioriParameters do
+defmodule Lightnex.LNRPC.Router.AprioriParameters do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :half_life_seconds, 1, type: :uint64, json_name: "halfLifeSeconds"
@@ -310,7 +310,7 @@ defmodule Lightnex.RPC.Router.AprioriParameters do
   field :capacity_fraction, 4, type: :double, json_name: "capacityFraction"
 end
 
-defmodule Lightnex.RPC.Router.QueryProbabilityRequest do
+defmodule Lightnex.LNRPC.Router.QueryProbabilityRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :from_node, 1, type: :bytes, json_name: "fromNode"
@@ -318,21 +318,21 @@ defmodule Lightnex.RPC.Router.QueryProbabilityRequest do
   field :amt_msat, 3, type: :int64, json_name: "amtMsat"
 end
 
-defmodule Lightnex.RPC.Router.QueryProbabilityResponse do
+defmodule Lightnex.LNRPC.Router.QueryProbabilityResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :probability, 1, type: :double
-  field :history, 2, type: Lightnex.RPC.Router.PairData
+  field :history, 2, type: Lightnex.LNRPC.Router.PairData
 end
 
-defmodule Lightnex.RPC.Router.BuildRouteRequest.FirstHopCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Router.BuildRouteRequest.FirstHopCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Router.BuildRouteRequest do
+defmodule Lightnex.LNRPC.Router.BuildRouteRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :amt_msat, 1, type: :int64, json_name: "amtMsat"
@@ -343,22 +343,22 @@ defmodule Lightnex.RPC.Router.BuildRouteRequest do
 
   field :first_hop_custom_records, 6,
     repeated: true,
-    type: Lightnex.RPC.Router.BuildRouteRequest.FirstHopCustomRecordsEntry,
+    type: Lightnex.LNRPC.Router.BuildRouteRequest.FirstHopCustomRecordsEntry,
     json_name: "firstHopCustomRecords",
     map: true
 end
 
-defmodule Lightnex.RPC.Router.BuildRouteResponse do
+defmodule Lightnex.LNRPC.Router.BuildRouteResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :route, 1, type: Lightnex.RPC.Lightning.Route
+  field :route, 1, type: Lightnex.LNRPC.Lightning.Route
 end
 
-defmodule Lightnex.RPC.Router.SubscribeHtlcEventsRequest do
+defmodule Lightnex.LNRPC.Router.SubscribeHtlcEventsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.HtlcEvent do
+defmodule Lightnex.LNRPC.Router.HtlcEvent do
   @moduledoc """
   HtlcEvent contains the htlc event that was processed. These are served on a
   best-effort basis; events are not persisted, delivery is not guaranteed
@@ -379,42 +379,42 @@ defmodule Lightnex.RPC.Router.HtlcEvent do
   field :timestamp_ns, 5, type: :uint64, json_name: "timestampNs"
 
   field :event_type, 6,
-    type: Lightnex.RPC.Router.HtlcEvent.EventType,
+    type: Lightnex.LNRPC.Router.HtlcEvent.EventType,
     json_name: "eventType",
     enum: true
 
   field :forward_event, 7,
-    type: Lightnex.RPC.Router.ForwardEvent,
+    type: Lightnex.LNRPC.Router.ForwardEvent,
     json_name: "forwardEvent",
     oneof: 0
 
   field :forward_fail_event, 8,
-    type: Lightnex.RPC.Router.ForwardFailEvent,
+    type: Lightnex.LNRPC.Router.ForwardFailEvent,
     json_name: "forwardFailEvent",
     oneof: 0
 
   field :settle_event, 9,
-    type: Lightnex.RPC.Router.SettleEvent,
+    type: Lightnex.LNRPC.Router.SettleEvent,
     json_name: "settleEvent",
     oneof: 0
 
   field :link_fail_event, 10,
-    type: Lightnex.RPC.Router.LinkFailEvent,
+    type: Lightnex.LNRPC.Router.LinkFailEvent,
     json_name: "linkFailEvent",
     oneof: 0
 
   field :subscribed_event, 11,
-    type: Lightnex.RPC.Router.SubscribedEvent,
+    type: Lightnex.LNRPC.Router.SubscribedEvent,
     json_name: "subscribedEvent",
     oneof: 0
 
   field :final_htlc_event, 12,
-    type: Lightnex.RPC.Router.FinalHtlcEvent,
+    type: Lightnex.LNRPC.Router.FinalHtlcEvent,
     json_name: "finalHtlcEvent",
     oneof: 0
 end
 
-defmodule Lightnex.RPC.Router.HtlcInfo do
+defmodule Lightnex.LNRPC.Router.HtlcInfo do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :incoming_timelock, 1, type: :uint32, json_name: "incomingTimelock"
@@ -423,85 +423,85 @@ defmodule Lightnex.RPC.Router.HtlcInfo do
   field :outgoing_amt_msat, 4, type: :uint64, json_name: "outgoingAmtMsat"
 end
 
-defmodule Lightnex.RPC.Router.ForwardEvent do
+defmodule Lightnex.LNRPC.Router.ForwardEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :info, 1, type: Lightnex.RPC.Router.HtlcInfo
+  field :info, 1, type: Lightnex.LNRPC.Router.HtlcInfo
 end
 
-defmodule Lightnex.RPC.Router.ForwardFailEvent do
+defmodule Lightnex.LNRPC.Router.ForwardFailEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.SettleEvent do
+defmodule Lightnex.LNRPC.Router.SettleEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :preimage, 1, type: :bytes
 end
 
-defmodule Lightnex.RPC.Router.FinalHtlcEvent do
+defmodule Lightnex.LNRPC.Router.FinalHtlcEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :settled, 1, type: :bool
   field :offchain, 2, type: :bool
 end
 
-defmodule Lightnex.RPC.Router.SubscribedEvent do
+defmodule Lightnex.LNRPC.Router.SubscribedEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.LinkFailEvent do
+defmodule Lightnex.LNRPC.Router.LinkFailEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :info, 1, type: Lightnex.RPC.Router.HtlcInfo
+  field :info, 1, type: Lightnex.LNRPC.Router.HtlcInfo
 
   field :wire_failure, 2,
-    type: Lightnex.RPC.Lightning.Failure.FailureCode,
+    type: Lightnex.LNRPC.Lightning.Failure.FailureCode,
     json_name: "wireFailure",
     enum: true
 
   field :failure_detail, 3,
-    type: Lightnex.RPC.Router.FailureDetail,
+    type: Lightnex.LNRPC.Router.FailureDetail,
     json_name: "failureDetail",
     enum: true
 
   field :failure_string, 4, type: :string, json_name: "failureString"
 end
 
-defmodule Lightnex.RPC.Router.PaymentStatus do
+defmodule Lightnex.LNRPC.Router.PaymentStatus do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :state, 1, type: Lightnex.RPC.Router.PaymentState, enum: true
+  field :state, 1, type: Lightnex.LNRPC.Router.PaymentState, enum: true
   field :preimage, 2, type: :bytes
-  field :htlcs, 4, repeated: true, type: Lightnex.RPC.Lightning.HTLCAttempt
+  field :htlcs, 4, repeated: true, type: Lightnex.LNRPC.Lightning.HTLCAttempt
 end
 
-defmodule Lightnex.RPC.Router.CircuitKey do
+defmodule Lightnex.LNRPC.Router.CircuitKey do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_id, 1, type: :uint64, json_name: "chanId"
   field :htlc_id, 2, type: :uint64, json_name: "htlcId"
 end
 
-defmodule Lightnex.RPC.Router.ForwardHtlcInterceptRequest.CustomRecordsEntry do
+defmodule Lightnex.LNRPC.Router.ForwardHtlcInterceptRequest.CustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Router.ForwardHtlcInterceptRequest.InWireCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Router.ForwardHtlcInterceptRequest.InWireCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Router.ForwardHtlcInterceptRequest do
+defmodule Lightnex.LNRPC.Router.ForwardHtlcInterceptRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :incoming_circuit_key, 1,
-    type: Lightnex.RPC.Router.CircuitKey,
+    type: Lightnex.LNRPC.Router.CircuitKey,
     json_name: "incomingCircuitKey"
 
   field :incoming_amount_msat, 5, type: :uint64, json_name: "incomingAmountMsat"
@@ -513,7 +513,7 @@ defmodule Lightnex.RPC.Router.ForwardHtlcInterceptRequest do
 
   field :custom_records, 8,
     repeated: true,
-    type: Lightnex.RPC.Router.ForwardHtlcInterceptRequest.CustomRecordsEntry,
+    type: Lightnex.LNRPC.Router.ForwardHtlcInterceptRequest.CustomRecordsEntry,
     json_name: "customRecords",
     map: true
 
@@ -522,19 +522,19 @@ defmodule Lightnex.RPC.Router.ForwardHtlcInterceptRequest do
 
   field :in_wire_custom_records, 11,
     repeated: true,
-    type: Lightnex.RPC.Router.ForwardHtlcInterceptRequest.InWireCustomRecordsEntry,
+    type: Lightnex.LNRPC.Router.ForwardHtlcInterceptRequest.InWireCustomRecordsEntry,
     json_name: "inWireCustomRecords",
     map: true
 end
 
-defmodule Lightnex.RPC.Router.ForwardHtlcInterceptResponse.OutWireCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Router.ForwardHtlcInterceptResponse.OutWireCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Router.ForwardHtlcInterceptResponse do
+defmodule Lightnex.LNRPC.Router.ForwardHtlcInterceptResponse do
   @moduledoc """
   *
   ForwardHtlcInterceptResponse enables the caller to resolve a previously hold
@@ -549,15 +549,15 @@ defmodule Lightnex.RPC.Router.ForwardHtlcInterceptResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :incoming_circuit_key, 1,
-    type: Lightnex.RPC.Router.CircuitKey,
+    type: Lightnex.LNRPC.Router.CircuitKey,
     json_name: "incomingCircuitKey"
 
-  field :action, 2, type: Lightnex.RPC.Router.ResolveHoldForwardAction, enum: true
+  field :action, 2, type: Lightnex.LNRPC.Router.ResolveHoldForwardAction, enum: true
   field :preimage, 3, type: :bytes
   field :failure_message, 4, type: :bytes, json_name: "failureMessage"
 
   field :failure_code, 5,
-    type: Lightnex.RPC.Lightning.Failure.FailureCode,
+    type: Lightnex.LNRPC.Lightning.Failure.FailureCode,
     json_name: "failureCode",
     enum: true
 
@@ -566,59 +566,59 @@ defmodule Lightnex.RPC.Router.ForwardHtlcInterceptResponse do
 
   field :out_wire_custom_records, 8,
     repeated: true,
-    type: Lightnex.RPC.Router.ForwardHtlcInterceptResponse.OutWireCustomRecordsEntry,
+    type: Lightnex.LNRPC.Router.ForwardHtlcInterceptResponse.OutWireCustomRecordsEntry,
     json_name: "outWireCustomRecords",
     map: true
 end
 
-defmodule Lightnex.RPC.Router.UpdateChanStatusRequest do
+defmodule Lightnex.LNRPC.Router.UpdateChanStatusRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :chan_point, 1, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "chanPoint"
-  field :action, 2, type: Lightnex.RPC.Router.ChanStatusAction, enum: true
+  field :chan_point, 1, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "chanPoint"
+  field :action, 2, type: Lightnex.LNRPC.Router.ChanStatusAction, enum: true
 end
 
-defmodule Lightnex.RPC.Router.UpdateChanStatusResponse do
+defmodule Lightnex.LNRPC.Router.UpdateChanStatusResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Router.AddAliasesRequest do
-  use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
-
-  field :alias_maps, 1,
-    repeated: true,
-    type: Lightnex.RPC.Lightning.AliasMap,
-    json_name: "aliasMaps"
-end
-
-defmodule Lightnex.RPC.Router.AddAliasesResponse do
+defmodule Lightnex.LNRPC.Router.AddAliasesRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :alias_maps, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.AliasMap,
+    type: Lightnex.LNRPC.Lightning.AliasMap,
     json_name: "aliasMaps"
 end
 
-defmodule Lightnex.RPC.Router.DeleteAliasesRequest do
+defmodule Lightnex.LNRPC.Router.AddAliasesResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :alias_maps, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.AliasMap,
+    type: Lightnex.LNRPC.Lightning.AliasMap,
     json_name: "aliasMaps"
 end
 
-defmodule Lightnex.RPC.Router.DeleteAliasesResponse do
+defmodule Lightnex.LNRPC.Router.DeleteAliasesRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :alias_maps, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.AliasMap,
+    type: Lightnex.LNRPC.Lightning.AliasMap,
     json_name: "aliasMaps"
 end
 
-defmodule Lightnex.RPC.Router.Service do
+defmodule Lightnex.LNRPC.Router.DeleteAliasesResponse do
+  use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
+
+  field :alias_maps, 1,
+    repeated: true,
+    type: Lightnex.LNRPC.Lightning.AliasMap,
+    json_name: "aliasMaps"
+end
+
+defmodule Lightnex.LNRPC.Router.Service do
   @moduledoc """
   Router is a service that offers advanced interaction with the router
   subsystem of the daemon.
@@ -642,80 +642,86 @@ defmodule Lightnex.RPC.Router.Service do
   use GRPC.Service, name: "routerrpc.Router", protoc_gen_elixir_version: "0.15.0"
 
   rpc :SendPaymentV2,
-      Lightnex.RPC.Router.SendPaymentRequest,
-      stream(Lightnex.RPC.Lightning.Payment)
+      Lightnex.LNRPC.Router.SendPaymentRequest,
+      stream(Lightnex.LNRPC.Lightning.Payment)
 
   rpc :TrackPaymentV2,
-      Lightnex.RPC.Router.TrackPaymentRequest,
-      stream(Lightnex.RPC.Lightning.Payment)
+      Lightnex.LNRPC.Router.TrackPaymentRequest,
+      stream(Lightnex.LNRPC.Lightning.Payment)
 
   rpc :TrackPayments,
-      Lightnex.RPC.Router.TrackPaymentsRequest,
-      stream(Lightnex.RPC.Lightning.Payment)
+      Lightnex.LNRPC.Router.TrackPaymentsRequest,
+      stream(Lightnex.LNRPC.Lightning.Payment)
 
-  rpc :EstimateRouteFee, Lightnex.RPC.Router.RouteFeeRequest, Lightnex.RPC.Router.RouteFeeResponse
+  rpc :EstimateRouteFee,
+      Lightnex.LNRPC.Router.RouteFeeRequest,
+      Lightnex.LNRPC.Router.RouteFeeResponse
 
   rpc :SendToRoute,
-      Lightnex.RPC.Router.SendToRouteRequest,
-      Lightnex.RPC.Router.SendToRouteResponse
+      Lightnex.LNRPC.Router.SendToRouteRequest,
+      Lightnex.LNRPC.Router.SendToRouteResponse
 
-  rpc :SendToRouteV2, Lightnex.RPC.Router.SendToRouteRequest, Lightnex.RPC.Lightning.HTLCAttempt
+  rpc :SendToRouteV2,
+      Lightnex.LNRPC.Router.SendToRouteRequest,
+      Lightnex.LNRPC.Lightning.HTLCAttempt
 
   rpc :ResetMissionControl,
-      Lightnex.RPC.Router.ResetMissionControlRequest,
-      Lightnex.RPC.Router.ResetMissionControlResponse
+      Lightnex.LNRPC.Router.ResetMissionControlRequest,
+      Lightnex.LNRPC.Router.ResetMissionControlResponse
 
   rpc :QueryMissionControl,
-      Lightnex.RPC.Router.QueryMissionControlRequest,
-      Lightnex.RPC.Router.QueryMissionControlResponse
+      Lightnex.LNRPC.Router.QueryMissionControlRequest,
+      Lightnex.LNRPC.Router.QueryMissionControlResponse
 
   rpc :XImportMissionControl,
-      Lightnex.RPC.Router.XImportMissionControlRequest,
-      Lightnex.RPC.Router.XImportMissionControlResponse
+      Lightnex.LNRPC.Router.XImportMissionControlRequest,
+      Lightnex.LNRPC.Router.XImportMissionControlResponse
 
   rpc :GetMissionControlConfig,
-      Lightnex.RPC.Router.GetMissionControlConfigRequest,
-      Lightnex.RPC.Router.GetMissionControlConfigResponse
+      Lightnex.LNRPC.Router.GetMissionControlConfigRequest,
+      Lightnex.LNRPC.Router.GetMissionControlConfigResponse
 
   rpc :SetMissionControlConfig,
-      Lightnex.RPC.Router.SetMissionControlConfigRequest,
-      Lightnex.RPC.Router.SetMissionControlConfigResponse
+      Lightnex.LNRPC.Router.SetMissionControlConfigRequest,
+      Lightnex.LNRPC.Router.SetMissionControlConfigResponse
 
   rpc :QueryProbability,
-      Lightnex.RPC.Router.QueryProbabilityRequest,
-      Lightnex.RPC.Router.QueryProbabilityResponse
+      Lightnex.LNRPC.Router.QueryProbabilityRequest,
+      Lightnex.LNRPC.Router.QueryProbabilityResponse
 
-  rpc :BuildRoute, Lightnex.RPC.Router.BuildRouteRequest, Lightnex.RPC.Router.BuildRouteResponse
+  rpc :BuildRoute,
+      Lightnex.LNRPC.Router.BuildRouteRequest,
+      Lightnex.LNRPC.Router.BuildRouteResponse
 
   rpc :SubscribeHtlcEvents,
-      Lightnex.RPC.Router.SubscribeHtlcEventsRequest,
-      stream(Lightnex.RPC.Router.HtlcEvent)
+      Lightnex.LNRPC.Router.SubscribeHtlcEventsRequest,
+      stream(Lightnex.LNRPC.Router.HtlcEvent)
 
   rpc :SendPayment,
-      Lightnex.RPC.Router.SendPaymentRequest,
-      stream(Lightnex.RPC.Router.PaymentStatus)
+      Lightnex.LNRPC.Router.SendPaymentRequest,
+      stream(Lightnex.LNRPC.Router.PaymentStatus)
 
   rpc :TrackPayment,
-      Lightnex.RPC.Router.TrackPaymentRequest,
-      stream(Lightnex.RPC.Router.PaymentStatus)
+      Lightnex.LNRPC.Router.TrackPaymentRequest,
+      stream(Lightnex.LNRPC.Router.PaymentStatus)
 
   rpc :HtlcInterceptor,
-      stream(Lightnex.RPC.Router.ForwardHtlcInterceptResponse),
-      stream(Lightnex.RPC.Router.ForwardHtlcInterceptRequest)
+      stream(Lightnex.LNRPC.Router.ForwardHtlcInterceptResponse),
+      stream(Lightnex.LNRPC.Router.ForwardHtlcInterceptRequest)
 
   rpc :UpdateChanStatus,
-      Lightnex.RPC.Router.UpdateChanStatusRequest,
-      Lightnex.RPC.Router.UpdateChanStatusResponse
+      Lightnex.LNRPC.Router.UpdateChanStatusRequest,
+      Lightnex.LNRPC.Router.UpdateChanStatusResponse
 
   rpc :XAddLocalChanAliases,
-      Lightnex.RPC.Router.AddAliasesRequest,
-      Lightnex.RPC.Router.AddAliasesResponse
+      Lightnex.LNRPC.Router.AddAliasesRequest,
+      Lightnex.LNRPC.Router.AddAliasesResponse
 
   rpc :XDeleteLocalChanAliases,
-      Lightnex.RPC.Router.DeleteAliasesRequest,
-      Lightnex.RPC.Router.DeleteAliasesResponse
+      Lightnex.LNRPC.Router.DeleteAliasesRequest,
+      Lightnex.LNRPC.Router.DeleteAliasesResponse
 end
 
-defmodule Lightnex.RPC.Router.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.Router.Service
+defmodule Lightnex.LNRPC.Router.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.Router.Service
 end

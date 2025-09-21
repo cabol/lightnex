@@ -1,4 +1,4 @@
-defmodule Lightnex.RPC.WalletKit.AddressType do
+defmodule Lightnex.LNRPC.WalletKit.AddressType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UNKNOWN, 0
@@ -8,7 +8,7 @@ defmodule Lightnex.RPC.WalletKit.AddressType do
   field :TAPROOT_PUBKEY, 4
 end
 
-defmodule Lightnex.RPC.WalletKit.WitnessType do
+defmodule Lightnex.LNRPC.WalletKit.WitnessType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UNKNOWN_WITNESS, 0
@@ -49,7 +49,7 @@ defmodule Lightnex.RPC.WalletKit.WitnessType do
   field :TAPROOT_COMMITMENT_REVOKE, 35
 end
 
-defmodule Lightnex.RPC.WalletKit.ChangeAddressType do
+defmodule Lightnex.LNRPC.WalletKit.ChangeAddressType do
   @moduledoc """
   The possible change address types for default accounts and single imported
   public keys. By default, P2WPKH will be used. We don't provide the
@@ -65,7 +65,7 @@ defmodule Lightnex.RPC.WalletKit.ChangeAddressType do
   field :CHANGE_ADDRESS_TYPE_P2TR, 1
 end
 
-defmodule Lightnex.RPC.WalletKit.ListUnspentRequest do
+defmodule Lightnex.LNRPC.WalletKit.ListUnspentRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :min_confs, 1, type: :int32, json_name: "minConfs"
@@ -74,67 +74,67 @@ defmodule Lightnex.RPC.WalletKit.ListUnspentRequest do
   field :unconfirmed_only, 4, type: :bool, json_name: "unconfirmedOnly"
 end
 
-defmodule Lightnex.RPC.WalletKit.ListUnspentResponse do
+defmodule Lightnex.LNRPC.WalletKit.ListUnspentResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :utxos, 1, repeated: true, type: Lightnex.RPC.Lightning.Utxo
+  field :utxos, 1, repeated: true, type: Lightnex.LNRPC.Lightning.Utxo
 end
 
-defmodule Lightnex.RPC.WalletKit.LeaseOutputRequest do
+defmodule Lightnex.LNRPC.WalletKit.LeaseOutputRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :id, 1, type: :bytes
-  field :outpoint, 2, type: Lightnex.RPC.Lightning.OutPoint
+  field :outpoint, 2, type: Lightnex.LNRPC.Lightning.OutPoint
   field :expiration_seconds, 3, type: :uint64, json_name: "expirationSeconds"
 end
 
-defmodule Lightnex.RPC.WalletKit.LeaseOutputResponse do
+defmodule Lightnex.LNRPC.WalletKit.LeaseOutputResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :expiration, 1, type: :uint64
 end
 
-defmodule Lightnex.RPC.WalletKit.ReleaseOutputRequest do
+defmodule Lightnex.LNRPC.WalletKit.ReleaseOutputRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :id, 1, type: :bytes
-  field :outpoint, 2, type: Lightnex.RPC.Lightning.OutPoint
+  field :outpoint, 2, type: Lightnex.LNRPC.Lightning.OutPoint
 end
 
-defmodule Lightnex.RPC.WalletKit.ReleaseOutputResponse do
+defmodule Lightnex.LNRPC.WalletKit.ReleaseOutputResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.KeyReq do
+defmodule Lightnex.LNRPC.WalletKit.KeyReq do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key_finger_print, 1, type: :int32, json_name: "keyFingerPrint"
   field :key_family, 2, type: :int32, json_name: "keyFamily"
 end
 
-defmodule Lightnex.RPC.WalletKit.AddrRequest do
+defmodule Lightnex.LNRPC.WalletKit.AddrRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :account, 1, type: :string
-  field :type, 2, type: Lightnex.RPC.WalletKit.AddressType, enum: true
+  field :type, 2, type: Lightnex.LNRPC.WalletKit.AddressType, enum: true
   field :change, 3, type: :bool
 end
 
-defmodule Lightnex.RPC.WalletKit.AddrResponse do
+defmodule Lightnex.LNRPC.WalletKit.AddrResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :addr, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.Account do
+defmodule Lightnex.LNRPC.WalletKit.Account do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :name, 1, type: :string
 
   field :address_type, 2,
-    type: Lightnex.RPC.WalletKit.AddressType,
+    type: Lightnex.LNRPC.WalletKit.AddressType,
     json_name: "addressType",
     enum: true
 
@@ -146,7 +146,7 @@ defmodule Lightnex.RPC.WalletKit.Account do
   field :watch_only, 8, type: :bool, json_name: "watchOnly"
 end
 
-defmodule Lightnex.RPC.WalletKit.AddressProperty do
+defmodule Lightnex.LNRPC.WalletKit.AddressProperty do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :address, 1, type: :string
@@ -156,85 +156,85 @@ defmodule Lightnex.RPC.WalletKit.AddressProperty do
   field :public_key, 5, type: :bytes, json_name: "publicKey"
 end
 
-defmodule Lightnex.RPC.WalletKit.AccountWithAddresses do
+defmodule Lightnex.LNRPC.WalletKit.AccountWithAddresses do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :name, 1, type: :string
 
   field :address_type, 2,
-    type: Lightnex.RPC.WalletKit.AddressType,
+    type: Lightnex.LNRPC.WalletKit.AddressType,
     json_name: "addressType",
     enum: true
 
   field :derivation_path, 3, type: :string, json_name: "derivationPath"
-  field :addresses, 4, repeated: true, type: Lightnex.RPC.WalletKit.AddressProperty
+  field :addresses, 4, repeated: true, type: Lightnex.LNRPC.WalletKit.AddressProperty
 end
 
-defmodule Lightnex.RPC.WalletKit.ListAccountsRequest do
+defmodule Lightnex.LNRPC.WalletKit.ListAccountsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :name, 1, type: :string
 
   field :address_type, 2,
-    type: Lightnex.RPC.WalletKit.AddressType,
+    type: Lightnex.LNRPC.WalletKit.AddressType,
     json_name: "addressType",
     enum: true
 end
 
-defmodule Lightnex.RPC.WalletKit.ListAccountsResponse do
+defmodule Lightnex.LNRPC.WalletKit.ListAccountsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :accounts, 1, repeated: true, type: Lightnex.RPC.WalletKit.Account
+  field :accounts, 1, repeated: true, type: Lightnex.LNRPC.WalletKit.Account
 end
 
-defmodule Lightnex.RPC.WalletKit.RequiredReserveRequest do
+defmodule Lightnex.LNRPC.WalletKit.RequiredReserveRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :additional_public_channels, 1, type: :uint32, json_name: "additionalPublicChannels"
 end
 
-defmodule Lightnex.RPC.WalletKit.RequiredReserveResponse do
+defmodule Lightnex.LNRPC.WalletKit.RequiredReserveResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :required_reserve, 1, type: :int64, json_name: "requiredReserve"
 end
 
-defmodule Lightnex.RPC.WalletKit.ListAddressesRequest do
+defmodule Lightnex.LNRPC.WalletKit.ListAddressesRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :account_name, 1, type: :string, json_name: "accountName"
   field :show_custom_accounts, 2, type: :bool, json_name: "showCustomAccounts"
 end
 
-defmodule Lightnex.RPC.WalletKit.ListAddressesResponse do
+defmodule Lightnex.LNRPC.WalletKit.ListAddressesResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :account_with_addresses, 1,
     repeated: true,
-    type: Lightnex.RPC.WalletKit.AccountWithAddresses,
+    type: Lightnex.LNRPC.WalletKit.AccountWithAddresses,
     json_name: "accountWithAddresses"
 end
 
-defmodule Lightnex.RPC.WalletKit.GetTransactionRequest do
+defmodule Lightnex.LNRPC.WalletKit.GetTransactionRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :txid, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.SignMessageWithAddrRequest do
+defmodule Lightnex.LNRPC.WalletKit.SignMessageWithAddrRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :msg, 1, type: :bytes
   field :addr, 2, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.SignMessageWithAddrResponse do
+defmodule Lightnex.LNRPC.WalletKit.SignMessageWithAddrResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :signature, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.VerifyMessageWithAddrRequest do
+defmodule Lightnex.LNRPC.WalletKit.VerifyMessageWithAddrRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :msg, 1, type: :bytes
@@ -242,14 +242,14 @@ defmodule Lightnex.RPC.WalletKit.VerifyMessageWithAddrRequest do
   field :addr, 3, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.VerifyMessageWithAddrResponse do
+defmodule Lightnex.LNRPC.WalletKit.VerifyMessageWithAddrResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :valid, 1, type: :bool
   field :pubkey, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.WalletKit.ImportAccountRequest do
+defmodule Lightnex.LNRPC.WalletKit.ImportAccountRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :name, 1, type: :string
@@ -257,17 +257,17 @@ defmodule Lightnex.RPC.WalletKit.ImportAccountRequest do
   field :master_key_fingerprint, 3, type: :bytes, json_name: "masterKeyFingerprint"
 
   field :address_type, 4,
-    type: Lightnex.RPC.WalletKit.AddressType,
+    type: Lightnex.LNRPC.WalletKit.AddressType,
     json_name: "addressType",
     enum: true
 
   field :dry_run, 5, type: :bool, json_name: "dryRun"
 end
 
-defmodule Lightnex.RPC.WalletKit.ImportAccountResponse do
+defmodule Lightnex.LNRPC.WalletKit.ImportAccountResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :account, 1, type: Lightnex.RPC.WalletKit.Account
+  field :account, 1, type: Lightnex.LNRPC.WalletKit.Account
 
   field :dry_run_external_addrs, 2,
     repeated: true,
@@ -280,24 +280,24 @@ defmodule Lightnex.RPC.WalletKit.ImportAccountResponse do
     json_name: "dryRunInternalAddrs"
 end
 
-defmodule Lightnex.RPC.WalletKit.ImportPublicKeyRequest do
+defmodule Lightnex.LNRPC.WalletKit.ImportPublicKeyRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :public_key, 1, type: :bytes, json_name: "publicKey"
 
   field :address_type, 2,
-    type: Lightnex.RPC.WalletKit.AddressType,
+    type: Lightnex.LNRPC.WalletKit.AddressType,
     json_name: "addressType",
     enum: true
 end
 
-defmodule Lightnex.RPC.WalletKit.ImportPublicKeyResponse do
+defmodule Lightnex.LNRPC.WalletKit.ImportPublicKeyResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.ImportTapscriptRequest do
+defmodule Lightnex.LNRPC.WalletKit.ImportTapscriptRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :script, 0
@@ -305,12 +305,12 @@ defmodule Lightnex.RPC.WalletKit.ImportTapscriptRequest do
   field :internal_public_key, 1, type: :bytes, json_name: "internalPublicKey"
 
   field :full_tree, 2,
-    type: Lightnex.RPC.WalletKit.TapscriptFullTree,
+    type: Lightnex.LNRPC.WalletKit.TapscriptFullTree,
     json_name: "fullTree",
     oneof: 0
 
   field :partial_reveal, 3,
-    type: Lightnex.RPC.WalletKit.TapscriptPartialReveal,
+    type: Lightnex.LNRPC.WalletKit.TapscriptPartialReveal,
     json_name: "partialReveal",
     oneof: 0
 
@@ -318,95 +318,95 @@ defmodule Lightnex.RPC.WalletKit.ImportTapscriptRequest do
   field :full_key_only, 5, type: :bool, json_name: "fullKeyOnly", oneof: 0
 end
 
-defmodule Lightnex.RPC.WalletKit.TapscriptFullTree do
+defmodule Lightnex.LNRPC.WalletKit.TapscriptFullTree do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :all_leaves, 1,
     repeated: true,
-    type: Lightnex.RPC.WalletKit.TapLeaf,
+    type: Lightnex.LNRPC.WalletKit.TapLeaf,
     json_name: "allLeaves"
 end
 
-defmodule Lightnex.RPC.WalletKit.TapLeaf do
+defmodule Lightnex.LNRPC.WalletKit.TapLeaf do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :leaf_version, 1, type: :uint32, json_name: "leafVersion"
   field :script, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.WalletKit.TapscriptPartialReveal do
+defmodule Lightnex.LNRPC.WalletKit.TapscriptPartialReveal do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :revealed_leaf, 1, type: Lightnex.RPC.WalletKit.TapLeaf, json_name: "revealedLeaf"
+  field :revealed_leaf, 1, type: Lightnex.LNRPC.WalletKit.TapLeaf, json_name: "revealedLeaf"
   field :full_inclusion_proof, 2, type: :bytes, json_name: "fullInclusionProof"
 end
 
-defmodule Lightnex.RPC.WalletKit.ImportTapscriptResponse do
+defmodule Lightnex.LNRPC.WalletKit.ImportTapscriptResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :p2tr_address, 1, type: :string, json_name: "p2trAddress"
 end
 
-defmodule Lightnex.RPC.WalletKit.Transaction do
+defmodule Lightnex.LNRPC.WalletKit.Transaction do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :tx_hex, 1, type: :bytes, json_name: "txHex"
   field :label, 2, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.PublishResponse do
+defmodule Lightnex.LNRPC.WalletKit.PublishResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :publish_error, 1, type: :string, json_name: "publishError"
 end
 
-defmodule Lightnex.RPC.WalletKit.RemoveTransactionResponse do
+defmodule Lightnex.LNRPC.WalletKit.RemoveTransactionResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.SendOutputsRequest do
+defmodule Lightnex.LNRPC.WalletKit.SendOutputsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :sat_per_kw, 1, type: :int64, json_name: "satPerKw"
-  field :outputs, 2, repeated: true, type: Lightnex.RPC.Signer.TxOut
+  field :outputs, 2, repeated: true, type: Lightnex.LNRPC.Signer.TxOut
   field :label, 3, type: :string
   field :min_confs, 4, type: :int32, json_name: "minConfs"
   field :spend_unconfirmed, 5, type: :bool, json_name: "spendUnconfirmed"
 
   field :coin_selection_strategy, 6,
-    type: Lightnex.RPC.Lightning.CoinSelectionStrategy,
+    type: Lightnex.LNRPC.Lightning.CoinSelectionStrategy,
     json_name: "coinSelectionStrategy",
     enum: true
 end
 
-defmodule Lightnex.RPC.WalletKit.SendOutputsResponse do
+defmodule Lightnex.LNRPC.WalletKit.SendOutputsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :raw_tx, 1, type: :bytes, json_name: "rawTx"
 end
 
-defmodule Lightnex.RPC.WalletKit.EstimateFeeRequest do
+defmodule Lightnex.LNRPC.WalletKit.EstimateFeeRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :conf_target, 1, type: :int32, json_name: "confTarget"
 end
 
-defmodule Lightnex.RPC.WalletKit.EstimateFeeResponse do
+defmodule Lightnex.LNRPC.WalletKit.EstimateFeeResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :sat_per_kw, 1, type: :int64, json_name: "satPerKw"
   field :min_relay_fee_sat_per_kw, 2, type: :int64, json_name: "minRelayFeeSatPerKw"
 end
 
-defmodule Lightnex.RPC.WalletKit.PendingSweep do
+defmodule Lightnex.LNRPC.WalletKit.PendingSweep do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :outpoint, 1, type: Lightnex.RPC.Lightning.OutPoint
+  field :outpoint, 1, type: Lightnex.LNRPC.Lightning.OutPoint
 
   field :witness_type, 2,
-    type: Lightnex.RPC.WalletKit.WitnessType,
+    type: Lightnex.LNRPC.WalletKit.WitnessType,
     json_name: "witnessType",
     enum: true
 
@@ -439,23 +439,23 @@ defmodule Lightnex.RPC.WalletKit.PendingSweep do
   field :maturity_height, 15, type: :uint32, json_name: "maturityHeight"
 end
 
-defmodule Lightnex.RPC.WalletKit.PendingSweepsRequest do
+defmodule Lightnex.LNRPC.WalletKit.PendingSweepsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.WalletKit.PendingSweepsResponse do
+defmodule Lightnex.LNRPC.WalletKit.PendingSweepsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pending_sweeps, 1,
     repeated: true,
-    type: Lightnex.RPC.WalletKit.PendingSweep,
+    type: Lightnex.LNRPC.WalletKit.PendingSweep,
     json_name: "pendingSweeps"
 end
 
-defmodule Lightnex.RPC.WalletKit.BumpFeeRequest do
+defmodule Lightnex.LNRPC.WalletKit.BumpFeeRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :outpoint, 1, type: Lightnex.RPC.Lightning.OutPoint
+  field :outpoint, 1, type: Lightnex.LNRPC.Lightning.OutPoint
   field :target_conf, 2, type: :uint32, json_name: "targetConf"
   field :sat_per_byte, 3, type: :uint32, json_name: "satPerByte", deprecated: true
   field :force, 4, type: :bool, deprecated: true
@@ -465,16 +465,16 @@ defmodule Lightnex.RPC.WalletKit.BumpFeeRequest do
   field :deadline_delta, 8, type: :uint32, json_name: "deadlineDelta"
 end
 
-defmodule Lightnex.RPC.WalletKit.BumpFeeResponse do
+defmodule Lightnex.LNRPC.WalletKit.BumpFeeResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.BumpForceCloseFeeRequest do
+defmodule Lightnex.LNRPC.WalletKit.BumpForceCloseFeeRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :chan_point, 1, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "chanPoint"
+  field :chan_point, 1, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "chanPoint"
   field :deadline_delta, 2, type: :uint32, json_name: "deadlineDelta"
   field :starting_feerate, 3, type: :uint64, json_name: "startingFeerate"
   field :immediate, 4, type: :bool
@@ -482,42 +482,42 @@ defmodule Lightnex.RPC.WalletKit.BumpForceCloseFeeRequest do
   field :target_conf, 6, type: :uint32, json_name: "targetConf"
 end
 
-defmodule Lightnex.RPC.WalletKit.BumpForceCloseFeeResponse do
+defmodule Lightnex.LNRPC.WalletKit.BumpForceCloseFeeResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.ListSweepsRequest do
+defmodule Lightnex.LNRPC.WalletKit.ListSweepsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :verbose, 1, type: :bool
   field :start_height, 2, type: :int32, json_name: "startHeight"
 end
 
-defmodule Lightnex.RPC.WalletKit.ListSweepsResponse.TransactionIDs do
+defmodule Lightnex.LNRPC.WalletKit.ListSweepsResponse.TransactionIDs do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :transaction_ids, 1, repeated: true, type: :string, json_name: "transactionIds"
 end
 
-defmodule Lightnex.RPC.WalletKit.ListSweepsResponse do
+defmodule Lightnex.LNRPC.WalletKit.ListSweepsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :sweeps, 0
 
   field :transaction_details, 1,
-    type: Lightnex.RPC.Lightning.TransactionDetails,
+    type: Lightnex.LNRPC.Lightning.TransactionDetails,
     json_name: "transactionDetails",
     oneof: 0
 
   field :transaction_ids, 2,
-    type: Lightnex.RPC.WalletKit.ListSweepsResponse.TransactionIDs,
+    type: Lightnex.LNRPC.WalletKit.ListSweepsResponse.TransactionIDs,
     json_name: "transactionIds",
     oneof: 0
 end
 
-defmodule Lightnex.RPC.WalletKit.LabelTransactionRequest do
+defmodule Lightnex.LNRPC.WalletKit.LabelTransactionRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :txid, 1, type: :bytes
@@ -525,13 +525,13 @@ defmodule Lightnex.RPC.WalletKit.LabelTransactionRequest do
   field :overwrite, 3, type: :bool
 end
 
-defmodule Lightnex.RPC.WalletKit.LabelTransactionResponse do
+defmodule Lightnex.LNRPC.WalletKit.LabelTransactionResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.FundPsbtRequest do
+defmodule Lightnex.LNRPC.WalletKit.FundPsbtRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :template, 0
@@ -539,10 +539,10 @@ defmodule Lightnex.RPC.WalletKit.FundPsbtRequest do
   oneof :fees, 1
 
   field :psbt, 1, type: :bytes, oneof: 0
-  field :raw, 2, type: Lightnex.RPC.WalletKit.TxTemplate, oneof: 0
+  field :raw, 2, type: Lightnex.LNRPC.WalletKit.TxTemplate, oneof: 0
 
   field :coin_select, 9,
-    type: Lightnex.RPC.WalletKit.PsbtCoinSelect,
+    type: Lightnex.LNRPC.WalletKit.PsbtCoinSelect,
     json_name: "coinSelect",
     oneof: 0
 
@@ -554,12 +554,12 @@ defmodule Lightnex.RPC.WalletKit.FundPsbtRequest do
   field :spend_unconfirmed, 7, type: :bool, json_name: "spendUnconfirmed"
 
   field :change_type, 8,
-    type: Lightnex.RPC.WalletKit.ChangeAddressType,
+    type: Lightnex.LNRPC.WalletKit.ChangeAddressType,
     json_name: "changeType",
     enum: true
 
   field :coin_selection_strategy, 10,
-    type: Lightnex.RPC.Lightning.CoinSelectionStrategy,
+    type: Lightnex.LNRPC.Lightning.CoinSelectionStrategy,
     json_name: "coinSelectionStrategy",
     enum: true
 
@@ -568,7 +568,7 @@ defmodule Lightnex.RPC.WalletKit.FundPsbtRequest do
   field :lock_expiration_seconds, 14, type: :uint64, json_name: "lockExpirationSeconds"
 end
 
-defmodule Lightnex.RPC.WalletKit.FundPsbtResponse do
+defmodule Lightnex.LNRPC.WalletKit.FundPsbtResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :funded_psbt, 1, type: :bytes, json_name: "fundedPsbt"
@@ -576,29 +576,29 @@ defmodule Lightnex.RPC.WalletKit.FundPsbtResponse do
 
   field :locked_utxos, 3,
     repeated: true,
-    type: Lightnex.RPC.WalletKit.UtxoLease,
+    type: Lightnex.LNRPC.WalletKit.UtxoLease,
     json_name: "lockedUtxos"
 end
 
-defmodule Lightnex.RPC.WalletKit.TxTemplate.OutputsEntry do
+defmodule Lightnex.LNRPC.WalletKit.TxTemplate.OutputsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
   field :value, 2, type: :uint64
 end
 
-defmodule Lightnex.RPC.WalletKit.TxTemplate do
+defmodule Lightnex.LNRPC.WalletKit.TxTemplate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :inputs, 1, repeated: true, type: Lightnex.RPC.Lightning.OutPoint
+  field :inputs, 1, repeated: true, type: Lightnex.LNRPC.Lightning.OutPoint
 
   field :outputs, 2,
     repeated: true,
-    type: Lightnex.RPC.WalletKit.TxTemplate.OutputsEntry,
+    type: Lightnex.LNRPC.WalletKit.TxTemplate.OutputsEntry,
     map: true
 end
 
-defmodule Lightnex.RPC.WalletKit.PsbtCoinSelect do
+defmodule Lightnex.LNRPC.WalletKit.PsbtCoinSelect do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :change_output, 0
@@ -608,57 +608,57 @@ defmodule Lightnex.RPC.WalletKit.PsbtCoinSelect do
   field :add, 3, type: :bool, oneof: 0
 end
 
-defmodule Lightnex.RPC.WalletKit.UtxoLease do
+defmodule Lightnex.LNRPC.WalletKit.UtxoLease do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :id, 1, type: :bytes
-  field :outpoint, 2, type: Lightnex.RPC.Lightning.OutPoint
+  field :outpoint, 2, type: Lightnex.LNRPC.Lightning.OutPoint
   field :expiration, 3, type: :uint64
   field :pk_script, 4, type: :bytes, json_name: "pkScript"
   field :value, 5, type: :uint64
 end
 
-defmodule Lightnex.RPC.WalletKit.SignPsbtRequest do
+defmodule Lightnex.LNRPC.WalletKit.SignPsbtRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :funded_psbt, 1, type: :bytes, json_name: "fundedPsbt"
 end
 
-defmodule Lightnex.RPC.WalletKit.SignPsbtResponse do
+defmodule Lightnex.LNRPC.WalletKit.SignPsbtResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :signed_psbt, 1, type: :bytes, json_name: "signedPsbt"
   field :signed_inputs, 2, repeated: true, type: :uint32, json_name: "signedInputs"
 end
 
-defmodule Lightnex.RPC.WalletKit.FinalizePsbtRequest do
+defmodule Lightnex.LNRPC.WalletKit.FinalizePsbtRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :funded_psbt, 1, type: :bytes, json_name: "fundedPsbt"
   field :account, 5, type: :string
 end
 
-defmodule Lightnex.RPC.WalletKit.FinalizePsbtResponse do
+defmodule Lightnex.LNRPC.WalletKit.FinalizePsbtResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :signed_psbt, 1, type: :bytes, json_name: "signedPsbt"
   field :raw_final_tx, 2, type: :bytes, json_name: "rawFinalTx"
 end
 
-defmodule Lightnex.RPC.WalletKit.ListLeasesRequest do
+defmodule Lightnex.LNRPC.WalletKit.ListLeasesRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.WalletKit.ListLeasesResponse do
+defmodule Lightnex.LNRPC.WalletKit.ListLeasesResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :locked_utxos, 1,
     repeated: true,
-    type: Lightnex.RPC.WalletKit.UtxoLease,
+    type: Lightnex.LNRPC.WalletKit.UtxoLease,
     json_name: "lockedUtxos"
 end
 
-defmodule Lightnex.RPC.WalletKit.Service do
+defmodule Lightnex.LNRPC.WalletKit.Service do
   @moduledoc """
   WalletKit is a service that gives access to the core functionalities of the
   daemon's wallet.
@@ -682,106 +682,110 @@ defmodule Lightnex.RPC.WalletKit.Service do
   use GRPC.Service, name: "walletrpc.WalletKit", protoc_gen_elixir_version: "0.15.0"
 
   rpc :ListUnspent,
-      Lightnex.RPC.WalletKit.ListUnspentRequest,
-      Lightnex.RPC.WalletKit.ListUnspentResponse
+      Lightnex.LNRPC.WalletKit.ListUnspentRequest,
+      Lightnex.LNRPC.WalletKit.ListUnspentResponse
 
   rpc :LeaseOutput,
-      Lightnex.RPC.WalletKit.LeaseOutputRequest,
-      Lightnex.RPC.WalletKit.LeaseOutputResponse
+      Lightnex.LNRPC.WalletKit.LeaseOutputRequest,
+      Lightnex.LNRPC.WalletKit.LeaseOutputResponse
 
   rpc :ReleaseOutput,
-      Lightnex.RPC.WalletKit.ReleaseOutputRequest,
-      Lightnex.RPC.WalletKit.ReleaseOutputResponse
+      Lightnex.LNRPC.WalletKit.ReleaseOutputRequest,
+      Lightnex.LNRPC.WalletKit.ReleaseOutputResponse
 
   rpc :ListLeases,
-      Lightnex.RPC.WalletKit.ListLeasesRequest,
-      Lightnex.RPC.WalletKit.ListLeasesResponse
+      Lightnex.LNRPC.WalletKit.ListLeasesRequest,
+      Lightnex.LNRPC.WalletKit.ListLeasesResponse
 
-  rpc :DeriveNextKey, Lightnex.RPC.WalletKit.KeyReq, Lightnex.RPC.Signer.KeyDescriptor
+  rpc :DeriveNextKey, Lightnex.LNRPC.WalletKit.KeyReq, Lightnex.LNRPC.Signer.KeyDescriptor
 
-  rpc :DeriveKey, Lightnex.RPC.Signer.KeyLocator, Lightnex.RPC.Signer.KeyDescriptor
+  rpc :DeriveKey, Lightnex.LNRPC.Signer.KeyLocator, Lightnex.LNRPC.Signer.KeyDescriptor
 
-  rpc :NextAddr, Lightnex.RPC.WalletKit.AddrRequest, Lightnex.RPC.WalletKit.AddrResponse
+  rpc :NextAddr, Lightnex.LNRPC.WalletKit.AddrRequest, Lightnex.LNRPC.WalletKit.AddrResponse
 
   rpc :GetTransaction,
-      Lightnex.RPC.WalletKit.GetTransactionRequest,
-      Lightnex.RPC.Lightning.Transaction
+      Lightnex.LNRPC.WalletKit.GetTransactionRequest,
+      Lightnex.LNRPC.Lightning.Transaction
 
   rpc :ListAccounts,
-      Lightnex.RPC.WalletKit.ListAccountsRequest,
-      Lightnex.RPC.WalletKit.ListAccountsResponse
+      Lightnex.LNRPC.WalletKit.ListAccountsRequest,
+      Lightnex.LNRPC.WalletKit.ListAccountsResponse
 
   rpc :RequiredReserve,
-      Lightnex.RPC.WalletKit.RequiredReserveRequest,
-      Lightnex.RPC.WalletKit.RequiredReserveResponse
+      Lightnex.LNRPC.WalletKit.RequiredReserveRequest,
+      Lightnex.LNRPC.WalletKit.RequiredReserveResponse
 
   rpc :ListAddresses,
-      Lightnex.RPC.WalletKit.ListAddressesRequest,
-      Lightnex.RPC.WalletKit.ListAddressesResponse
+      Lightnex.LNRPC.WalletKit.ListAddressesRequest,
+      Lightnex.LNRPC.WalletKit.ListAddressesResponse
 
   rpc :SignMessageWithAddr,
-      Lightnex.RPC.WalletKit.SignMessageWithAddrRequest,
-      Lightnex.RPC.WalletKit.SignMessageWithAddrResponse
+      Lightnex.LNRPC.WalletKit.SignMessageWithAddrRequest,
+      Lightnex.LNRPC.WalletKit.SignMessageWithAddrResponse
 
   rpc :VerifyMessageWithAddr,
-      Lightnex.RPC.WalletKit.VerifyMessageWithAddrRequest,
-      Lightnex.RPC.WalletKit.VerifyMessageWithAddrResponse
+      Lightnex.LNRPC.WalletKit.VerifyMessageWithAddrRequest,
+      Lightnex.LNRPC.WalletKit.VerifyMessageWithAddrResponse
 
   rpc :ImportAccount,
-      Lightnex.RPC.WalletKit.ImportAccountRequest,
-      Lightnex.RPC.WalletKit.ImportAccountResponse
+      Lightnex.LNRPC.WalletKit.ImportAccountRequest,
+      Lightnex.LNRPC.WalletKit.ImportAccountResponse
 
   rpc :ImportPublicKey,
-      Lightnex.RPC.WalletKit.ImportPublicKeyRequest,
-      Lightnex.RPC.WalletKit.ImportPublicKeyResponse
+      Lightnex.LNRPC.WalletKit.ImportPublicKeyRequest,
+      Lightnex.LNRPC.WalletKit.ImportPublicKeyResponse
 
   rpc :ImportTapscript,
-      Lightnex.RPC.WalletKit.ImportTapscriptRequest,
-      Lightnex.RPC.WalletKit.ImportTapscriptResponse
+      Lightnex.LNRPC.WalletKit.ImportTapscriptRequest,
+      Lightnex.LNRPC.WalletKit.ImportTapscriptResponse
 
   rpc :PublishTransaction,
-      Lightnex.RPC.WalletKit.Transaction,
-      Lightnex.RPC.WalletKit.PublishResponse
+      Lightnex.LNRPC.WalletKit.Transaction,
+      Lightnex.LNRPC.WalletKit.PublishResponse
 
   rpc :RemoveTransaction,
-      Lightnex.RPC.WalletKit.GetTransactionRequest,
-      Lightnex.RPC.WalletKit.RemoveTransactionResponse
+      Lightnex.LNRPC.WalletKit.GetTransactionRequest,
+      Lightnex.LNRPC.WalletKit.RemoveTransactionResponse
 
   rpc :SendOutputs,
-      Lightnex.RPC.WalletKit.SendOutputsRequest,
-      Lightnex.RPC.WalletKit.SendOutputsResponse
+      Lightnex.LNRPC.WalletKit.SendOutputsRequest,
+      Lightnex.LNRPC.WalletKit.SendOutputsResponse
 
   rpc :EstimateFee,
-      Lightnex.RPC.WalletKit.EstimateFeeRequest,
-      Lightnex.RPC.WalletKit.EstimateFeeResponse
+      Lightnex.LNRPC.WalletKit.EstimateFeeRequest,
+      Lightnex.LNRPC.WalletKit.EstimateFeeResponse
 
   rpc :PendingSweeps,
-      Lightnex.RPC.WalletKit.PendingSweepsRequest,
-      Lightnex.RPC.WalletKit.PendingSweepsResponse
+      Lightnex.LNRPC.WalletKit.PendingSweepsRequest,
+      Lightnex.LNRPC.WalletKit.PendingSweepsResponse
 
-  rpc :BumpFee, Lightnex.RPC.WalletKit.BumpFeeRequest, Lightnex.RPC.WalletKit.BumpFeeResponse
+  rpc :BumpFee, Lightnex.LNRPC.WalletKit.BumpFeeRequest, Lightnex.LNRPC.WalletKit.BumpFeeResponse
 
   rpc :BumpForceCloseFee,
-      Lightnex.RPC.WalletKit.BumpForceCloseFeeRequest,
-      Lightnex.RPC.WalletKit.BumpForceCloseFeeResponse
+      Lightnex.LNRPC.WalletKit.BumpForceCloseFeeRequest,
+      Lightnex.LNRPC.WalletKit.BumpForceCloseFeeResponse
 
   rpc :ListSweeps,
-      Lightnex.RPC.WalletKit.ListSweepsRequest,
-      Lightnex.RPC.WalletKit.ListSweepsResponse
+      Lightnex.LNRPC.WalletKit.ListSweepsRequest,
+      Lightnex.LNRPC.WalletKit.ListSweepsResponse
 
   rpc :LabelTransaction,
-      Lightnex.RPC.WalletKit.LabelTransactionRequest,
-      Lightnex.RPC.WalletKit.LabelTransactionResponse
+      Lightnex.LNRPC.WalletKit.LabelTransactionRequest,
+      Lightnex.LNRPC.WalletKit.LabelTransactionResponse
 
-  rpc :FundPsbt, Lightnex.RPC.WalletKit.FundPsbtRequest, Lightnex.RPC.WalletKit.FundPsbtResponse
+  rpc :FundPsbt,
+      Lightnex.LNRPC.WalletKit.FundPsbtRequest,
+      Lightnex.LNRPC.WalletKit.FundPsbtResponse
 
-  rpc :SignPsbt, Lightnex.RPC.WalletKit.SignPsbtRequest, Lightnex.RPC.WalletKit.SignPsbtResponse
+  rpc :SignPsbt,
+      Lightnex.LNRPC.WalletKit.SignPsbtRequest,
+      Lightnex.LNRPC.WalletKit.SignPsbtResponse
 
   rpc :FinalizePsbt,
-      Lightnex.RPC.WalletKit.FinalizePsbtRequest,
-      Lightnex.RPC.WalletKit.FinalizePsbtResponse
+      Lightnex.LNRPC.WalletKit.FinalizePsbtRequest,
+      Lightnex.LNRPC.WalletKit.FinalizePsbtResponse
 end
 
-defmodule Lightnex.RPC.WalletKit.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.WalletKit.Service
+defmodule Lightnex.LNRPC.WalletKit.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.WalletKit.Service
 end

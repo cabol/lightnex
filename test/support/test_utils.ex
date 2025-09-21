@@ -127,24 +127,24 @@ defmodule Lightnex.TestUtils do
   """
   def expected_transformed_content do
     """
-    defmodule Lightnex.RPC.Lightning.GetInfoRequest do
+    defmodule Lightnex.LNRPC.Lightning.GetInfoRequest do
       use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
     end
 
-    defmodule Lightnex.RPC.Lightning.GetInfoResponse do
+    defmodule Lightnex.LNRPC.Lightning.GetInfoResponse do
       use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
       field :version, 1, type: :string
     end
 
-    defmodule Lightnex.RPC.Lightning.Service do
+    defmodule Lightnex.LNRPC.Lightning.Service do
       use GRPC.Service, name: "lnrpc.Lightning", protoc_gen_elixir_version: "0.15.0"
 
-      rpc :GetInfo, Lightnex.RPC.Lightning.GetInfoRequest, Lightnex.RPC.Lightning.GetInfoResponse
+      rpc :GetInfo, Lightnex.LNRPC.Lightning.GetInfoRequest, Lightnex.LNRPC.Lightning.GetInfoResponse
     end
 
-    defmodule Lightnex.RPC.Lightning.Stub do
-      use GRPC.Stub, service: Lightnex.RPC.Lightning.Service
+    defmodule Lightnex.LNRPC.Lightning.Stub do
+      use GRPC.Stub, service: Lightnex.LNRPC.Lightning.Service
     end
     """
   end

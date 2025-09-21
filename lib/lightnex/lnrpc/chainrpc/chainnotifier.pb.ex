@@ -1,4 +1,4 @@
-defmodule Lightnex.RPC.ChainNotifier.ConfRequest do
+defmodule Lightnex.LNRPC.ChainNotifier.ConfRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :txid, 1, type: :bytes
@@ -8,7 +8,7 @@ defmodule Lightnex.RPC.ChainNotifier.ConfRequest do
   field :include_block, 5, type: :bool, json_name: "includeBlock"
 end
 
-defmodule Lightnex.RPC.ChainNotifier.ConfDetails do
+defmodule Lightnex.LNRPC.ChainNotifier.ConfDetails do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :raw_tx, 1, type: :bytes, json_name: "rawTx"
@@ -18,7 +18,7 @@ defmodule Lightnex.RPC.ChainNotifier.ConfDetails do
   field :raw_block, 5, type: :bytes, json_name: "rawBlock"
 end
 
-defmodule Lightnex.RPC.ChainNotifier.Reorg do
+defmodule Lightnex.LNRPC.ChainNotifier.Reorg do
   @moduledoc """
   TODO(wilmer): need to know how the client will use this first.
   """
@@ -26,35 +26,35 @@ defmodule Lightnex.RPC.ChainNotifier.Reorg do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.ChainNotifier.ConfEvent do
+defmodule Lightnex.LNRPC.ChainNotifier.ConfEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :event, 0
 
-  field :conf, 1, type: Lightnex.RPC.ChainNotifier.ConfDetails, oneof: 0
-  field :reorg, 2, type: Lightnex.RPC.ChainNotifier.Reorg, oneof: 0
+  field :conf, 1, type: Lightnex.LNRPC.ChainNotifier.ConfDetails, oneof: 0
+  field :reorg, 2, type: Lightnex.LNRPC.ChainNotifier.Reorg, oneof: 0
 end
 
-defmodule Lightnex.RPC.ChainNotifier.Outpoint do
+defmodule Lightnex.LNRPC.ChainNotifier.Outpoint do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :hash, 1, type: :bytes
   field :index, 2, type: :uint32
 end
 
-defmodule Lightnex.RPC.ChainNotifier.SpendRequest do
+defmodule Lightnex.LNRPC.ChainNotifier.SpendRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :outpoint, 1, type: Lightnex.RPC.ChainNotifier.Outpoint
+  field :outpoint, 1, type: Lightnex.LNRPC.ChainNotifier.Outpoint
   field :script, 2, type: :bytes
   field :height_hint, 3, type: :uint32, json_name: "heightHint"
 end
 
-defmodule Lightnex.RPC.ChainNotifier.SpendDetails do
+defmodule Lightnex.LNRPC.ChainNotifier.SpendDetails do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :spending_outpoint, 1,
-    type: Lightnex.RPC.ChainNotifier.Outpoint,
+    type: Lightnex.LNRPC.ChainNotifier.Outpoint,
     json_name: "spendingOutpoint"
 
   field :raw_spending_tx, 2, type: :bytes, json_name: "rawSpendingTx"
@@ -63,23 +63,23 @@ defmodule Lightnex.RPC.ChainNotifier.SpendDetails do
   field :spending_height, 5, type: :uint32, json_name: "spendingHeight"
 end
 
-defmodule Lightnex.RPC.ChainNotifier.SpendEvent do
+defmodule Lightnex.LNRPC.ChainNotifier.SpendEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :event, 0
 
-  field :spend, 1, type: Lightnex.RPC.ChainNotifier.SpendDetails, oneof: 0
-  field :reorg, 2, type: Lightnex.RPC.ChainNotifier.Reorg, oneof: 0
+  field :spend, 1, type: Lightnex.LNRPC.ChainNotifier.SpendDetails, oneof: 0
+  field :reorg, 2, type: Lightnex.LNRPC.ChainNotifier.Reorg, oneof: 0
 end
 
-defmodule Lightnex.RPC.ChainNotifier.BlockEpoch do
+defmodule Lightnex.LNRPC.ChainNotifier.BlockEpoch do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :hash, 1, type: :bytes
   field :height, 2, type: :uint32
 end
 
-defmodule Lightnex.RPC.ChainNotifier.Service do
+defmodule Lightnex.LNRPC.ChainNotifier.Service do
   @moduledoc """
   ChainNotifier is a service that can be used to get information about the
   chain backend by registering notifiers for chain events.
@@ -88,18 +88,18 @@ defmodule Lightnex.RPC.ChainNotifier.Service do
   use GRPC.Service, name: "chainrpc.ChainNotifier", protoc_gen_elixir_version: "0.15.0"
 
   rpc :RegisterConfirmationsNtfn,
-      Lightnex.RPC.ChainNotifier.ConfRequest,
-      stream(Lightnex.RPC.ChainNotifier.ConfEvent)
+      Lightnex.LNRPC.ChainNotifier.ConfRequest,
+      stream(Lightnex.LNRPC.ChainNotifier.ConfEvent)
 
   rpc :RegisterSpendNtfn,
-      Lightnex.RPC.ChainNotifier.SpendRequest,
-      stream(Lightnex.RPC.ChainNotifier.SpendEvent)
+      Lightnex.LNRPC.ChainNotifier.SpendRequest,
+      stream(Lightnex.LNRPC.ChainNotifier.SpendEvent)
 
   rpc :RegisterBlockEpochNtfn,
-      Lightnex.RPC.ChainNotifier.BlockEpoch,
-      stream(Lightnex.RPC.ChainNotifier.BlockEpoch)
+      Lightnex.LNRPC.ChainNotifier.BlockEpoch,
+      stream(Lightnex.LNRPC.ChainNotifier.BlockEpoch)
 end
 
-defmodule Lightnex.RPC.ChainNotifier.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.ChainNotifier.Service
+defmodule Lightnex.LNRPC.ChainNotifier.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.ChainNotifier.Service
 end

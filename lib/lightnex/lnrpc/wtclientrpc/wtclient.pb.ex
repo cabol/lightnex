@@ -1,4 +1,4 @@
-defmodule Lightnex.RPC.WatchtowerClient.PolicyType do
+defmodule Lightnex.LNRPC.WatchtowerClient.PolicyType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :LEGACY, 0
@@ -6,53 +6,53 @@ defmodule Lightnex.RPC.WatchtowerClient.PolicyType do
   field :TAPROOT, 2
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.AddTowerRequest do
+defmodule Lightnex.LNRPC.WatchtowerClient.AddTowerRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pubkey, 1, type: :bytes
   field :address, 2, type: :string
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.AddTowerResponse do
+defmodule Lightnex.LNRPC.WatchtowerClient.AddTowerResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.RemoveTowerRequest do
+defmodule Lightnex.LNRPC.WatchtowerClient.RemoveTowerRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pubkey, 1, type: :bytes
   field :address, 2, type: :string
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.RemoveTowerResponse do
+defmodule Lightnex.LNRPC.WatchtowerClient.RemoveTowerResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.DeactivateTowerRequest do
+defmodule Lightnex.LNRPC.WatchtowerClient.DeactivateTowerRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pubkey, 1, type: :bytes
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.DeactivateTowerResponse do
+defmodule Lightnex.LNRPC.WatchtowerClient.DeactivateTowerResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.TerminateSessionRequest do
+defmodule Lightnex.LNRPC.WatchtowerClient.TerminateSessionRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :session_id, 1, type: :bytes, json_name: "sessionId"
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.TerminateSessionResponse do
+defmodule Lightnex.LNRPC.WatchtowerClient.TerminateSessionResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.GetTowerInfoRequest do
+defmodule Lightnex.LNRPC.WatchtowerClient.GetTowerInfoRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pubkey, 1, type: :bytes
@@ -60,7 +60,7 @@ defmodule Lightnex.RPC.WatchtowerClient.GetTowerInfoRequest do
   field :exclude_exhausted_sessions, 3, type: :bool, json_name: "excludeExhaustedSessions"
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.TowerSession do
+defmodule Lightnex.LNRPC.WatchtowerClient.TowerSession do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :num_backups, 1, type: :uint32, json_name: "numBackups"
@@ -71,7 +71,7 @@ defmodule Lightnex.RPC.WatchtowerClient.TowerSession do
   field :id, 6, type: :bytes
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.Tower do
+defmodule Lightnex.LNRPC.WatchtowerClient.Tower do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pubkey, 1, type: :bytes
@@ -86,46 +86,46 @@ defmodule Lightnex.RPC.WatchtowerClient.Tower do
 
   field :sessions, 5,
     repeated: true,
-    type: Lightnex.RPC.WatchtowerClient.TowerSession,
+    type: Lightnex.LNRPC.WatchtowerClient.TowerSession,
     deprecated: true
 
   field :session_info, 6,
     repeated: true,
-    type: Lightnex.RPC.WatchtowerClient.TowerSessionInfo,
+    type: Lightnex.LNRPC.WatchtowerClient.TowerSessionInfo,
     json_name: "sessionInfo"
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.TowerSessionInfo do
+defmodule Lightnex.LNRPC.WatchtowerClient.TowerSessionInfo do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :active_session_candidate, 1, type: :bool, json_name: "activeSessionCandidate"
   field :num_sessions, 2, type: :uint32, json_name: "numSessions"
-  field :sessions, 3, repeated: true, type: Lightnex.RPC.WatchtowerClient.TowerSession
+  field :sessions, 3, repeated: true, type: Lightnex.LNRPC.WatchtowerClient.TowerSession
 
   field :policy_type, 4,
-    type: Lightnex.RPC.WatchtowerClient.PolicyType,
+    type: Lightnex.LNRPC.WatchtowerClient.PolicyType,
     json_name: "policyType",
     enum: true
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.ListTowersRequest do
+defmodule Lightnex.LNRPC.WatchtowerClient.ListTowersRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :include_sessions, 1, type: :bool, json_name: "includeSessions"
   field :exclude_exhausted_sessions, 2, type: :bool, json_name: "excludeExhaustedSessions"
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.ListTowersResponse do
+defmodule Lightnex.LNRPC.WatchtowerClient.ListTowersResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :towers, 1, repeated: true, type: Lightnex.RPC.WatchtowerClient.Tower
+  field :towers, 1, repeated: true, type: Lightnex.LNRPC.WatchtowerClient.Tower
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.StatsRequest do
+defmodule Lightnex.LNRPC.WatchtowerClient.StatsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.StatsResponse do
+defmodule Lightnex.LNRPC.WatchtowerClient.StatsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :num_backups, 1, type: :uint32, json_name: "numBackups"
@@ -135,16 +135,16 @@ defmodule Lightnex.RPC.WatchtowerClient.StatsResponse do
   field :num_sessions_exhausted, 5, type: :uint32, json_name: "numSessionsExhausted"
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.PolicyRequest do
+defmodule Lightnex.LNRPC.WatchtowerClient.PolicyRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :policy_type, 1,
-    type: Lightnex.RPC.WatchtowerClient.PolicyType,
+    type: Lightnex.LNRPC.WatchtowerClient.PolicyType,
     json_name: "policyType",
     enum: true
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.PolicyResponse do
+defmodule Lightnex.LNRPC.WatchtowerClient.PolicyResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :max_updates, 1, type: :uint32, json_name: "maxUpdates"
@@ -152,7 +152,7 @@ defmodule Lightnex.RPC.WatchtowerClient.PolicyResponse do
   field :sweep_sat_per_vbyte, 3, type: :uint32, json_name: "sweepSatPerVbyte"
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.Service do
+defmodule Lightnex.LNRPC.WatchtowerClient.Service do
   @moduledoc """
   WatchtowerClient is a service that grants access to the watchtower client
   functionality of the daemon.
@@ -176,38 +176,38 @@ defmodule Lightnex.RPC.WatchtowerClient.Service do
   use GRPC.Service, name: "wtclientrpc.WatchtowerClient", protoc_gen_elixir_version: "0.15.0"
 
   rpc :AddTower,
-      Lightnex.RPC.WatchtowerClient.AddTowerRequest,
-      Lightnex.RPC.WatchtowerClient.AddTowerResponse
+      Lightnex.LNRPC.WatchtowerClient.AddTowerRequest,
+      Lightnex.LNRPC.WatchtowerClient.AddTowerResponse
 
   rpc :RemoveTower,
-      Lightnex.RPC.WatchtowerClient.RemoveTowerRequest,
-      Lightnex.RPC.WatchtowerClient.RemoveTowerResponse
+      Lightnex.LNRPC.WatchtowerClient.RemoveTowerRequest,
+      Lightnex.LNRPC.WatchtowerClient.RemoveTowerResponse
 
   rpc :DeactivateTower,
-      Lightnex.RPC.WatchtowerClient.DeactivateTowerRequest,
-      Lightnex.RPC.WatchtowerClient.DeactivateTowerResponse
+      Lightnex.LNRPC.WatchtowerClient.DeactivateTowerRequest,
+      Lightnex.LNRPC.WatchtowerClient.DeactivateTowerResponse
 
   rpc :TerminateSession,
-      Lightnex.RPC.WatchtowerClient.TerminateSessionRequest,
-      Lightnex.RPC.WatchtowerClient.TerminateSessionResponse
+      Lightnex.LNRPC.WatchtowerClient.TerminateSessionRequest,
+      Lightnex.LNRPC.WatchtowerClient.TerminateSessionResponse
 
   rpc :ListTowers,
-      Lightnex.RPC.WatchtowerClient.ListTowersRequest,
-      Lightnex.RPC.WatchtowerClient.ListTowersResponse
+      Lightnex.LNRPC.WatchtowerClient.ListTowersRequest,
+      Lightnex.LNRPC.WatchtowerClient.ListTowersResponse
 
   rpc :GetTowerInfo,
-      Lightnex.RPC.WatchtowerClient.GetTowerInfoRequest,
-      Lightnex.RPC.WatchtowerClient.Tower
+      Lightnex.LNRPC.WatchtowerClient.GetTowerInfoRequest,
+      Lightnex.LNRPC.WatchtowerClient.Tower
 
   rpc :Stats,
-      Lightnex.RPC.WatchtowerClient.StatsRequest,
-      Lightnex.RPC.WatchtowerClient.StatsResponse
+      Lightnex.LNRPC.WatchtowerClient.StatsRequest,
+      Lightnex.LNRPC.WatchtowerClient.StatsResponse
 
   rpc :Policy,
-      Lightnex.RPC.WatchtowerClient.PolicyRequest,
-      Lightnex.RPC.WatchtowerClient.PolicyResponse
+      Lightnex.LNRPC.WatchtowerClient.PolicyRequest,
+      Lightnex.LNRPC.WatchtowerClient.PolicyResponse
 end
 
-defmodule Lightnex.RPC.WatchtowerClient.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.WatchtowerClient.Service
+defmodule Lightnex.LNRPC.WatchtowerClient.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.WatchtowerClient.Service
 end

@@ -102,7 +102,7 @@
         {Credo.Check.Readability.LargeNumbers, []},
         {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 100]},
         {Credo.Check.Readability.ModuleAttributeNames, []},
-        {Credo.Check.Readability.ModuleDoc, [ignore_names: [~r/Lightnex.RPC/]]},
+        {Credo.Check.Readability.ModuleDoc, [ignore_names: [~r/Lightnex.LNRPC/]]},
         {Credo.Check.Readability.ModuleNames, []},
         {Credo.Check.Readability.ParenthesesInCondition, []},
         {Credo.Check.Readability.ParenthesesOnZeroArityDefs, []},

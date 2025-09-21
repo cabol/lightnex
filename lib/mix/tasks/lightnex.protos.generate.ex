@@ -21,7 +21,7 @@ defmodule Mix.Tasks.Lightnex.Protos.Generate do
     * `-i`, `--input-dir` - Directory where protobuf files are located
       (default: `priv/protos`).
     * `-o`, `--output-dir` - Directory where generated modules will be placed
-      (default: `lib/lightnex/rpc`).
+      (default: `lib/lightnex/lnrpc`).
     * `-d`, `--include-docs` - Include documentation in generated code.
     * `-c`, `--clean` - Clean output directory before generating.
     * `-v`, `--verbose` - Show verbose output.
@@ -33,7 +33,7 @@ defmodule Mix.Tasks.Lightnex.Protos.Generate do
   import Mix.Lightnex, only: [proto_files: 0]
 
   @input_dir "priv/protos"
-  @output_dir "lib/lightnex/rpc"
+  @output_dir "lib/lightnex/lnrpc"
 
   @switches [
     input_dir: :string,
@@ -99,8 +99,8 @@ defmodule Mix.Tasks.Lightnex.Protos.Generate do
     ✅ Code generation completed successfully!
 
     👉 Add the following to your application:
-       alias Lightnex.RPC.Lightning.{GetInfoRequest, GetInfoResponse}
-       alias Lightnex.RPC.WalletUnlocker.{InitWalletRequest, UnlockWalletRequest}
+       alias Lightnex.LNRPC.Lightning.{GetInfoRequest, GetInfoResponse}
+       alias Lightnex.LNRPC.WalletUnlocker.{InitWalletRequest, UnlockWalletRequest}
     """)
   end
 
@@ -237,48 +237,51 @@ defmodule Mix.Tasks.Lightnex.Protos.Generate do
   # Define all the LND RPC packages that need to be unified
   @lnd_packages %{
     "lightning.pb.ex" => [
-      {"Lnrpc", "Lightnex.RPC.Lightning"},
+      {"Lnrpc", "Lightnex.LNRPC.Lightning"},
       {"Lightning.Lightning", "Lightning"}
     ],
-    "stateservice.pb.ex" => [{"Lnrpc", "Lightnex.RPC.State"}],
+    "stateservice.pb.ex" => [{"Lnrpc", "Lightnex.LNRPC.State"}],
     "walletunlocker.pb.ex" => [
-      {"Lnrpc.ChanBackupSnapshot", "Lightnex.RPC.Lightning.ChanBackupSnapshot"},
-      {"Lnrpc", "Lightnex.RPC.WalletUnlocker"},
+      {"Lnrpc.ChanBackupSnapshot", "Lightnex.LNRPC.Lightning.ChanBackupSnapshot"},
+      {"Lnrpc", "Lightnex.LNRPC.WalletUnlocker"},
       {"WalletUnlocker.WalletUnlocker", "WalletUnlocker"}
     ],
     "chainnotifier.pb.ex" => [
-      {"Chainrpc", "Lightnex.RPC.ChainNotifier"},
+      {"Chainrpc", "Lightnex.LNRPC.ChainNotifier"},
       {"ChainNotifier.ChainNotifier", "ChainNotifier"}
     ],
-    "chainkit.pb.ex" => [{"Chainrpc", "Lightnex.RPC.ChainKit"}, {"ChainKit.ChainKit", "ChainKit"}],
+    "chainkit.pb.ex" => [
+      {"Chainrpc", "Lightnex.LNRPC.ChainKit"},
+      {"ChainKit.ChainKit", "ChainKit"}
+    ],
     "invoices.pb.ex" => [
-      {"Invoicesrpc", "Lightnex.RPC.Invoices"},
+      {"Invoicesrpc", "Lightnex.LNRPC.Invoices"},
       {"Invoices.Invoices", "Invoices"},
-      {"Lnrpc", "Lightnex.RPC.Lightning"}
+      {"Lnrpc", "Lightnex.LNRPC.Lightning"}
     ],
     "peers.pb.ex" => [
-      {"Peersrpc", "Lightnex.RPC.Peers"},
+      {"Peersrpc", "Lightnex.LNRPC.Peers"},
       {"Peers.Peers", "Peers"},
-      {"Lnrpc", "Lightnex.RPC.Lightning"}
+      {"Lnrpc", "Lightnex.LNRPC.Lightning"}
     ],
     "router.pb.ex" => [
-      {"Routerrpc", "Lightnex.RPC.Router"},
+      {"Routerrpc", "Lightnex.LNRPC.Router"},
       {"Router.Router", "Router"},
-      {"Lnrpc", "Lightnex.RPC.Lightning"}
+      {"Lnrpc", "Lightnex.LNRPC.Lightning"}
     ],
-    "signer.pb.ex" => [{"Signrpc", "Lightnex.RPC.Signer"}, {"Signer.Signer", "Signer"}],
+    "signer.pb.ex" => [{"Signrpc", "Lightnex.LNRPC.Signer"}, {"Signer.Signer", "Signer"}],
     "walletkit.pb.ex" => [
-      {"Walletrpc", "Lightnex.RPC.WalletKit"},
+      {"Walletrpc", "Lightnex.LNRPC.WalletKit"},
       {"WalletKit.WalletKit", "WalletKit"},
-      {"Lnrpc", "Lightnex.RPC.Lightning"},
-      {"Signrpc", "Lightnex.RPC.Signer"}
+      {"Lnrpc", "Lightnex.LNRPC.Lightning"},
+      {"Signrpc", "Lightnex.LNRPC.Signer"}
     ],
     "watchtower.pb.ex" => [
-      {"Watchtowerrpc", "Lightnex.RPC.Watchtower"},
+      {"Watchtowerrpc", "Lightnex.LNRPC.Watchtower"},
       {"Watchtower.Watchtower", "Watchtower"}
     ],
     "wtclient.pb.ex" => [
-      {"Wtclientrpc", "Lightnex.RPC.WatchtowerClient"},
+      {"Wtclientrpc", "Lightnex.LNRPC.WatchtowerClient"},
       {"WatchtowerClient.WatchtowerClient", "WatchtowerClient"}
     ]
   }

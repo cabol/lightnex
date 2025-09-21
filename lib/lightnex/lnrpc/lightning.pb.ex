@@ -1,4 +1,4 @@
-defmodule Lightnex.RPC.Lightning.OutputScriptType do
+defmodule Lightnex.LNRPC.Lightning.OutputScriptType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :SCRIPT_TYPE_PUBKEY_HASH, 0
@@ -13,7 +13,7 @@ defmodule Lightnex.RPC.Lightning.OutputScriptType do
   field :SCRIPT_TYPE_WITNESS_V1_TAPROOT, 9
 end
 
-defmodule Lightnex.RPC.Lightning.CoinSelectionStrategy do
+defmodule Lightnex.LNRPC.Lightning.CoinSelectionStrategy do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :STRATEGY_USE_GLOBAL_CONFIG, 0
@@ -21,7 +21,7 @@ defmodule Lightnex.RPC.Lightning.CoinSelectionStrategy do
   field :STRATEGY_RANDOM, 2
 end
 
-defmodule Lightnex.RPC.Lightning.AddressType do
+defmodule Lightnex.LNRPC.Lightning.AddressType do
   @moduledoc """
   `AddressType` has to be one of:
 
@@ -40,7 +40,7 @@ defmodule Lightnex.RPC.Lightning.AddressType do
   field :UNUSED_TAPROOT_PUBKEY, 5
 end
 
-defmodule Lightnex.RPC.Lightning.CommitmentType do
+defmodule Lightnex.LNRPC.Lightning.CommitmentType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UNKNOWN_COMMITMENT_TYPE, 0
@@ -52,7 +52,7 @@ defmodule Lightnex.RPC.Lightning.CommitmentType do
   field :SIMPLE_TAPROOT_OVERLAY, 6
 end
 
-defmodule Lightnex.RPC.Lightning.Initiator do
+defmodule Lightnex.LNRPC.Lightning.Initiator do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :INITIATOR_UNKNOWN, 0
@@ -61,7 +61,7 @@ defmodule Lightnex.RPC.Lightning.Initiator do
   field :INITIATOR_BOTH, 3
 end
 
-defmodule Lightnex.RPC.Lightning.ResolutionType do
+defmodule Lightnex.LNRPC.Lightning.ResolutionType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :TYPE_UNKNOWN, 0
@@ -71,7 +71,7 @@ defmodule Lightnex.RPC.Lightning.ResolutionType do
   field :COMMIT, 4
 end
 
-defmodule Lightnex.RPC.Lightning.ResolutionOutcome do
+defmodule Lightnex.LNRPC.Lightning.ResolutionOutcome do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :OUTCOME_UNKNOWN, 0
@@ -82,14 +82,14 @@ defmodule Lightnex.RPC.Lightning.ResolutionOutcome do
   field :TIMEOUT, 5
 end
 
-defmodule Lightnex.RPC.Lightning.NodeMetricType do
+defmodule Lightnex.LNRPC.Lightning.NodeMetricType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UNKNOWN, 0
   field :BETWEENNESS_CENTRALITY, 1
 end
 
-defmodule Lightnex.RPC.Lightning.InvoiceHTLCState do
+defmodule Lightnex.LNRPC.Lightning.InvoiceHTLCState do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :ACCEPTED, 0
@@ -97,7 +97,7 @@ defmodule Lightnex.RPC.Lightning.InvoiceHTLCState do
   field :CANCELED, 2
 end
 
-defmodule Lightnex.RPC.Lightning.PaymentFailureReason do
+defmodule Lightnex.LNRPC.Lightning.PaymentFailureReason do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :FAILURE_REASON_NONE, 0
@@ -109,7 +109,7 @@ defmodule Lightnex.RPC.Lightning.PaymentFailureReason do
   field :FAILURE_REASON_CANCELED, 6
 end
 
-defmodule Lightnex.RPC.Lightning.FeatureBit do
+defmodule Lightnex.LNRPC.Lightning.FeatureBit do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :DATALOSS_PROTECT_REQ, 0
@@ -141,7 +141,7 @@ defmodule Lightnex.RPC.Lightning.FeatureBit do
   field :AMP_OPT, 31
 end
 
-defmodule Lightnex.RPC.Lightning.UpdateFailure do
+defmodule Lightnex.LNRPC.Lightning.UpdateFailure do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UPDATE_FAILURE_UNKNOWN, 0
@@ -151,7 +151,7 @@ defmodule Lightnex.RPC.Lightning.UpdateFailure do
   field :UPDATE_FAILURE_INVALID_PARAMETER, 4
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelCloseSummary.ClosureType do
+defmodule Lightnex.LNRPC.Lightning.ChannelCloseSummary.ClosureType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :COOPERATIVE_CLOSE, 0
@@ -162,7 +162,7 @@ defmodule Lightnex.RPC.Lightning.ChannelCloseSummary.ClosureType do
   field :ABANDONED, 5
 end
 
-defmodule Lightnex.RPC.Lightning.Peer.SyncType do
+defmodule Lightnex.LNRPC.Lightning.Peer.SyncType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UNKNOWN_SYNC, 0
@@ -171,14 +171,14 @@ defmodule Lightnex.RPC.Lightning.Peer.SyncType do
   field :PINNED_SYNC, 3
 end
 
-defmodule Lightnex.RPC.Lightning.PeerEvent.EventType do
+defmodule Lightnex.LNRPC.Lightning.PeerEvent.EventType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :PEER_ONLINE, 0
   field :PEER_OFFLINE, 1
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.ForceClosedChannel.AnchorState do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsResponse.ForceClosedChannel.AnchorState do
   @moduledoc """
   There are three resolution states for the anchor:
   limbo, lost and recovered. Derive the current state
@@ -192,7 +192,7 @@ defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.ForceClosedChannel.Anch
   field :LOST, 2
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelEventUpdate.UpdateType do
+defmodule Lightnex.LNRPC.Lightning.ChannelEventUpdate.UpdateType do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :OPEN_CHANNEL, 0
@@ -204,7 +204,7 @@ defmodule Lightnex.RPC.Lightning.ChannelEventUpdate.UpdateType do
   field :CHANNEL_FUNDING_TIMEOUT, 6
 end
 
-defmodule Lightnex.RPC.Lightning.Invoice.InvoiceState do
+defmodule Lightnex.LNRPC.Lightning.Invoice.InvoiceState do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :OPEN, 0
@@ -213,7 +213,7 @@ defmodule Lightnex.RPC.Lightning.Invoice.InvoiceState do
   field :ACCEPTED, 3
 end
 
-defmodule Lightnex.RPC.Lightning.Payment.PaymentStatus do
+defmodule Lightnex.LNRPC.Lightning.Payment.PaymentStatus do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :UNKNOWN, 0
@@ -223,7 +223,7 @@ defmodule Lightnex.RPC.Lightning.Payment.PaymentStatus do
   field :INITIATED, 4
 end
 
-defmodule Lightnex.RPC.Lightning.HTLCAttempt.HTLCStatus do
+defmodule Lightnex.LNRPC.Lightning.HTLCAttempt.HTLCStatus do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :IN_FLIGHT, 0
@@ -231,7 +231,7 @@ defmodule Lightnex.RPC.Lightning.HTLCAttempt.HTLCStatus do
   field :FAILED, 2
 end
 
-defmodule Lightnex.RPC.Lightning.Failure.FailureCode do
+defmodule Lightnex.LNRPC.Lightning.Failure.FailureCode do
   use Protobuf, enum: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :RESERVED, 0
@@ -265,33 +265,25 @@ defmodule Lightnex.RPC.Lightning.Failure.FailureCode do
   field :UNREADABLE_FAILURE, 999
 end
 
-defmodule Lightnex.RPC.Lightning.LookupHtlcResolutionRequest do
+defmodule Lightnex.LNRPC.Lightning.LookupHtlcResolutionRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_id, 1, type: :uint64, json_name: "chanId"
   field :htlc_index, 2, type: :uint64, json_name: "htlcIndex"
 end
 
-defmodule Lightnex.RPC.Lightning.LookupHtlcResolutionResponse do
+defmodule Lightnex.LNRPC.Lightning.LookupHtlcResolutionResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :settled, 1, type: :bool
   field :offchain, 2, type: :bool
 end
 
-defmodule Lightnex.RPC.Lightning.SubscribeCustomMessagesRequest do
+defmodule Lightnex.LNRPC.Lightning.SubscribeCustomMessagesRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.CustomMessage do
-  use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
-
-  field :peer, 1, type: :bytes
-  field :type, 2, type: :uint32
-  field :data, 3, type: :bytes
-end
-
-defmodule Lightnex.RPC.Lightning.SendCustomMessageRequest do
+defmodule Lightnex.LNRPC.Lightning.CustomMessage do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :peer, 1, type: :bytes
@@ -299,32 +291,40 @@ defmodule Lightnex.RPC.Lightning.SendCustomMessageRequest do
   field :data, 3, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.SendCustomMessageResponse do
+defmodule Lightnex.LNRPC.Lightning.SendCustomMessageRequest do
+  use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
+
+  field :peer, 1, type: :bytes
+  field :type, 2, type: :uint32
+  field :data, 3, type: :bytes
+end
+
+defmodule Lightnex.LNRPC.Lightning.SendCustomMessageResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.Utxo do
+defmodule Lightnex.LNRPC.Lightning.Utxo do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :address_type, 1,
-    type: Lightnex.RPC.Lightning.AddressType,
+    type: Lightnex.LNRPC.Lightning.AddressType,
     json_name: "addressType",
     enum: true
 
   field :address, 2, type: :string
   field :amount_sat, 3, type: :int64, json_name: "amountSat"
   field :pk_script, 4, type: :string, json_name: "pkScript"
-  field :outpoint, 5, type: Lightnex.RPC.Lightning.OutPoint
+  field :outpoint, 5, type: Lightnex.LNRPC.Lightning.OutPoint
   field :confirmations, 6, type: :int64
 end
 
-defmodule Lightnex.RPC.Lightning.OutputDetail do
+defmodule Lightnex.LNRPC.Lightning.OutputDetail do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :output_type, 1,
-    type: Lightnex.RPC.Lightning.OutputScriptType,
+    type: Lightnex.LNRPC.Lightning.OutputScriptType,
     json_name: "outputType",
     enum: true
 
@@ -335,7 +335,7 @@ defmodule Lightnex.RPC.Lightning.OutputDetail do
   field :is_our_address, 6, type: :bool, json_name: "isOurAddress"
 end
 
-defmodule Lightnex.RPC.Lightning.Transaction do
+defmodule Lightnex.LNRPC.Lightning.Transaction do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :tx_hash, 1, type: :string, json_name: "txHash"
@@ -354,7 +354,7 @@ defmodule Lightnex.RPC.Lightning.Transaction do
 
   field :output_details, 11,
     repeated: true,
-    type: Lightnex.RPC.Lightning.OutputDetail,
+    type: Lightnex.LNRPC.Lightning.OutputDetail,
     json_name: "outputDetails"
 
   field :raw_tx_hex, 9, type: :string, json_name: "rawTxHex"
@@ -362,11 +362,11 @@ defmodule Lightnex.RPC.Lightning.Transaction do
 
   field :previous_outpoints, 12,
     repeated: true,
-    type: Lightnex.RPC.Lightning.PreviousOutPoint,
+    type: Lightnex.LNRPC.Lightning.PreviousOutPoint,
     json_name: "previousOutpoints"
 end
 
-defmodule Lightnex.RPC.Lightning.GetTransactionsRequest do
+defmodule Lightnex.LNRPC.Lightning.GetTransactionsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :start_height, 1, type: :int32, json_name: "startHeight"
@@ -376,15 +376,15 @@ defmodule Lightnex.RPC.Lightning.GetTransactionsRequest do
   field :max_transactions, 5, type: :uint32, json_name: "maxTransactions"
 end
 
-defmodule Lightnex.RPC.Lightning.TransactionDetails do
+defmodule Lightnex.LNRPC.Lightning.TransactionDetails do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :transactions, 1, repeated: true, type: Lightnex.RPC.Lightning.Transaction
+  field :transactions, 1, repeated: true, type: Lightnex.LNRPC.Lightning.Transaction
   field :last_index, 2, type: :uint64, json_name: "lastIndex"
   field :first_index, 3, type: :uint64, json_name: "firstIndex"
 end
 
-defmodule Lightnex.RPC.Lightning.FeeLimit do
+defmodule Lightnex.LNRPC.Lightning.FeeLimit do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :limit, 0
@@ -394,14 +394,14 @@ defmodule Lightnex.RPC.Lightning.FeeLimit do
   field :percent, 2, type: :int64, oneof: 0
 end
 
-defmodule Lightnex.RPC.Lightning.SendRequest.DestCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Lightning.SendRequest.DestCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.SendRequest do
+defmodule Lightnex.LNRPC.Lightning.SendRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :dest, 1, type: :bytes
@@ -412,14 +412,14 @@ defmodule Lightnex.RPC.Lightning.SendRequest do
   field :payment_hash_string, 5, type: :string, json_name: "paymentHashString", deprecated: true
   field :payment_request, 6, type: :string, json_name: "paymentRequest"
   field :final_cltv_delta, 7, type: :int32, json_name: "finalCltvDelta"
-  field :fee_limit, 8, type: Lightnex.RPC.Lightning.FeeLimit, json_name: "feeLimit"
+  field :fee_limit, 8, type: Lightnex.LNRPC.Lightning.FeeLimit, json_name: "feeLimit"
   field :outgoing_chan_id, 9, type: :uint64, json_name: "outgoingChanId", deprecated: false
   field :last_hop_pubkey, 13, type: :bytes, json_name: "lastHopPubkey"
   field :cltv_limit, 10, type: :uint32, json_name: "cltvLimit"
 
   field :dest_custom_records, 11,
     repeated: true,
-    type: Lightnex.RPC.Lightning.SendRequest.DestCustomRecordsEntry,
+    type: Lightnex.LNRPC.Lightning.SendRequest.DestCustomRecordsEntry,
     json_name: "destCustomRecords",
     map: true
 
@@ -427,31 +427,31 @@ defmodule Lightnex.RPC.Lightning.SendRequest do
 
   field :dest_features, 15,
     repeated: true,
-    type: Lightnex.RPC.Lightning.FeatureBit,
+    type: Lightnex.LNRPC.Lightning.FeatureBit,
     json_name: "destFeatures",
     enum: true
 
   field :payment_addr, 16, type: :bytes, json_name: "paymentAddr"
 end
 
-defmodule Lightnex.RPC.Lightning.SendResponse do
+defmodule Lightnex.LNRPC.Lightning.SendResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :payment_error, 1, type: :string, json_name: "paymentError"
   field :payment_preimage, 2, type: :bytes, json_name: "paymentPreimage"
-  field :payment_route, 3, type: Lightnex.RPC.Lightning.Route, json_name: "paymentRoute"
+  field :payment_route, 3, type: Lightnex.LNRPC.Lightning.Route, json_name: "paymentRoute"
   field :payment_hash, 4, type: :bytes, json_name: "paymentHash"
 end
 
-defmodule Lightnex.RPC.Lightning.SendToRouteRequest do
+defmodule Lightnex.LNRPC.Lightning.SendToRouteRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :payment_hash, 1, type: :bytes, json_name: "paymentHash"
   field :payment_hash_string, 2, type: :string, json_name: "paymentHashString", deprecated: true
-  field :route, 4, type: Lightnex.RPC.Lightning.Route
+  field :route, 4, type: Lightnex.LNRPC.Lightning.Route
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelAcceptRequest do
+defmodule Lightnex.LNRPC.Lightning.ChannelAcceptRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :node_pubkey, 1, type: :bytes, json_name: "nodePubkey"
@@ -469,7 +469,7 @@ defmodule Lightnex.RPC.Lightning.ChannelAcceptRequest do
   field :channel_flags, 13, type: :uint32, json_name: "channelFlags"
 
   field :commitment_type, 14,
-    type: Lightnex.RPC.Lightning.CommitmentType,
+    type: Lightnex.LNRPC.Lightning.CommitmentType,
     json_name: "commitmentType",
     enum: true
 
@@ -477,7 +477,7 @@ defmodule Lightnex.RPC.Lightning.ChannelAcceptRequest do
   field :wants_scid_alias, 16, type: :bool, json_name: "wantsScidAlias"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelAcceptResponse do
+defmodule Lightnex.LNRPC.Lightning.ChannelAcceptResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :accept, 1, type: :bool
@@ -493,7 +493,7 @@ defmodule Lightnex.RPC.Lightning.ChannelAcceptResponse do
   field :zero_conf, 11, type: :bool, json_name: "zeroConf"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelPoint do
+defmodule Lightnex.LNRPC.Lightning.ChannelPoint do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :funding_txid, 0
@@ -503,7 +503,7 @@ defmodule Lightnex.RPC.Lightning.ChannelPoint do
   field :output_index, 3, type: :uint32, json_name: "outputIndex"
 end
 
-defmodule Lightnex.RPC.Lightning.OutPoint do
+defmodule Lightnex.LNRPC.Lightning.OutPoint do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :txid_bytes, 1, type: :bytes, json_name: "txidBytes"
@@ -511,33 +511,33 @@ defmodule Lightnex.RPC.Lightning.OutPoint do
   field :output_index, 3, type: :uint32, json_name: "outputIndex"
 end
 
-defmodule Lightnex.RPC.Lightning.PreviousOutPoint do
+defmodule Lightnex.LNRPC.Lightning.PreviousOutPoint do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :outpoint, 1, type: :string
   field :is_our_output, 2, type: :bool, json_name: "isOurOutput"
 end
 
-defmodule Lightnex.RPC.Lightning.LightningAddress do
+defmodule Lightnex.LNRPC.Lightning.LightningAddress do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pubkey, 1, type: :string
   field :host, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.EstimateFeeRequest.AddrToAmountEntry do
+defmodule Lightnex.LNRPC.Lightning.EstimateFeeRequest.AddrToAmountEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
   field :value, 2, type: :int64
 end
 
-defmodule Lightnex.RPC.Lightning.EstimateFeeRequest do
+defmodule Lightnex.LNRPC.Lightning.EstimateFeeRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :AddrToAmount, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.EstimateFeeRequest.AddrToAmountEntry,
+    type: Lightnex.LNRPC.Lightning.EstimateFeeRequest.AddrToAmountEntry,
     map: true
 
   field :target_conf, 2, type: :int32, json_name: "targetConf"
@@ -545,12 +545,12 @@ defmodule Lightnex.RPC.Lightning.EstimateFeeRequest do
   field :spend_unconfirmed, 4, type: :bool, json_name: "spendUnconfirmed"
 
   field :coin_selection_strategy, 5,
-    type: Lightnex.RPC.Lightning.CoinSelectionStrategy,
+    type: Lightnex.LNRPC.Lightning.CoinSelectionStrategy,
     json_name: "coinSelectionStrategy",
     enum: true
 end
 
-defmodule Lightnex.RPC.Lightning.EstimateFeeResponse do
+defmodule Lightnex.LNRPC.Lightning.EstimateFeeResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :fee_sat, 1, type: :int64, json_name: "feeSat"
@@ -558,19 +558,19 @@ defmodule Lightnex.RPC.Lightning.EstimateFeeResponse do
   field :sat_per_vbyte, 3, type: :uint64, json_name: "satPerVbyte"
 end
 
-defmodule Lightnex.RPC.Lightning.SendManyRequest.AddrToAmountEntry do
+defmodule Lightnex.LNRPC.Lightning.SendManyRequest.AddrToAmountEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
   field :value, 2, type: :int64
 end
 
-defmodule Lightnex.RPC.Lightning.SendManyRequest do
+defmodule Lightnex.LNRPC.Lightning.SendManyRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :AddrToAmount, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.SendManyRequest.AddrToAmountEntry,
+    type: Lightnex.LNRPC.Lightning.SendManyRequest.AddrToAmountEntry,
     map: true
 
   field :target_conf, 3, type: :int32, json_name: "targetConf"
@@ -581,18 +581,18 @@ defmodule Lightnex.RPC.Lightning.SendManyRequest do
   field :spend_unconfirmed, 8, type: :bool, json_name: "spendUnconfirmed"
 
   field :coin_selection_strategy, 9,
-    type: Lightnex.RPC.Lightning.CoinSelectionStrategy,
+    type: Lightnex.LNRPC.Lightning.CoinSelectionStrategy,
     json_name: "coinSelectionStrategy",
     enum: true
 end
 
-defmodule Lightnex.RPC.Lightning.SendManyResponse do
+defmodule Lightnex.LNRPC.Lightning.SendManyResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :txid, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.SendCoinsRequest do
+defmodule Lightnex.LNRPC.Lightning.SendCoinsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :addr, 1, type: :string
@@ -606,20 +606,20 @@ defmodule Lightnex.RPC.Lightning.SendCoinsRequest do
   field :spend_unconfirmed, 9, type: :bool, json_name: "spendUnconfirmed"
 
   field :coin_selection_strategy, 10,
-    type: Lightnex.RPC.Lightning.CoinSelectionStrategy,
+    type: Lightnex.LNRPC.Lightning.CoinSelectionStrategy,
     json_name: "coinSelectionStrategy",
     enum: true
 
-  field :outpoints, 11, repeated: true, type: Lightnex.RPC.Lightning.OutPoint
+  field :outpoints, 11, repeated: true, type: Lightnex.LNRPC.Lightning.OutPoint
 end
 
-defmodule Lightnex.RPC.Lightning.SendCoinsResponse do
+defmodule Lightnex.LNRPC.Lightning.SendCoinsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :txid, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.ListUnspentRequest do
+defmodule Lightnex.LNRPC.Lightning.ListUnspentRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :min_confs, 1, type: :int32, json_name: "minConfs"
@@ -627,79 +627,79 @@ defmodule Lightnex.RPC.Lightning.ListUnspentRequest do
   field :account, 3, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.ListUnspentResponse do
+defmodule Lightnex.LNRPC.Lightning.ListUnspentResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :utxos, 1, repeated: true, type: Lightnex.RPC.Lightning.Utxo
+  field :utxos, 1, repeated: true, type: Lightnex.LNRPC.Lightning.Utxo
 end
 
-defmodule Lightnex.RPC.Lightning.NewAddressRequest do
+defmodule Lightnex.LNRPC.Lightning.NewAddressRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :type, 1, type: Lightnex.RPC.Lightning.AddressType, enum: true
+  field :type, 1, type: Lightnex.LNRPC.Lightning.AddressType, enum: true
   field :account, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.NewAddressResponse do
+defmodule Lightnex.LNRPC.Lightning.NewAddressResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :address, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.SignMessageRequest do
+defmodule Lightnex.LNRPC.Lightning.SignMessageRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :msg, 1, type: :bytes
   field :single_hash, 2, type: :bool, json_name: "singleHash"
 end
 
-defmodule Lightnex.RPC.Lightning.SignMessageResponse do
+defmodule Lightnex.LNRPC.Lightning.SignMessageResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :signature, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.VerifyMessageRequest do
+defmodule Lightnex.LNRPC.Lightning.VerifyMessageRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :msg, 1, type: :bytes
   field :signature, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.VerifyMessageResponse do
+defmodule Lightnex.LNRPC.Lightning.VerifyMessageResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :valid, 1, type: :bool
   field :pubkey, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.ConnectPeerRequest do
+defmodule Lightnex.LNRPC.Lightning.ConnectPeerRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :addr, 1, type: Lightnex.RPC.Lightning.LightningAddress
+  field :addr, 1, type: Lightnex.LNRPC.Lightning.LightningAddress
   field :perm, 2, type: :bool
   field :timeout, 3, type: :uint64
 end
 
-defmodule Lightnex.RPC.Lightning.ConnectPeerResponse do
+defmodule Lightnex.LNRPC.Lightning.ConnectPeerResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.DisconnectPeerRequest do
+defmodule Lightnex.LNRPC.Lightning.DisconnectPeerRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pub_key, 1, type: :string, json_name: "pubKey"
 end
 
-defmodule Lightnex.RPC.Lightning.DisconnectPeerResponse do
+defmodule Lightnex.LNRPC.Lightning.DisconnectPeerResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.HTLC do
+defmodule Lightnex.LNRPC.Lightning.HTLC do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :incoming, 1, type: :bool
@@ -712,7 +712,7 @@ defmodule Lightnex.RPC.Lightning.HTLC do
   field :locked_in, 8, type: :bool, json_name: "lockedIn"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelConstraints do
+defmodule Lightnex.LNRPC.Lightning.ChannelConstraints do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :csv_delay, 1, type: :uint32, json_name: "csvDelay"
@@ -723,7 +723,7 @@ defmodule Lightnex.RPC.Lightning.ChannelConstraints do
   field :max_accepted_htlcs, 6, type: :uint32, json_name: "maxAcceptedHtlcs"
 end
 
-defmodule Lightnex.RPC.Lightning.Channel do
+defmodule Lightnex.LNRPC.Lightning.Channel do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :active, 1, type: :bool
@@ -743,7 +743,7 @@ defmodule Lightnex.RPC.Lightning.Channel do
 
   field :pending_htlcs, 15,
     repeated: true,
-    type: Lightnex.RPC.Lightning.HTLC,
+    type: Lightnex.LNRPC.Lightning.HTLC,
     json_name: "pendingHtlcs"
 
   field :csv_delay, 16, type: :uint32, json_name: "csvDelay", deprecated: true
@@ -764,7 +764,7 @@ defmodule Lightnex.RPC.Lightning.Channel do
   field :static_remote_key, 22, type: :bool, json_name: "staticRemoteKey", deprecated: true
 
   field :commitment_type, 26,
-    type: Lightnex.RPC.Lightning.CommitmentType,
+    type: Lightnex.LNRPC.Lightning.CommitmentType,
     json_name: "commitmentType",
     enum: true
 
@@ -775,11 +775,11 @@ defmodule Lightnex.RPC.Lightning.Channel do
   field :thaw_height, 28, type: :uint32, json_name: "thawHeight"
 
   field :local_constraints, 29,
-    type: Lightnex.RPC.Lightning.ChannelConstraints,
+    type: Lightnex.LNRPC.Lightning.ChannelConstraints,
     json_name: "localConstraints"
 
   field :remote_constraints, 30,
-    type: Lightnex.RPC.Lightning.ChannelConstraints,
+    type: Lightnex.LNRPC.Lightning.ChannelConstraints,
     json_name: "remoteConstraints"
 
   field :alias_scids, 31, repeated: true, type: :uint64, json_name: "aliasScids"
@@ -791,7 +791,7 @@ defmodule Lightnex.RPC.Lightning.Channel do
   field :custom_channel_data, 37, type: :bytes, json_name: "customChannelData"
 end
 
-defmodule Lightnex.RPC.Lightning.ListChannelsRequest do
+defmodule Lightnex.LNRPC.Lightning.ListChannelsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :active_only, 1, type: :bool, json_name: "activeOnly"
@@ -802,33 +802,33 @@ defmodule Lightnex.RPC.Lightning.ListChannelsRequest do
   field :peer_alias_lookup, 6, type: :bool, json_name: "peerAliasLookup"
 end
 
-defmodule Lightnex.RPC.Lightning.ListChannelsResponse do
+defmodule Lightnex.LNRPC.Lightning.ListChannelsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channels, 11, repeated: true, type: Lightnex.RPC.Lightning.Channel
+  field :channels, 11, repeated: true, type: Lightnex.LNRPC.Lightning.Channel
 end
 
-defmodule Lightnex.RPC.Lightning.AliasMap do
+defmodule Lightnex.LNRPC.Lightning.AliasMap do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :base_scid, 1, type: :uint64, json_name: "baseScid"
   field :aliases, 2, repeated: true, type: :uint64
 end
 
-defmodule Lightnex.RPC.Lightning.ListAliasesRequest do
+defmodule Lightnex.LNRPC.Lightning.ListAliasesRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.ListAliasesResponse do
+defmodule Lightnex.LNRPC.Lightning.ListAliasesResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :alias_maps, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.AliasMap,
+    type: Lightnex.LNRPC.Lightning.AliasMap,
     json_name: "aliasMaps"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelCloseSummary do
+defmodule Lightnex.LNRPC.Lightning.ChannelCloseSummary do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :channel_point, 1, type: :string, json_name: "channelPoint"
@@ -842,21 +842,21 @@ defmodule Lightnex.RPC.Lightning.ChannelCloseSummary do
   field :time_locked_balance, 9, type: :int64, json_name: "timeLockedBalance"
 
   field :close_type, 10,
-    type: Lightnex.RPC.Lightning.ChannelCloseSummary.ClosureType,
+    type: Lightnex.LNRPC.Lightning.ChannelCloseSummary.ClosureType,
     json_name: "closeType",
     enum: true
 
   field :open_initiator, 11,
-    type: Lightnex.RPC.Lightning.Initiator,
+    type: Lightnex.LNRPC.Lightning.Initiator,
     json_name: "openInitiator",
     enum: true
 
   field :close_initiator, 12,
-    type: Lightnex.RPC.Lightning.Initiator,
+    type: Lightnex.LNRPC.Lightning.Initiator,
     json_name: "closeInitiator",
     enum: true
 
-  field :resolutions, 13, repeated: true, type: Lightnex.RPC.Lightning.Resolution
+  field :resolutions, 13, repeated: true, type: Lightnex.LNRPC.Lightning.Resolution
   field :alias_scids, 14, repeated: true, type: :uint64, json_name: "aliasScids"
 
   field :zero_conf_confirmed_scid, 15,
@@ -867,21 +867,21 @@ defmodule Lightnex.RPC.Lightning.ChannelCloseSummary do
   field :custom_channel_data, 16, type: :bytes, json_name: "customChannelData"
 end
 
-defmodule Lightnex.RPC.Lightning.Resolution do
+defmodule Lightnex.LNRPC.Lightning.Resolution do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :resolution_type, 1,
-    type: Lightnex.RPC.Lightning.ResolutionType,
+    type: Lightnex.LNRPC.Lightning.ResolutionType,
     json_name: "resolutionType",
     enum: true
 
-  field :outcome, 2, type: Lightnex.RPC.Lightning.ResolutionOutcome, enum: true
-  field :outpoint, 3, type: Lightnex.RPC.Lightning.OutPoint
+  field :outcome, 2, type: Lightnex.LNRPC.Lightning.ResolutionOutcome, enum: true
+  field :outpoint, 3, type: Lightnex.LNRPC.Lightning.OutPoint
   field :amount_sat, 4, type: :uint64, json_name: "amountSat"
   field :sweep_txid, 5, type: :string, json_name: "sweepTxid"
 end
 
-defmodule Lightnex.RPC.Lightning.ClosedChannelsRequest do
+defmodule Lightnex.LNRPC.Lightning.ClosedChannelsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :cooperative, 1, type: :bool
@@ -892,20 +892,20 @@ defmodule Lightnex.RPC.Lightning.ClosedChannelsRequest do
   field :abandoned, 6, type: :bool
 end
 
-defmodule Lightnex.RPC.Lightning.ClosedChannelsResponse do
+defmodule Lightnex.LNRPC.Lightning.ClosedChannelsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channels, 1, repeated: true, type: Lightnex.RPC.Lightning.ChannelCloseSummary
+  field :channels, 1, repeated: true, type: Lightnex.LNRPC.Lightning.ChannelCloseSummary
 end
 
-defmodule Lightnex.RPC.Lightning.Peer.FeaturesEntry do
+defmodule Lightnex.LNRPC.Lightning.Peer.FeaturesEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint32
-  field :value, 2, type: Lightnex.RPC.Lightning.Feature
+  field :value, 2, type: Lightnex.LNRPC.Lightning.Feature
 end
 
-defmodule Lightnex.RPC.Lightning.Peer do
+defmodule Lightnex.LNRPC.Lightning.Peer do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pub_key, 1, type: :string, json_name: "pubKey"
@@ -918,59 +918,63 @@ defmodule Lightnex.RPC.Lightning.Peer do
   field :ping_time, 9, type: :int64, json_name: "pingTime"
 
   field :sync_type, 10,
-    type: Lightnex.RPC.Lightning.Peer.SyncType,
+    type: Lightnex.LNRPC.Lightning.Peer.SyncType,
     json_name: "syncType",
     enum: true
 
-  field :features, 11, repeated: true, type: Lightnex.RPC.Lightning.Peer.FeaturesEntry, map: true
-  field :errors, 12, repeated: true, type: Lightnex.RPC.Lightning.TimestampedError
+  field :features, 11,
+    repeated: true,
+    type: Lightnex.LNRPC.Lightning.Peer.FeaturesEntry,
+    map: true
+
+  field :errors, 12, repeated: true, type: Lightnex.LNRPC.Lightning.TimestampedError
   field :flap_count, 13, type: :int32, json_name: "flapCount"
   field :last_flap_ns, 14, type: :int64, json_name: "lastFlapNs"
   field :last_ping_payload, 15, type: :bytes, json_name: "lastPingPayload"
 end
 
-defmodule Lightnex.RPC.Lightning.TimestampedError do
+defmodule Lightnex.LNRPC.Lightning.TimestampedError do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :timestamp, 1, type: :uint64
   field :error, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.ListPeersRequest do
+defmodule Lightnex.LNRPC.Lightning.ListPeersRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :latest_error, 1, type: :bool, json_name: "latestError"
 end
 
-defmodule Lightnex.RPC.Lightning.ListPeersResponse do
+defmodule Lightnex.LNRPC.Lightning.ListPeersResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :peers, 1, repeated: true, type: Lightnex.RPC.Lightning.Peer
+  field :peers, 1, repeated: true, type: Lightnex.LNRPC.Lightning.Peer
 end
 
-defmodule Lightnex.RPC.Lightning.PeerEventSubscription do
+defmodule Lightnex.LNRPC.Lightning.PeerEventSubscription do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.PeerEvent do
+defmodule Lightnex.LNRPC.Lightning.PeerEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pub_key, 1, type: :string, json_name: "pubKey"
-  field :type, 2, type: Lightnex.RPC.Lightning.PeerEvent.EventType, enum: true
+  field :type, 2, type: Lightnex.LNRPC.Lightning.PeerEvent.EventType, enum: true
 end
 
-defmodule Lightnex.RPC.Lightning.GetInfoRequest do
+defmodule Lightnex.LNRPC.Lightning.GetInfoRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.GetInfoResponse.FeaturesEntry do
+defmodule Lightnex.LNRPC.Lightning.GetInfoResponse.FeaturesEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint32
-  field :value, 2, type: Lightnex.RPC.Lightning.Feature
+  field :value, 2, type: Lightnex.LNRPC.Lightning.Feature
 end
 
-defmodule Lightnex.RPC.Lightning.GetInfoResponse do
+defmodule Lightnex.LNRPC.Lightning.GetInfoResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :version, 14, type: :string
@@ -988,45 +992,45 @@ defmodule Lightnex.RPC.Lightning.GetInfoResponse do
   field :synced_to_chain, 9, type: :bool, json_name: "syncedToChain"
   field :synced_to_graph, 18, type: :bool, json_name: "syncedToGraph"
   field :testnet, 10, type: :bool, deprecated: true
-  field :chains, 16, repeated: true, type: Lightnex.RPC.Lightning.Chain
+  field :chains, 16, repeated: true, type: Lightnex.LNRPC.Lightning.Chain
   field :uris, 12, repeated: true, type: :string
 
   field :features, 19,
     repeated: true,
-    type: Lightnex.RPC.Lightning.GetInfoResponse.FeaturesEntry,
+    type: Lightnex.LNRPC.Lightning.GetInfoResponse.FeaturesEntry,
     map: true
 
   field :require_htlc_interceptor, 21, type: :bool, json_name: "requireHtlcInterceptor"
   field :store_final_htlc_resolutions, 22, type: :bool, json_name: "storeFinalHtlcResolutions"
 end
 
-defmodule Lightnex.RPC.Lightning.GetDebugInfoRequest do
+defmodule Lightnex.LNRPC.Lightning.GetDebugInfoRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.GetDebugInfoResponse.ConfigEntry do
+defmodule Lightnex.LNRPC.Lightning.GetDebugInfoResponse.ConfigEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
   field :value, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.GetDebugInfoResponse do
+defmodule Lightnex.LNRPC.Lightning.GetDebugInfoResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :config, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.GetDebugInfoResponse.ConfigEntry,
+    type: Lightnex.LNRPC.Lightning.GetDebugInfoResponse.ConfigEntry,
     map: true
 
   field :log, 2, repeated: true, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.GetRecoveryInfoRequest do
+defmodule Lightnex.LNRPC.Lightning.GetRecoveryInfoRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.GetRecoveryInfoResponse do
+defmodule Lightnex.LNRPC.Lightning.GetRecoveryInfoResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :recovery_mode, 1, type: :bool, json_name: "recoveryMode"
@@ -1034,14 +1038,14 @@ defmodule Lightnex.RPC.Lightning.GetRecoveryInfoResponse do
   field :progress, 3, type: :double
 end
 
-defmodule Lightnex.RPC.Lightning.Chain do
+defmodule Lightnex.LNRPC.Lightning.Chain do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chain, 1, type: :string, deprecated: true
   field :network, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.ConfirmationUpdate do
+defmodule Lightnex.LNRPC.Lightning.ConfirmationUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :block_sha, 1, type: :bytes, json_name: "blockSha"
@@ -1049,13 +1053,13 @@ defmodule Lightnex.RPC.Lightning.ConfirmationUpdate do
   field :num_confs_left, 3, type: :uint32, json_name: "numConfsLeft"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelOpenUpdate do
+defmodule Lightnex.LNRPC.Lightning.ChannelOpenUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channel_point, 1, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "channelPoint"
+  field :channel_point, 1, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "channelPoint"
 end
 
-defmodule Lightnex.RPC.Lightning.CloseOutput do
+defmodule Lightnex.LNRPC.Lightning.CloseOutput do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :amount_sat, 1, type: :int64, json_name: "amountSat"
@@ -1064,30 +1068,30 @@ defmodule Lightnex.RPC.Lightning.CloseOutput do
   field :custom_channel_data, 4, type: :bytes, json_name: "customChannelData"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelCloseUpdate do
+defmodule Lightnex.LNRPC.Lightning.ChannelCloseUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :closing_txid, 1, type: :bytes, json_name: "closingTxid"
   field :success, 2, type: :bool
 
   field :local_close_output, 3,
-    type: Lightnex.RPC.Lightning.CloseOutput,
+    type: Lightnex.LNRPC.Lightning.CloseOutput,
     json_name: "localCloseOutput"
 
   field :remote_close_output, 4,
-    type: Lightnex.RPC.Lightning.CloseOutput,
+    type: Lightnex.LNRPC.Lightning.CloseOutput,
     json_name: "remoteCloseOutput"
 
   field :additional_outputs, 5,
     repeated: true,
-    type: Lightnex.RPC.Lightning.CloseOutput,
+    type: Lightnex.LNRPC.Lightning.CloseOutput,
     json_name: "additionalOutputs"
 end
 
-defmodule Lightnex.RPC.Lightning.CloseChannelRequest do
+defmodule Lightnex.LNRPC.Lightning.CloseChannelRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channel_point, 1, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "channelPoint"
+  field :channel_point, 1, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "channelPoint"
   field :force, 2, type: :bool
   field :target_conf, 3, type: :int32, json_name: "targetConf"
   field :sat_per_byte, 4, type: :int64, json_name: "satPerByte", deprecated: true
@@ -1097,28 +1101,28 @@ defmodule Lightnex.RPC.Lightning.CloseChannelRequest do
   field :no_wait, 8, type: :bool, json_name: "noWait"
 end
 
-defmodule Lightnex.RPC.Lightning.CloseStatusUpdate do
+defmodule Lightnex.LNRPC.Lightning.CloseStatusUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :update, 0
 
   field :close_pending, 1,
-    type: Lightnex.RPC.Lightning.PendingUpdate,
+    type: Lightnex.LNRPC.Lightning.PendingUpdate,
     json_name: "closePending",
     oneof: 0
 
   field :chan_close, 3,
-    type: Lightnex.RPC.Lightning.ChannelCloseUpdate,
+    type: Lightnex.LNRPC.Lightning.ChannelCloseUpdate,
     json_name: "chanClose",
     oneof: 0
 
   field :close_instant, 4,
-    type: Lightnex.RPC.Lightning.InstantUpdate,
+    type: Lightnex.LNRPC.Lightning.InstantUpdate,
     json_name: "closeInstant",
     oneof: 0
 end
 
-defmodule Lightnex.RPC.Lightning.PendingUpdate do
+defmodule Lightnex.LNRPC.Lightning.PendingUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :txid, 1, type: :bytes
@@ -1127,13 +1131,13 @@ defmodule Lightnex.RPC.Lightning.PendingUpdate do
   field :local_close_tx, 4, type: :bool, json_name: "localCloseTx"
 end
 
-defmodule Lightnex.RPC.Lightning.InstantUpdate do
+defmodule Lightnex.LNRPC.Lightning.InstantUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :num_pending_htlcs, 1, type: :int32, json_name: "numPendingHtlcs"
 end
 
-defmodule Lightnex.RPC.Lightning.ReadyForPsbtFunding do
+defmodule Lightnex.LNRPC.Lightning.ReadyForPsbtFunding do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :funding_address, 1, type: :string, json_name: "fundingAddress"
@@ -1141,10 +1145,10 @@ defmodule Lightnex.RPC.Lightning.ReadyForPsbtFunding do
   field :psbt, 3, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.BatchOpenChannelRequest do
+defmodule Lightnex.LNRPC.Lightning.BatchOpenChannelRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channels, 1, repeated: true, type: Lightnex.RPC.Lightning.BatchOpenChannel
+  field :channels, 1, repeated: true, type: Lightnex.LNRPC.Lightning.BatchOpenChannel
   field :target_conf, 2, type: :int32, json_name: "targetConf"
   field :sat_per_vbyte, 3, type: :int64, json_name: "satPerVbyte"
   field :min_confs, 4, type: :int32, json_name: "minConfs"
@@ -1152,12 +1156,12 @@ defmodule Lightnex.RPC.Lightning.BatchOpenChannelRequest do
   field :label, 6, type: :string
 
   field :coin_selection_strategy, 7,
-    type: Lightnex.RPC.Lightning.CoinSelectionStrategy,
+    type: Lightnex.LNRPC.Lightning.CoinSelectionStrategy,
     json_name: "coinSelectionStrategy",
     enum: true
 end
 
-defmodule Lightnex.RPC.Lightning.BatchOpenChannel do
+defmodule Lightnex.LNRPC.Lightning.BatchOpenChannel do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :node_pubkey, 1, type: :bytes, json_name: "nodePubkey"
@@ -1170,7 +1174,7 @@ defmodule Lightnex.RPC.Lightning.BatchOpenChannel do
   field :pending_chan_id, 8, type: :bytes, json_name: "pendingChanId"
 
   field :commitment_type, 9,
-    type: Lightnex.RPC.Lightning.CommitmentType,
+    type: Lightnex.LNRPC.Lightning.CommitmentType,
     json_name: "commitmentType",
     enum: true
 
@@ -1190,16 +1194,16 @@ defmodule Lightnex.RPC.Lightning.BatchOpenChannel do
   field :memo, 20, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.BatchOpenChannelResponse do
+defmodule Lightnex.LNRPC.Lightning.BatchOpenChannelResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pending_channels, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.PendingUpdate,
+    type: Lightnex.LNRPC.Lightning.PendingUpdate,
     json_name: "pendingChannels"
 end
 
-defmodule Lightnex.RPC.Lightning.OpenChannelRequest do
+defmodule Lightnex.LNRPC.Lightning.OpenChannelRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :sat_per_vbyte, 1, type: :uint64, json_name: "satPerVbyte"
@@ -1215,7 +1219,7 @@ defmodule Lightnex.RPC.Lightning.OpenChannelRequest do
   field :min_confs, 11, type: :int32, json_name: "minConfs"
   field :spend_unconfirmed, 12, type: :bool, json_name: "spendUnconfirmed"
   field :close_address, 13, type: :string, json_name: "closeAddress"
-  field :funding_shim, 14, type: Lightnex.RPC.Lightning.FundingShim, json_name: "fundingShim"
+  field :funding_shim, 14, type: Lightnex.LNRPC.Lightning.FundingShim, json_name: "fundingShim"
 
   field :remote_max_value_in_flight_msat, 15,
     type: :uint64,
@@ -1225,7 +1229,7 @@ defmodule Lightnex.RPC.Lightning.OpenChannelRequest do
   field :max_local_csv, 17, type: :uint32, json_name: "maxLocalCsv"
 
   field :commitment_type, 18,
-    type: Lightnex.RPC.Lightning.CommitmentType,
+    type: Lightnex.LNRPC.Lightning.CommitmentType,
     json_name: "commitmentType",
     enum: true
 
@@ -1238,59 +1242,59 @@ defmodule Lightnex.RPC.Lightning.OpenChannelRequest do
   field :remote_chan_reserve_sat, 25, type: :uint64, json_name: "remoteChanReserveSat"
   field :fund_max, 26, type: :bool, json_name: "fundMax"
   field :memo, 27, type: :string
-  field :outpoints, 28, repeated: true, type: Lightnex.RPC.Lightning.OutPoint
+  field :outpoints, 28, repeated: true, type: Lightnex.LNRPC.Lightning.OutPoint
 end
 
-defmodule Lightnex.RPC.Lightning.OpenStatusUpdate do
+defmodule Lightnex.LNRPC.Lightning.OpenStatusUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :update, 0
 
   field :chan_pending, 1,
-    type: Lightnex.RPC.Lightning.PendingUpdate,
+    type: Lightnex.LNRPC.Lightning.PendingUpdate,
     json_name: "chanPending",
     oneof: 0
 
   field :chan_open, 3,
-    type: Lightnex.RPC.Lightning.ChannelOpenUpdate,
+    type: Lightnex.LNRPC.Lightning.ChannelOpenUpdate,
     json_name: "chanOpen",
     oneof: 0
 
   field :psbt_fund, 5,
-    type: Lightnex.RPC.Lightning.ReadyForPsbtFunding,
+    type: Lightnex.LNRPC.Lightning.ReadyForPsbtFunding,
     json_name: "psbtFund",
     oneof: 0
 
   field :pending_chan_id, 4, type: :bytes, json_name: "pendingChanId"
 end
 
-defmodule Lightnex.RPC.Lightning.KeyLocator do
+defmodule Lightnex.LNRPC.Lightning.KeyLocator do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key_family, 1, type: :int32, json_name: "keyFamily"
   field :key_index, 2, type: :int32, json_name: "keyIndex"
 end
 
-defmodule Lightnex.RPC.Lightning.KeyDescriptor do
+defmodule Lightnex.LNRPC.Lightning.KeyDescriptor do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :raw_key_bytes, 1, type: :bytes, json_name: "rawKeyBytes"
-  field :key_loc, 2, type: Lightnex.RPC.Lightning.KeyLocator, json_name: "keyLoc"
+  field :key_loc, 2, type: Lightnex.LNRPC.Lightning.KeyLocator, json_name: "keyLoc"
 end
 
-defmodule Lightnex.RPC.Lightning.ChanPointShim do
+defmodule Lightnex.LNRPC.Lightning.ChanPointShim do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :amt, 1, type: :int64
-  field :chan_point, 2, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "chanPoint"
-  field :local_key, 3, type: Lightnex.RPC.Lightning.KeyDescriptor, json_name: "localKey"
+  field :chan_point, 2, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "chanPoint"
+  field :local_key, 3, type: Lightnex.LNRPC.Lightning.KeyDescriptor, json_name: "localKey"
   field :remote_key, 4, type: :bytes, json_name: "remoteKey"
   field :pending_chan_id, 5, type: :bytes, json_name: "pendingChanId"
   field :thaw_height, 6, type: :uint32, json_name: "thawHeight"
   field :musig2, 7, type: :bool
 end
 
-defmodule Lightnex.RPC.Lightning.PsbtShim do
+defmodule Lightnex.LNRPC.Lightning.PsbtShim do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pending_chan_id, 1, type: :bytes, json_name: "pendingChanId"
@@ -1298,26 +1302,26 @@ defmodule Lightnex.RPC.Lightning.PsbtShim do
   field :no_publish, 3, type: :bool, json_name: "noPublish"
 end
 
-defmodule Lightnex.RPC.Lightning.FundingShim do
+defmodule Lightnex.LNRPC.Lightning.FundingShim do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :shim, 0
 
   field :chan_point_shim, 1,
-    type: Lightnex.RPC.Lightning.ChanPointShim,
+    type: Lightnex.LNRPC.Lightning.ChanPointShim,
     json_name: "chanPointShim",
     oneof: 0
 
-  field :psbt_shim, 2, type: Lightnex.RPC.Lightning.PsbtShim, json_name: "psbtShim", oneof: 0
+  field :psbt_shim, 2, type: Lightnex.LNRPC.Lightning.PsbtShim, json_name: "psbtShim", oneof: 0
 end
 
-defmodule Lightnex.RPC.Lightning.FundingShimCancel do
+defmodule Lightnex.LNRPC.Lightning.FundingShimCancel do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pending_chan_id, 1, type: :bytes, json_name: "pendingChanId"
 end
 
-defmodule Lightnex.RPC.Lightning.FundingPsbtVerify do
+defmodule Lightnex.LNRPC.Lightning.FundingPsbtVerify do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :funded_psbt, 1, type: :bytes, json_name: "fundedPsbt"
@@ -1325,7 +1329,7 @@ defmodule Lightnex.RPC.Lightning.FundingPsbtVerify do
   field :skip_finalize, 3, type: :bool, json_name: "skipFinalize"
 end
 
-defmodule Lightnex.RPC.Lightning.FundingPsbtFinalize do
+defmodule Lightnex.LNRPC.Lightning.FundingPsbtFinalize do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :signed_psbt, 1, type: :bytes, json_name: "signedPsbt"
@@ -1333,37 +1337,37 @@ defmodule Lightnex.RPC.Lightning.FundingPsbtFinalize do
   field :final_raw_tx, 3, type: :bytes, json_name: "finalRawTx"
 end
 
-defmodule Lightnex.RPC.Lightning.FundingTransitionMsg do
+defmodule Lightnex.LNRPC.Lightning.FundingTransitionMsg do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :trigger, 0
 
   field :shim_register, 1,
-    type: Lightnex.RPC.Lightning.FundingShim,
+    type: Lightnex.LNRPC.Lightning.FundingShim,
     json_name: "shimRegister",
     oneof: 0
 
   field :shim_cancel, 2,
-    type: Lightnex.RPC.Lightning.FundingShimCancel,
+    type: Lightnex.LNRPC.Lightning.FundingShimCancel,
     json_name: "shimCancel",
     oneof: 0
 
   field :psbt_verify, 3,
-    type: Lightnex.RPC.Lightning.FundingPsbtVerify,
+    type: Lightnex.LNRPC.Lightning.FundingPsbtVerify,
     json_name: "psbtVerify",
     oneof: 0
 
   field :psbt_finalize, 4,
-    type: Lightnex.RPC.Lightning.FundingPsbtFinalize,
+    type: Lightnex.LNRPC.Lightning.FundingPsbtFinalize,
     json_name: "psbtFinalize",
     oneof: 0
 end
 
-defmodule Lightnex.RPC.Lightning.FundingStateStepResp do
+defmodule Lightnex.LNRPC.Lightning.FundingStateStepResp do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.PendingHTLC do
+defmodule Lightnex.LNRPC.Lightning.PendingHTLC do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :incoming, 1, type: :bool
@@ -1374,13 +1378,13 @@ defmodule Lightnex.RPC.Lightning.PendingHTLC do
   field :stage, 6, type: :uint32
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsRequest do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :include_raw_tx, 1, type: :bool, json_name: "includeRawTx"
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.PendingChannel do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsResponse.PendingChannel do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :remote_node_pub, 1, type: :string, json_name: "remoteNodePub"
@@ -1390,10 +1394,10 @@ defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.PendingChannel do
   field :remote_balance, 5, type: :int64, json_name: "remoteBalance"
   field :local_chan_reserve_sat, 6, type: :int64, json_name: "localChanReserveSat"
   field :remote_chan_reserve_sat, 7, type: :int64, json_name: "remoteChanReserveSat"
-  field :initiator, 8, type: Lightnex.RPC.Lightning.Initiator, enum: true
+  field :initiator, 8, type: Lightnex.LNRPC.Lightning.Initiator, enum: true
 
   field :commitment_type, 9,
-    type: Lightnex.RPC.Lightning.CommitmentType,
+    type: Lightnex.LNRPC.Lightning.CommitmentType,
     json_name: "commitmentType",
     enum: true
 
@@ -1404,27 +1408,27 @@ defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.PendingChannel do
   field :custom_channel_data, 34, type: :bytes, json_name: "customChannelData"
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.PendingOpenChannel do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsResponse.PendingOpenChannel do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channel, 1, type: Lightnex.RPC.Lightning.PendingChannelsResponse.PendingChannel
+  field :channel, 1, type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.PendingChannel
   field :commit_fee, 4, type: :int64, json_name: "commitFee"
   field :commit_weight, 5, type: :int64, json_name: "commitWeight"
   field :fee_per_kw, 6, type: :int64, json_name: "feePerKw"
   field :funding_expiry_blocks, 3, type: :int32, json_name: "fundingExpiryBlocks"
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.WaitingCloseChannel do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsResponse.WaitingCloseChannel do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channel, 1, type: Lightnex.RPC.Lightning.PendingChannelsResponse.PendingChannel
+  field :channel, 1, type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.PendingChannel
   field :limbo_balance, 2, type: :int64, json_name: "limboBalance"
-  field :commitments, 3, type: Lightnex.RPC.Lightning.PendingChannelsResponse.Commitments
+  field :commitments, 3, type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.Commitments
   field :closing_txid, 4, type: :string, json_name: "closingTxid"
   field :closing_tx_hex, 5, type: :string, json_name: "closingTxHex"
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.Commitments do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsResponse.Commitments do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :local_txid, 1, type: :string, json_name: "localTxid"
@@ -1435,17 +1439,17 @@ defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.Commitments do
   field :remote_pending_commit_fee_sat, 6, type: :uint64, json_name: "remotePendingCommitFeeSat"
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.ClosedChannel do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsResponse.ClosedChannel do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channel, 1, type: Lightnex.RPC.Lightning.PendingChannelsResponse.PendingChannel
+  field :channel, 1, type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.PendingChannel
   field :closing_txid, 2, type: :string, json_name: "closingTxid"
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.ForceClosedChannel do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsResponse.ForceClosedChannel do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channel, 1, type: Lightnex.RPC.Lightning.PendingChannelsResponse.PendingChannel
+  field :channel, 1, type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.PendingChannel
   field :closing_txid, 2, type: :string, json_name: "closingTxid"
   field :limbo_balance, 3, type: :int64, json_name: "limboBalance"
   field :maturity_height, 4, type: :uint32, json_name: "maturityHeight"
@@ -1454,107 +1458,110 @@ defmodule Lightnex.RPC.Lightning.PendingChannelsResponse.ForceClosedChannel do
 
   field :pending_htlcs, 8,
     repeated: true,
-    type: Lightnex.RPC.Lightning.PendingHTLC,
+    type: Lightnex.LNRPC.Lightning.PendingHTLC,
     json_name: "pendingHtlcs"
 
   field :anchor, 9,
-    type: Lightnex.RPC.Lightning.PendingChannelsResponse.ForceClosedChannel.AnchorState,
+    type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.ForceClosedChannel.AnchorState,
     enum: true
 end
 
-defmodule Lightnex.RPC.Lightning.PendingChannelsResponse do
+defmodule Lightnex.LNRPC.Lightning.PendingChannelsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :total_limbo_balance, 1, type: :int64, json_name: "totalLimboBalance"
 
   field :pending_open_channels, 2,
     repeated: true,
-    type: Lightnex.RPC.Lightning.PendingChannelsResponse.PendingOpenChannel,
+    type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.PendingOpenChannel,
     json_name: "pendingOpenChannels"
 
   field :pending_closing_channels, 3,
     repeated: true,
-    type: Lightnex.RPC.Lightning.PendingChannelsResponse.ClosedChannel,
+    type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.ClosedChannel,
     json_name: "pendingClosingChannels",
     deprecated: true
 
   field :pending_force_closing_channels, 4,
     repeated: true,
-    type: Lightnex.RPC.Lightning.PendingChannelsResponse.ForceClosedChannel,
+    type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.ForceClosedChannel,
     json_name: "pendingForceClosingChannels"
 
   field :waiting_close_channels, 5,
     repeated: true,
-    type: Lightnex.RPC.Lightning.PendingChannelsResponse.WaitingCloseChannel,
+    type: Lightnex.LNRPC.Lightning.PendingChannelsResponse.WaitingCloseChannel,
     json_name: "waitingCloseChannels"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelEventSubscription do
+defmodule Lightnex.LNRPC.Lightning.ChannelEventSubscription do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelEventUpdate do
+defmodule Lightnex.LNRPC.Lightning.ChannelEventUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :channel, 0
 
-  field :open_channel, 1, type: Lightnex.RPC.Lightning.Channel, json_name: "openChannel", oneof: 0
+  field :open_channel, 1,
+    type: Lightnex.LNRPC.Lightning.Channel,
+    json_name: "openChannel",
+    oneof: 0
 
   field :closed_channel, 2,
-    type: Lightnex.RPC.Lightning.ChannelCloseSummary,
+    type: Lightnex.LNRPC.Lightning.ChannelCloseSummary,
     json_name: "closedChannel",
     oneof: 0
 
   field :active_channel, 3,
-    type: Lightnex.RPC.Lightning.ChannelPoint,
+    type: Lightnex.LNRPC.Lightning.ChannelPoint,
     json_name: "activeChannel",
     oneof: 0
 
   field :inactive_channel, 4,
-    type: Lightnex.RPC.Lightning.ChannelPoint,
+    type: Lightnex.LNRPC.Lightning.ChannelPoint,
     json_name: "inactiveChannel",
     oneof: 0
 
   field :pending_open_channel, 6,
-    type: Lightnex.RPC.Lightning.PendingUpdate,
+    type: Lightnex.LNRPC.Lightning.PendingUpdate,
     json_name: "pendingOpenChannel",
     oneof: 0
 
   field :fully_resolved_channel, 7,
-    type: Lightnex.RPC.Lightning.ChannelPoint,
+    type: Lightnex.LNRPC.Lightning.ChannelPoint,
     json_name: "fullyResolvedChannel",
     oneof: 0
 
   field :channel_funding_timeout, 8,
-    type: Lightnex.RPC.Lightning.ChannelPoint,
+    type: Lightnex.LNRPC.Lightning.ChannelPoint,
     json_name: "channelFundingTimeout",
     oneof: 0
 
-  field :type, 5, type: Lightnex.RPC.Lightning.ChannelEventUpdate.UpdateType, enum: true
+  field :type, 5, type: Lightnex.LNRPC.Lightning.ChannelEventUpdate.UpdateType, enum: true
 end
 
-defmodule Lightnex.RPC.Lightning.WalletAccountBalance do
+defmodule Lightnex.LNRPC.Lightning.WalletAccountBalance do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :confirmed_balance, 1, type: :int64, json_name: "confirmedBalance"
   field :unconfirmed_balance, 2, type: :int64, json_name: "unconfirmedBalance"
 end
 
-defmodule Lightnex.RPC.Lightning.WalletBalanceRequest do
+defmodule Lightnex.LNRPC.Lightning.WalletBalanceRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :account, 1, type: :string
   field :min_confs, 2, type: :int32, json_name: "minConfs"
 end
 
-defmodule Lightnex.RPC.Lightning.WalletBalanceResponse.AccountBalanceEntry do
+defmodule Lightnex.LNRPC.Lightning.WalletBalanceResponse.AccountBalanceEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
-  field :value, 2, type: Lightnex.RPC.Lightning.WalletAccountBalance
+  field :value, 2, type: Lightnex.LNRPC.Lightning.WalletAccountBalance
 end
 
-defmodule Lightnex.RPC.Lightning.WalletBalanceResponse do
+defmodule Lightnex.LNRPC.Lightning.WalletBalanceResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :total_balance, 1, type: :int64, json_name: "totalBalance"
@@ -1565,69 +1572,69 @@ defmodule Lightnex.RPC.Lightning.WalletBalanceResponse do
 
   field :account_balance, 4,
     repeated: true,
-    type: Lightnex.RPC.Lightning.WalletBalanceResponse.AccountBalanceEntry,
+    type: Lightnex.LNRPC.Lightning.WalletBalanceResponse.AccountBalanceEntry,
     json_name: "accountBalance",
     map: true
 end
 
-defmodule Lightnex.RPC.Lightning.Amount do
+defmodule Lightnex.LNRPC.Lightning.Amount do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :sat, 1, type: :uint64
   field :msat, 2, type: :uint64
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelBalanceRequest do
+defmodule Lightnex.LNRPC.Lightning.ChannelBalanceRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelBalanceResponse do
+defmodule Lightnex.LNRPC.Lightning.ChannelBalanceResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :balance, 1, type: :int64, deprecated: true
   field :pending_open_balance, 2, type: :int64, json_name: "pendingOpenBalance", deprecated: true
-  field :local_balance, 3, type: Lightnex.RPC.Lightning.Amount, json_name: "localBalance"
-  field :remote_balance, 4, type: Lightnex.RPC.Lightning.Amount, json_name: "remoteBalance"
+  field :local_balance, 3, type: Lightnex.LNRPC.Lightning.Amount, json_name: "localBalance"
+  field :remote_balance, 4, type: Lightnex.LNRPC.Lightning.Amount, json_name: "remoteBalance"
 
   field :unsettled_local_balance, 5,
-    type: Lightnex.RPC.Lightning.Amount,
+    type: Lightnex.LNRPC.Lightning.Amount,
     json_name: "unsettledLocalBalance"
 
   field :unsettled_remote_balance, 6,
-    type: Lightnex.RPC.Lightning.Amount,
+    type: Lightnex.LNRPC.Lightning.Amount,
     json_name: "unsettledRemoteBalance"
 
   field :pending_open_local_balance, 7,
-    type: Lightnex.RPC.Lightning.Amount,
+    type: Lightnex.LNRPC.Lightning.Amount,
     json_name: "pendingOpenLocalBalance"
 
   field :pending_open_remote_balance, 8,
-    type: Lightnex.RPC.Lightning.Amount,
+    type: Lightnex.LNRPC.Lightning.Amount,
     json_name: "pendingOpenRemoteBalance"
 
   field :custom_channel_data, 9, type: :bytes, json_name: "customChannelData"
 end
 
-defmodule Lightnex.RPC.Lightning.QueryRoutesRequest.DestCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Lightning.QueryRoutesRequest.DestCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.QueryRoutesRequest do
+defmodule Lightnex.LNRPC.Lightning.QueryRoutesRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pub_key, 1, type: :string, json_name: "pubKey"
   field :amt, 2, type: :int64
   field :amt_msat, 12, type: :int64, json_name: "amtMsat"
   field :final_cltv_delta, 4, type: :int32, json_name: "finalCltvDelta"
-  field :fee_limit, 5, type: Lightnex.RPC.Lightning.FeeLimit, json_name: "feeLimit"
+  field :fee_limit, 5, type: Lightnex.LNRPC.Lightning.FeeLimit, json_name: "feeLimit"
   field :ignored_nodes, 6, repeated: true, type: :bytes, json_name: "ignoredNodes"
 
   field :ignored_edges, 7,
     repeated: true,
-    type: Lightnex.RPC.Lightning.EdgeLocator,
+    type: Lightnex.LNRPC.Lightning.EdgeLocator,
     json_name: "ignoredEdges",
     deprecated: true
 
@@ -1636,14 +1643,14 @@ defmodule Lightnex.RPC.Lightning.QueryRoutesRequest do
 
   field :ignored_pairs, 10,
     repeated: true,
-    type: Lightnex.RPC.Lightning.NodePair,
+    type: Lightnex.LNRPC.Lightning.NodePair,
     json_name: "ignoredPairs"
 
   field :cltv_limit, 11, type: :uint32, json_name: "cltvLimit"
 
   field :dest_custom_records, 13,
     repeated: true,
-    type: Lightnex.RPC.Lightning.QueryRoutesRequest.DestCustomRecordsEntry,
+    type: Lightnex.LNRPC.Lightning.QueryRoutesRequest.DestCustomRecordsEntry,
     json_name: "destCustomRecords",
     map: true
 
@@ -1652,52 +1659,52 @@ defmodule Lightnex.RPC.Lightning.QueryRoutesRequest do
 
   field :route_hints, 16,
     repeated: true,
-    type: Lightnex.RPC.Lightning.RouteHint,
+    type: Lightnex.LNRPC.Lightning.RouteHint,
     json_name: "routeHints"
 
   field :blinded_payment_paths, 19,
     repeated: true,
-    type: Lightnex.RPC.Lightning.BlindedPaymentPath,
+    type: Lightnex.LNRPC.Lightning.BlindedPaymentPath,
     json_name: "blindedPaymentPaths"
 
   field :dest_features, 17,
     repeated: true,
-    type: Lightnex.RPC.Lightning.FeatureBit,
+    type: Lightnex.LNRPC.Lightning.FeatureBit,
     json_name: "destFeatures",
     enum: true
 
   field :time_pref, 18, type: :double, json_name: "timePref"
 end
 
-defmodule Lightnex.RPC.Lightning.NodePair do
+defmodule Lightnex.LNRPC.Lightning.NodePair do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :from, 1, type: :bytes
   field :to, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.EdgeLocator do
+defmodule Lightnex.LNRPC.Lightning.EdgeLocator do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :channel_id, 1, type: :uint64, json_name: "channelId", deprecated: false
   field :direction_reverse, 2, type: :bool, json_name: "directionReverse"
 end
 
-defmodule Lightnex.RPC.Lightning.QueryRoutesResponse do
+defmodule Lightnex.LNRPC.Lightning.QueryRoutesResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :routes, 1, repeated: true, type: Lightnex.RPC.Lightning.Route
+  field :routes, 1, repeated: true, type: Lightnex.LNRPC.Lightning.Route
   field :success_prob, 2, type: :double, json_name: "successProb"
 end
 
-defmodule Lightnex.RPC.Lightning.Hop.CustomRecordsEntry do
+defmodule Lightnex.LNRPC.Lightning.Hop.CustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.Hop do
+defmodule Lightnex.LNRPC.Lightning.Hop do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_id, 1, type: :uint64, json_name: "chanId", deprecated: false
@@ -1709,12 +1716,12 @@ defmodule Lightnex.RPC.Lightning.Hop do
   field :fee_msat, 7, type: :int64, json_name: "feeMsat"
   field :pub_key, 8, type: :string, json_name: "pubKey"
   field :tlv_payload, 9, type: :bool, json_name: "tlvPayload", deprecated: true
-  field :mpp_record, 10, type: Lightnex.RPC.Lightning.MPPRecord, json_name: "mppRecord"
-  field :amp_record, 12, type: Lightnex.RPC.Lightning.AMPRecord, json_name: "ampRecord"
+  field :mpp_record, 10, type: Lightnex.LNRPC.Lightning.MPPRecord, json_name: "mppRecord"
+  field :amp_record, 12, type: Lightnex.LNRPC.Lightning.AMPRecord, json_name: "ampRecord"
 
   field :custom_records, 11,
     repeated: true,
-    type: Lightnex.RPC.Lightning.Hop.CustomRecordsEntry,
+    type: Lightnex.LNRPC.Lightning.Hop.CustomRecordsEntry,
     json_name: "customRecords",
     map: true
 
@@ -1724,14 +1731,14 @@ defmodule Lightnex.RPC.Lightning.Hop do
   field :total_amt_msat, 16, type: :uint64, json_name: "totalAmtMsat"
 end
 
-defmodule Lightnex.RPC.Lightning.MPPRecord do
+defmodule Lightnex.LNRPC.Lightning.MPPRecord do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :payment_addr, 11, type: :bytes, json_name: "paymentAddr"
   field :total_amt_msat, 10, type: :int64, json_name: "totalAmtMsat"
 end
 
-defmodule Lightnex.RPC.Lightning.AMPRecord do
+defmodule Lightnex.LNRPC.Lightning.AMPRecord do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :root_share, 1, type: :bytes, json_name: "rootShare"
@@ -1739,7 +1746,7 @@ defmodule Lightnex.RPC.Lightning.AMPRecord do
   field :child_index, 3, type: :uint32, json_name: "childIndex"
 end
 
-defmodule Lightnex.RPC.Lightning.Route do
+defmodule Lightnex.LNRPC.Lightning.Route do
   @moduledoc """
   A path through the channel graph which runs over one or more channels in
   succession. This struct carries all the information required to craft the
@@ -1753,44 +1760,44 @@ defmodule Lightnex.RPC.Lightning.Route do
   field :total_time_lock, 1, type: :uint32, json_name: "totalTimeLock"
   field :total_fees, 2, type: :int64, json_name: "totalFees", deprecated: true
   field :total_amt, 3, type: :int64, json_name: "totalAmt", deprecated: true
-  field :hops, 4, repeated: true, type: Lightnex.RPC.Lightning.Hop
+  field :hops, 4, repeated: true, type: Lightnex.LNRPC.Lightning.Hop
   field :total_fees_msat, 5, type: :int64, json_name: "totalFeesMsat"
   field :total_amt_msat, 6, type: :int64, json_name: "totalAmtMsat"
   field :first_hop_amount_msat, 7, type: :int64, json_name: "firstHopAmountMsat"
   field :custom_channel_data, 8, type: :bytes, json_name: "customChannelData"
 end
 
-defmodule Lightnex.RPC.Lightning.NodeInfoRequest do
+defmodule Lightnex.LNRPC.Lightning.NodeInfoRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pub_key, 1, type: :string, json_name: "pubKey"
   field :include_channels, 2, type: :bool, json_name: "includeChannels"
 end
 
-defmodule Lightnex.RPC.Lightning.NodeInfo do
+defmodule Lightnex.LNRPC.Lightning.NodeInfo do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :node, 1, type: Lightnex.RPC.Lightning.LightningNode
+  field :node, 1, type: Lightnex.LNRPC.Lightning.LightningNode
   field :num_channels, 2, type: :uint32, json_name: "numChannels"
   field :total_capacity, 3, type: :int64, json_name: "totalCapacity"
-  field :channels, 4, repeated: true, type: Lightnex.RPC.Lightning.ChannelEdge
+  field :channels, 4, repeated: true, type: Lightnex.LNRPC.Lightning.ChannelEdge
 end
 
-defmodule Lightnex.RPC.Lightning.LightningNode.FeaturesEntry do
+defmodule Lightnex.LNRPC.Lightning.LightningNode.FeaturesEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint32
-  field :value, 2, type: Lightnex.RPC.Lightning.Feature
+  field :value, 2, type: Lightnex.LNRPC.Lightning.Feature
 end
 
-defmodule Lightnex.RPC.Lightning.LightningNode.CustomRecordsEntry do
+defmodule Lightnex.LNRPC.Lightning.LightningNode.CustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.LightningNode do
+defmodule Lightnex.LNRPC.Lightning.LightningNode do
   @moduledoc """
   An individual vertex/node within the channel graph. A node is
   connected to other nodes by one or more channel edges emanating from it. As the
@@ -1803,36 +1810,36 @@ defmodule Lightnex.RPC.Lightning.LightningNode do
   field :last_update, 1, type: :uint32, json_name: "lastUpdate"
   field :pub_key, 2, type: :string, json_name: "pubKey"
   field :alias, 3, type: :string
-  field :addresses, 4, repeated: true, type: Lightnex.RPC.Lightning.NodeAddress
+  field :addresses, 4, repeated: true, type: Lightnex.LNRPC.Lightning.NodeAddress
   field :color, 5, type: :string
 
   field :features, 6,
     repeated: true,
-    type: Lightnex.RPC.Lightning.LightningNode.FeaturesEntry,
+    type: Lightnex.LNRPC.Lightning.LightningNode.FeaturesEntry,
     map: true
 
   field :custom_records, 7,
     repeated: true,
-    type: Lightnex.RPC.Lightning.LightningNode.CustomRecordsEntry,
+    type: Lightnex.LNRPC.Lightning.LightningNode.CustomRecordsEntry,
     json_name: "customRecords",
     map: true
 end
 
-defmodule Lightnex.RPC.Lightning.NodeAddress do
+defmodule Lightnex.LNRPC.Lightning.NodeAddress do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :network, 1, type: :string
   field :addr, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.RoutingPolicy.CustomRecordsEntry do
+defmodule Lightnex.LNRPC.Lightning.RoutingPolicy.CustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.RoutingPolicy do
+defmodule Lightnex.LNRPC.Lightning.RoutingPolicy do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :time_lock_delta, 1, type: :uint32, json_name: "timeLockDelta"
@@ -1845,7 +1852,7 @@ defmodule Lightnex.RPC.Lightning.RoutingPolicy do
 
   field :custom_records, 8,
     repeated: true,
-    type: Lightnex.RPC.Lightning.RoutingPolicy.CustomRecordsEntry,
+    type: Lightnex.LNRPC.Lightning.RoutingPolicy.CustomRecordsEntry,
     json_name: "customRecords",
     map: true
 
@@ -1853,14 +1860,14 @@ defmodule Lightnex.RPC.Lightning.RoutingPolicy do
   field :inbound_fee_rate_milli_msat, 10, type: :int32, json_name: "inboundFeeRateMilliMsat"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelEdge.CustomRecordsEntry do
+defmodule Lightnex.LNRPC.Lightning.ChannelEdge.CustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelEdge do
+defmodule Lightnex.LNRPC.Lightning.ChannelEdge do
   @moduledoc """
   A fully authenticated channel along with all its unique attributes.
   Once an authenticated channel announcement has been processed on the network,
@@ -1877,75 +1884,75 @@ defmodule Lightnex.RPC.Lightning.ChannelEdge do
   field :node1_pub, 4, type: :string, json_name: "node1Pub"
   field :node2_pub, 5, type: :string, json_name: "node2Pub"
   field :capacity, 6, type: :int64
-  field :node1_policy, 7, type: Lightnex.RPC.Lightning.RoutingPolicy, json_name: "node1Policy"
-  field :node2_policy, 8, type: Lightnex.RPC.Lightning.RoutingPolicy, json_name: "node2Policy"
+  field :node1_policy, 7, type: Lightnex.LNRPC.Lightning.RoutingPolicy, json_name: "node1Policy"
+  field :node2_policy, 8, type: Lightnex.LNRPC.Lightning.RoutingPolicy, json_name: "node2Policy"
 
   field :custom_records, 9,
     repeated: true,
-    type: Lightnex.RPC.Lightning.ChannelEdge.CustomRecordsEntry,
+    type: Lightnex.LNRPC.Lightning.ChannelEdge.CustomRecordsEntry,
     json_name: "customRecords",
     map: true
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelGraphRequest do
+defmodule Lightnex.LNRPC.Lightning.ChannelGraphRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :include_unannounced, 1, type: :bool, json_name: "includeUnannounced"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelGraph do
+defmodule Lightnex.LNRPC.Lightning.ChannelGraph do
   @moduledoc """
   Returns a new instance of the directed channel graph.
   """
 
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :nodes, 1, repeated: true, type: Lightnex.RPC.Lightning.LightningNode
-  field :edges, 2, repeated: true, type: Lightnex.RPC.Lightning.ChannelEdge
+  field :nodes, 1, repeated: true, type: Lightnex.LNRPC.Lightning.LightningNode
+  field :edges, 2, repeated: true, type: Lightnex.LNRPC.Lightning.ChannelEdge
 end
 
-defmodule Lightnex.RPC.Lightning.NodeMetricsRequest do
+defmodule Lightnex.LNRPC.Lightning.NodeMetricsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :types, 1, repeated: true, type: Lightnex.RPC.Lightning.NodeMetricType, enum: true
+  field :types, 1, repeated: true, type: Lightnex.LNRPC.Lightning.NodeMetricType, enum: true
 end
 
-defmodule Lightnex.RPC.Lightning.NodeMetricsResponse.BetweennessCentralityEntry do
+defmodule Lightnex.LNRPC.Lightning.NodeMetricsResponse.BetweennessCentralityEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
-  field :value, 2, type: Lightnex.RPC.Lightning.FloatMetric
+  field :value, 2, type: Lightnex.LNRPC.Lightning.FloatMetric
 end
 
-defmodule Lightnex.RPC.Lightning.NodeMetricsResponse do
+defmodule Lightnex.LNRPC.Lightning.NodeMetricsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :betweenness_centrality, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.NodeMetricsResponse.BetweennessCentralityEntry,
+    type: Lightnex.LNRPC.Lightning.NodeMetricsResponse.BetweennessCentralityEntry,
     json_name: "betweennessCentrality",
     map: true
 end
 
-defmodule Lightnex.RPC.Lightning.FloatMetric do
+defmodule Lightnex.LNRPC.Lightning.FloatMetric do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :value, 1, type: :double
   field :normalized_value, 2, type: :double, json_name: "normalizedValue"
 end
 
-defmodule Lightnex.RPC.Lightning.ChanInfoRequest do
+defmodule Lightnex.LNRPC.Lightning.ChanInfoRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_id, 1, type: :uint64, json_name: "chanId", deprecated: false
   field :chan_point, 2, type: :string, json_name: "chanPoint"
 end
 
-defmodule Lightnex.RPC.Lightning.NetworkInfoRequest do
+defmodule Lightnex.LNRPC.Lightning.NetworkInfoRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.NetworkInfo do
+defmodule Lightnex.LNRPC.Lightning.NetworkInfo do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :graph_diameter, 1, type: :uint32, json_name: "graphDiameter"
@@ -1961,47 +1968,47 @@ defmodule Lightnex.RPC.Lightning.NetworkInfo do
   field :num_zombie_chans, 11, type: :uint64, json_name: "numZombieChans"
 end
 
-defmodule Lightnex.RPC.Lightning.StopRequest do
+defmodule Lightnex.LNRPC.Lightning.StopRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.StopResponse do
+defmodule Lightnex.LNRPC.Lightning.StopResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.GraphTopologySubscription do
+defmodule Lightnex.LNRPC.Lightning.GraphTopologySubscription do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.GraphTopologyUpdate do
+defmodule Lightnex.LNRPC.Lightning.GraphTopologyUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :node_updates, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.NodeUpdate,
+    type: Lightnex.LNRPC.Lightning.NodeUpdate,
     json_name: "nodeUpdates"
 
   field :channel_updates, 2,
     repeated: true,
-    type: Lightnex.RPC.Lightning.ChannelEdgeUpdate,
+    type: Lightnex.LNRPC.Lightning.ChannelEdgeUpdate,
     json_name: "channelUpdates"
 
   field :closed_chans, 3,
     repeated: true,
-    type: Lightnex.RPC.Lightning.ClosedChannelUpdate,
+    type: Lightnex.LNRPC.Lightning.ClosedChannelUpdate,
     json_name: "closedChans"
 end
 
-defmodule Lightnex.RPC.Lightning.NodeUpdate.FeaturesEntry do
+defmodule Lightnex.LNRPC.Lightning.NodeUpdate.FeaturesEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint32
-  field :value, 2, type: Lightnex.RPC.Lightning.Feature
+  field :value, 2, type: Lightnex.LNRPC.Lightning.Feature
 end
 
-defmodule Lightnex.RPC.Lightning.NodeUpdate do
+defmodule Lightnex.LNRPC.Lightning.NodeUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :addresses, 1, repeated: true, type: :string, deprecated: true
@@ -2012,36 +2019,40 @@ defmodule Lightnex.RPC.Lightning.NodeUpdate do
 
   field :node_addresses, 7,
     repeated: true,
-    type: Lightnex.RPC.Lightning.NodeAddress,
+    type: Lightnex.LNRPC.Lightning.NodeAddress,
     json_name: "nodeAddresses"
 
   field :features, 6,
     repeated: true,
-    type: Lightnex.RPC.Lightning.NodeUpdate.FeaturesEntry,
+    type: Lightnex.LNRPC.Lightning.NodeUpdate.FeaturesEntry,
     map: true
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelEdgeUpdate do
+defmodule Lightnex.LNRPC.Lightning.ChannelEdgeUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_id, 1, type: :uint64, json_name: "chanId", deprecated: false
-  field :chan_point, 2, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "chanPoint"
+  field :chan_point, 2, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "chanPoint"
   field :capacity, 3, type: :int64
-  field :routing_policy, 4, type: Lightnex.RPC.Lightning.RoutingPolicy, json_name: "routingPolicy"
+
+  field :routing_policy, 4,
+    type: Lightnex.LNRPC.Lightning.RoutingPolicy,
+    json_name: "routingPolicy"
+
   field :advertising_node, 5, type: :string, json_name: "advertisingNode"
   field :connecting_node, 6, type: :string, json_name: "connectingNode"
 end
 
-defmodule Lightnex.RPC.Lightning.ClosedChannelUpdate do
+defmodule Lightnex.LNRPC.Lightning.ClosedChannelUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_id, 1, type: :uint64, json_name: "chanId", deprecated: false
   field :capacity, 2, type: :int64
   field :closed_height, 3, type: :uint32, json_name: "closedHeight"
-  field :chan_point, 4, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "chanPoint"
+  field :chan_point, 4, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "chanPoint"
 end
 
-defmodule Lightnex.RPC.Lightning.HopHint do
+defmodule Lightnex.LNRPC.Lightning.HopHint do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :node_id, 1, type: :string, json_name: "nodeId"
@@ -2051,31 +2062,34 @@ defmodule Lightnex.RPC.Lightning.HopHint do
   field :cltv_expiry_delta, 5, type: :uint32, json_name: "cltvExpiryDelta"
 end
 
-defmodule Lightnex.RPC.Lightning.SetID do
+defmodule Lightnex.LNRPC.Lightning.SetID do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :set_id, 1, type: :bytes, json_name: "setId"
 end
 
-defmodule Lightnex.RPC.Lightning.RouteHint do
+defmodule Lightnex.LNRPC.Lightning.RouteHint do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :hop_hints, 1, repeated: true, type: Lightnex.RPC.Lightning.HopHint, json_name: "hopHints"
+  field :hop_hints, 1,
+    repeated: true,
+    type: Lightnex.LNRPC.Lightning.HopHint,
+    json_name: "hopHints"
 end
 
-defmodule Lightnex.RPC.Lightning.BlindedPaymentPath do
+defmodule Lightnex.LNRPC.Lightning.BlindedPaymentPath do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :blinded_path, 1, type: Lightnex.RPC.Lightning.BlindedPath, json_name: "blindedPath"
+  field :blinded_path, 1, type: Lightnex.LNRPC.Lightning.BlindedPath, json_name: "blindedPath"
   field :base_fee_msat, 2, type: :uint64, json_name: "baseFeeMsat"
   field :proportional_fee_rate, 3, type: :uint32, json_name: "proportionalFeeRate"
   field :total_cltv_delta, 4, type: :uint32, json_name: "totalCltvDelta"
   field :htlc_min_msat, 5, type: :uint64, json_name: "htlcMinMsat"
   field :htlc_max_msat, 6, type: :uint64, json_name: "htlcMaxMsat"
-  field :features, 7, repeated: true, type: Lightnex.RPC.Lightning.FeatureBit, enum: true
+  field :features, 7, repeated: true, type: Lightnex.LNRPC.Lightning.FeatureBit, enum: true
 end
 
-defmodule Lightnex.RPC.Lightning.BlindedPath do
+defmodule Lightnex.LNRPC.Lightning.BlindedPath do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :introduction_node, 1, type: :bytes, json_name: "introductionNode"
@@ -2083,41 +2097,41 @@ defmodule Lightnex.RPC.Lightning.BlindedPath do
 
   field :blinded_hops, 3,
     repeated: true,
-    type: Lightnex.RPC.Lightning.BlindedHop,
+    type: Lightnex.LNRPC.Lightning.BlindedHop,
     json_name: "blindedHops"
 end
 
-defmodule Lightnex.RPC.Lightning.BlindedHop do
+defmodule Lightnex.LNRPC.Lightning.BlindedHop do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :blinded_node, 1, type: :bytes, json_name: "blindedNode"
   field :encrypted_data, 2, type: :bytes, json_name: "encryptedData"
 end
 
-defmodule Lightnex.RPC.Lightning.AMPInvoiceState do
+defmodule Lightnex.LNRPC.Lightning.AMPInvoiceState do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :state, 1, type: Lightnex.RPC.Lightning.InvoiceHTLCState, enum: true
+  field :state, 1, type: Lightnex.LNRPC.Lightning.InvoiceHTLCState, enum: true
   field :settle_index, 2, type: :uint64, json_name: "settleIndex"
   field :settle_time, 3, type: :int64, json_name: "settleTime"
   field :amt_paid_msat, 5, type: :int64, json_name: "amtPaidMsat"
 end
 
-defmodule Lightnex.RPC.Lightning.Invoice.FeaturesEntry do
+defmodule Lightnex.LNRPC.Lightning.Invoice.FeaturesEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint32
-  field :value, 2, type: Lightnex.RPC.Lightning.Feature
+  field :value, 2, type: Lightnex.LNRPC.Lightning.Feature
 end
 
-defmodule Lightnex.RPC.Lightning.Invoice.AmpInvoiceStateEntry do
+defmodule Lightnex.LNRPC.Lightning.Invoice.AmpInvoiceStateEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
-  field :value, 2, type: Lightnex.RPC.Lightning.AMPInvoiceState
+  field :value, 2, type: Lightnex.LNRPC.Lightning.AMPInvoiceState
 end
 
-defmodule Lightnex.RPC.Lightning.Invoice do
+defmodule Lightnex.LNRPC.Lightning.Invoice do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :memo, 1, type: :string
@@ -2136,7 +2150,7 @@ defmodule Lightnex.RPC.Lightning.Invoice do
 
   field :route_hints, 14,
     repeated: true,
-    type: Lightnex.RPC.Lightning.RouteHint,
+    type: Lightnex.LNRPC.Lightning.RouteHint,
     json_name: "routeHints"
 
   field :private, 15, type: :bool
@@ -2145,12 +2159,12 @@ defmodule Lightnex.RPC.Lightning.Invoice do
   field :amt_paid, 18, type: :int64, json_name: "amtPaid", deprecated: true
   field :amt_paid_sat, 19, type: :int64, json_name: "amtPaidSat"
   field :amt_paid_msat, 20, type: :int64, json_name: "amtPaidMsat"
-  field :state, 21, type: Lightnex.RPC.Lightning.Invoice.InvoiceState, enum: true
-  field :htlcs, 22, repeated: true, type: Lightnex.RPC.Lightning.InvoiceHTLC
+  field :state, 21, type: Lightnex.LNRPC.Lightning.Invoice.InvoiceState, enum: true
+  field :htlcs, 22, repeated: true, type: Lightnex.LNRPC.Lightning.InvoiceHTLC
 
   field :features, 24,
     repeated: true,
-    type: Lightnex.RPC.Lightning.Invoice.FeaturesEntry,
+    type: Lightnex.LNRPC.Lightning.Invoice.FeaturesEntry,
     map: true
 
   field :is_keysend, 25, type: :bool, json_name: "isKeysend"
@@ -2159,18 +2173,18 @@ defmodule Lightnex.RPC.Lightning.Invoice do
 
   field :amp_invoice_state, 28,
     repeated: true,
-    type: Lightnex.RPC.Lightning.Invoice.AmpInvoiceStateEntry,
+    type: Lightnex.LNRPC.Lightning.Invoice.AmpInvoiceStateEntry,
     json_name: "ampInvoiceState",
     map: true
 
   field :is_blinded, 29, type: :bool, json_name: "isBlinded"
 
   field :blinded_path_config, 30,
-    type: Lightnex.RPC.Lightning.BlindedPathConfig,
+    type: Lightnex.LNRPC.Lightning.BlindedPathConfig,
     json_name: "blindedPathConfig"
 end
 
-defmodule Lightnex.RPC.Lightning.BlindedPathConfig do
+defmodule Lightnex.LNRPC.Lightning.BlindedPathConfig do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :min_num_real_hops, 1, proto3_optional: true, type: :uint32, json_name: "minNumRealHops"
@@ -2179,14 +2193,14 @@ defmodule Lightnex.RPC.Lightning.BlindedPathConfig do
   field :node_omission_list, 4, repeated: true, type: :bytes, json_name: "nodeOmissionList"
 end
 
-defmodule Lightnex.RPC.Lightning.InvoiceHTLC.CustomRecordsEntry do
+defmodule Lightnex.LNRPC.Lightning.InvoiceHTLC.CustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.InvoiceHTLC do
+defmodule Lightnex.LNRPC.Lightning.InvoiceHTLC do
   @moduledoc """
   Details of an HTLC that paid to an invoice
   """
@@ -2200,20 +2214,20 @@ defmodule Lightnex.RPC.Lightning.InvoiceHTLC do
   field :accept_time, 5, type: :int64, json_name: "acceptTime"
   field :resolve_time, 6, type: :int64, json_name: "resolveTime"
   field :expiry_height, 7, type: :int32, json_name: "expiryHeight"
-  field :state, 8, type: Lightnex.RPC.Lightning.InvoiceHTLCState, enum: true
+  field :state, 8, type: Lightnex.LNRPC.Lightning.InvoiceHTLCState, enum: true
 
   field :custom_records, 9,
     repeated: true,
-    type: Lightnex.RPC.Lightning.InvoiceHTLC.CustomRecordsEntry,
+    type: Lightnex.LNRPC.Lightning.InvoiceHTLC.CustomRecordsEntry,
     json_name: "customRecords",
     map: true
 
   field :mpp_total_amt_msat, 10, type: :uint64, json_name: "mppTotalAmtMsat"
-  field :amp, 11, type: Lightnex.RPC.Lightning.AMP
+  field :amp, 11, type: Lightnex.LNRPC.Lightning.AMP
   field :custom_channel_data, 12, type: :bytes, json_name: "customChannelData"
 end
 
-defmodule Lightnex.RPC.Lightning.AMP do
+defmodule Lightnex.LNRPC.Lightning.AMP do
   @moduledoc """
   Details specific to AMP HTLCs.
   """
@@ -2227,7 +2241,7 @@ defmodule Lightnex.RPC.Lightning.AMP do
   field :preimage, 5, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.AddInvoiceResponse do
+defmodule Lightnex.LNRPC.Lightning.AddInvoiceResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :r_hash, 1, type: :bytes, json_name: "rHash"
@@ -2236,14 +2250,14 @@ defmodule Lightnex.RPC.Lightning.AddInvoiceResponse do
   field :payment_addr, 17, type: :bytes, json_name: "paymentAddr"
 end
 
-defmodule Lightnex.RPC.Lightning.PaymentHash do
+defmodule Lightnex.LNRPC.Lightning.PaymentHash do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :r_hash_str, 1, type: :string, json_name: "rHashStr", deprecated: true
   field :r_hash, 2, type: :bytes, json_name: "rHash"
 end
 
-defmodule Lightnex.RPC.Lightning.ListInvoiceRequest do
+defmodule Lightnex.LNRPC.Lightning.ListInvoiceRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pending_only, 1, type: :bool, json_name: "pendingOnly"
@@ -2254,29 +2268,29 @@ defmodule Lightnex.RPC.Lightning.ListInvoiceRequest do
   field :creation_date_end, 8, type: :uint64, json_name: "creationDateEnd"
 end
 
-defmodule Lightnex.RPC.Lightning.ListInvoiceResponse do
+defmodule Lightnex.LNRPC.Lightning.ListInvoiceResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :invoices, 1, repeated: true, type: Lightnex.RPC.Lightning.Invoice
+  field :invoices, 1, repeated: true, type: Lightnex.LNRPC.Lightning.Invoice
   field :last_index_offset, 2, type: :uint64, json_name: "lastIndexOffset"
   field :first_index_offset, 3, type: :uint64, json_name: "firstIndexOffset"
 end
 
-defmodule Lightnex.RPC.Lightning.InvoiceSubscription do
+defmodule Lightnex.LNRPC.Lightning.InvoiceSubscription do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :add_index, 1, type: :uint64, json_name: "addIndex"
   field :settle_index, 2, type: :uint64, json_name: "settleIndex"
 end
 
-defmodule Lightnex.RPC.Lightning.Payment.FirstHopCustomRecordsEntry do
+defmodule Lightnex.LNRPC.Lightning.Payment.FirstHopCustomRecordsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint64
   field :value, 2, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.Payment do
+defmodule Lightnex.LNRPC.Lightning.Payment do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :payment_hash, 1, type: :string, json_name: "paymentHash"
@@ -2287,38 +2301,38 @@ defmodule Lightnex.RPC.Lightning.Payment do
   field :value_sat, 7, type: :int64, json_name: "valueSat"
   field :value_msat, 8, type: :int64, json_name: "valueMsat"
   field :payment_request, 9, type: :string, json_name: "paymentRequest"
-  field :status, 10, type: Lightnex.RPC.Lightning.Payment.PaymentStatus, enum: true
+  field :status, 10, type: Lightnex.LNRPC.Lightning.Payment.PaymentStatus, enum: true
   field :fee_sat, 11, type: :int64, json_name: "feeSat"
   field :fee_msat, 12, type: :int64, json_name: "feeMsat"
   field :creation_time_ns, 13, type: :int64, json_name: "creationTimeNs"
-  field :htlcs, 14, repeated: true, type: Lightnex.RPC.Lightning.HTLCAttempt
+  field :htlcs, 14, repeated: true, type: Lightnex.LNRPC.Lightning.HTLCAttempt
   field :payment_index, 15, type: :uint64, json_name: "paymentIndex"
 
   field :failure_reason, 16,
-    type: Lightnex.RPC.Lightning.PaymentFailureReason,
+    type: Lightnex.LNRPC.Lightning.PaymentFailureReason,
     json_name: "failureReason",
     enum: true
 
   field :first_hop_custom_records, 17,
     repeated: true,
-    type: Lightnex.RPC.Lightning.Payment.FirstHopCustomRecordsEntry,
+    type: Lightnex.LNRPC.Lightning.Payment.FirstHopCustomRecordsEntry,
     json_name: "firstHopCustomRecords",
     map: true
 end
 
-defmodule Lightnex.RPC.Lightning.HTLCAttempt do
+defmodule Lightnex.LNRPC.Lightning.HTLCAttempt do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :attempt_id, 7, type: :uint64, json_name: "attemptId"
-  field :status, 1, type: Lightnex.RPC.Lightning.HTLCAttempt.HTLCStatus, enum: true
-  field :route, 2, type: Lightnex.RPC.Lightning.Route
+  field :status, 1, type: Lightnex.LNRPC.Lightning.HTLCAttempt.HTLCStatus, enum: true
+  field :route, 2, type: Lightnex.LNRPC.Lightning.Route
   field :attempt_time_ns, 3, type: :int64, json_name: "attemptTimeNs"
   field :resolve_time_ns, 4, type: :int64, json_name: "resolveTimeNs"
-  field :failure, 5, type: Lightnex.RPC.Lightning.Failure
+  field :failure, 5, type: Lightnex.LNRPC.Lightning.Failure
   field :preimage, 6, type: :bytes
 end
 
-defmodule Lightnex.RPC.Lightning.ListPaymentsRequest do
+defmodule Lightnex.LNRPC.Lightning.ListPaymentsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :include_incomplete, 1, type: :bool, json_name: "includeIncomplete"
@@ -2330,23 +2344,23 @@ defmodule Lightnex.RPC.Lightning.ListPaymentsRequest do
   field :creation_date_end, 7, type: :uint64, json_name: "creationDateEnd"
 end
 
-defmodule Lightnex.RPC.Lightning.ListPaymentsResponse do
+defmodule Lightnex.LNRPC.Lightning.ListPaymentsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :payments, 1, repeated: true, type: Lightnex.RPC.Lightning.Payment
+  field :payments, 1, repeated: true, type: Lightnex.LNRPC.Lightning.Payment
   field :first_index_offset, 2, type: :uint64, json_name: "firstIndexOffset"
   field :last_index_offset, 3, type: :uint64, json_name: "lastIndexOffset"
   field :total_num_payments, 4, type: :uint64, json_name: "totalNumPayments"
 end
 
-defmodule Lightnex.RPC.Lightning.DeletePaymentRequest do
+defmodule Lightnex.LNRPC.Lightning.DeletePaymentRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :payment_hash, 1, type: :bytes, json_name: "paymentHash"
   field :failed_htlcs_only, 2, type: :bool, json_name: "failedHtlcsOnly"
 end
 
-defmodule Lightnex.RPC.Lightning.DeleteAllPaymentsRequest do
+defmodule Lightnex.LNRPC.Lightning.DeleteAllPaymentsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :failed_payments_only, 1, type: :bool, json_name: "failedPaymentsOnly"
@@ -2354,59 +2368,59 @@ defmodule Lightnex.RPC.Lightning.DeleteAllPaymentsRequest do
   field :all_payments, 3, type: :bool, json_name: "allPayments"
 end
 
-defmodule Lightnex.RPC.Lightning.DeletePaymentResponse do
+defmodule Lightnex.LNRPC.Lightning.DeletePaymentResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.DeleteAllPaymentsResponse do
+defmodule Lightnex.LNRPC.Lightning.DeleteAllPaymentsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.AbandonChannelRequest do
+defmodule Lightnex.LNRPC.Lightning.AbandonChannelRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :channel_point, 1, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "channelPoint"
+  field :channel_point, 1, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "channelPoint"
   field :pending_funding_shim_only, 2, type: :bool, json_name: "pendingFundingShimOnly"
   field :i_know_what_i_am_doing, 3, type: :bool, json_name: "iKnowWhatIAmDoing"
 end
 
-defmodule Lightnex.RPC.Lightning.AbandonChannelResponse do
+defmodule Lightnex.LNRPC.Lightning.AbandonChannelResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :status, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.DebugLevelRequest do
+defmodule Lightnex.LNRPC.Lightning.DebugLevelRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :show, 1, type: :bool
   field :level_spec, 2, type: :string, json_name: "levelSpec"
 end
 
-defmodule Lightnex.RPC.Lightning.DebugLevelResponse do
+defmodule Lightnex.LNRPC.Lightning.DebugLevelResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :sub_systems, 1, type: :string, json_name: "subSystems"
 end
 
-defmodule Lightnex.RPC.Lightning.PayReqString do
+defmodule Lightnex.LNRPC.Lightning.PayReqString do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :pay_req, 1, type: :string, json_name: "payReq"
 end
 
-defmodule Lightnex.RPC.Lightning.PayReq.FeaturesEntry do
+defmodule Lightnex.LNRPC.Lightning.PayReq.FeaturesEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :uint32
-  field :value, 2, type: Lightnex.RPC.Lightning.Feature
+  field :value, 2, type: Lightnex.LNRPC.Lightning.Feature
 end
 
-defmodule Lightnex.RPC.Lightning.PayReq do
+defmodule Lightnex.LNRPC.Lightning.PayReq do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :destination, 1, type: :string
@@ -2421,7 +2435,7 @@ defmodule Lightnex.RPC.Lightning.PayReq do
 
   field :route_hints, 10,
     repeated: true,
-    type: Lightnex.RPC.Lightning.RouteHint,
+    type: Lightnex.LNRPC.Lightning.RouteHint,
     json_name: "routeHints"
 
   field :payment_addr, 11, type: :bytes, json_name: "paymentAddr"
@@ -2429,16 +2443,16 @@ defmodule Lightnex.RPC.Lightning.PayReq do
 
   field :features, 13,
     repeated: true,
-    type: Lightnex.RPC.Lightning.PayReq.FeaturesEntry,
+    type: Lightnex.LNRPC.Lightning.PayReq.FeaturesEntry,
     map: true
 
   field :blinded_paths, 14,
     repeated: true,
-    type: Lightnex.RPC.Lightning.BlindedPaymentPath,
+    type: Lightnex.LNRPC.Lightning.BlindedPaymentPath,
     json_name: "blindedPaths"
 end
 
-defmodule Lightnex.RPC.Lightning.Feature do
+defmodule Lightnex.LNRPC.Lightning.Feature do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :name, 2, type: :string
@@ -2446,11 +2460,11 @@ defmodule Lightnex.RPC.Lightning.Feature do
   field :is_known, 4, type: :bool, json_name: "isKnown"
 end
 
-defmodule Lightnex.RPC.Lightning.FeeReportRequest do
+defmodule Lightnex.LNRPC.Lightning.FeeReportRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelFeeReport do
+defmodule Lightnex.LNRPC.Lightning.ChannelFeeReport do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_id, 5, type: :uint64, json_name: "chanId", deprecated: false
@@ -2462,12 +2476,12 @@ defmodule Lightnex.RPC.Lightning.ChannelFeeReport do
   field :inbound_fee_per_mil, 7, type: :int32, json_name: "inboundFeePerMil"
 end
 
-defmodule Lightnex.RPC.Lightning.FeeReportResponse do
+defmodule Lightnex.LNRPC.Lightning.FeeReportResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :channel_fees, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.ChannelFeeReport,
+    type: Lightnex.LNRPC.Lightning.ChannelFeeReport,
     json_name: "channelFees"
 
   field :day_fee_sum, 2, type: :uint64, json_name: "dayFeeSum"
@@ -2475,14 +2489,14 @@ defmodule Lightnex.RPC.Lightning.FeeReportResponse do
   field :month_fee_sum, 4, type: :uint64, json_name: "monthFeeSum"
 end
 
-defmodule Lightnex.RPC.Lightning.InboundFee do
+defmodule Lightnex.LNRPC.Lightning.InboundFee do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :base_fee_msat, 1, type: :int32, json_name: "baseFeeMsat"
   field :fee_rate_ppm, 2, type: :int32, json_name: "feeRatePpm"
 end
 
-defmodule Lightnex.RPC.Lightning.PolicyUpdateRequest do
+defmodule Lightnex.LNRPC.Lightning.PolicyUpdateRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :scope, 0
@@ -2490,7 +2504,7 @@ defmodule Lightnex.RPC.Lightning.PolicyUpdateRequest do
   field :global, 1, type: :bool, oneof: 0
 
   field :chan_point, 2,
-    type: Lightnex.RPC.Lightning.ChannelPoint,
+    type: Lightnex.LNRPC.Lightning.ChannelPoint,
     json_name: "chanPoint",
     oneof: 0
 
@@ -2501,28 +2515,28 @@ defmodule Lightnex.RPC.Lightning.PolicyUpdateRequest do
   field :max_htlc_msat, 6, type: :uint64, json_name: "maxHtlcMsat"
   field :min_htlc_msat, 7, type: :uint64, json_name: "minHtlcMsat"
   field :min_htlc_msat_specified, 8, type: :bool, json_name: "minHtlcMsatSpecified"
-  field :inbound_fee, 10, type: Lightnex.RPC.Lightning.InboundFee, json_name: "inboundFee"
+  field :inbound_fee, 10, type: Lightnex.LNRPC.Lightning.InboundFee, json_name: "inboundFee"
   field :create_missing_edge, 11, type: :bool, json_name: "createMissingEdge"
 end
 
-defmodule Lightnex.RPC.Lightning.FailedUpdate do
+defmodule Lightnex.LNRPC.Lightning.FailedUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :outpoint, 1, type: Lightnex.RPC.Lightning.OutPoint
-  field :reason, 2, type: Lightnex.RPC.Lightning.UpdateFailure, enum: true
+  field :outpoint, 1, type: Lightnex.LNRPC.Lightning.OutPoint
+  field :reason, 2, type: Lightnex.LNRPC.Lightning.UpdateFailure, enum: true
   field :update_error, 3, type: :string, json_name: "updateError"
 end
 
-defmodule Lightnex.RPC.Lightning.PolicyUpdateResponse do
+defmodule Lightnex.LNRPC.Lightning.PolicyUpdateResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :failed_updates, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.FailedUpdate,
+    type: Lightnex.LNRPC.Lightning.FailedUpdate,
     json_name: "failedUpdates"
 end
 
-defmodule Lightnex.RPC.Lightning.ForwardingHistoryRequest do
+defmodule Lightnex.LNRPC.Lightning.ForwardingHistoryRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :start_time, 1, type: :uint64, json_name: "startTime"
@@ -2532,7 +2546,7 @@ defmodule Lightnex.RPC.Lightning.ForwardingHistoryRequest do
   field :peer_alias_lookup, 5, type: :bool, json_name: "peerAliasLookup"
 end
 
-defmodule Lightnex.RPC.Lightning.ForwardingEvent do
+defmodule Lightnex.LNRPC.Lightning.ForwardingEvent do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :timestamp, 1, type: :uint64, deprecated: true
@@ -2551,170 +2565,174 @@ defmodule Lightnex.RPC.Lightning.ForwardingEvent do
   field :outgoing_htlc_id, 15, proto3_optional: true, type: :uint64, json_name: "outgoingHtlcId"
 end
 
-defmodule Lightnex.RPC.Lightning.ForwardingHistoryResponse do
+defmodule Lightnex.LNRPC.Lightning.ForwardingHistoryResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :forwarding_events, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.ForwardingEvent,
+    type: Lightnex.LNRPC.Lightning.ForwardingEvent,
     json_name: "forwardingEvents"
 
   field :last_offset_index, 2, type: :uint32, json_name: "lastOffsetIndex"
 end
 
-defmodule Lightnex.RPC.Lightning.ExportChannelBackupRequest do
+defmodule Lightnex.LNRPC.Lightning.ExportChannelBackupRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :chan_point, 1, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "chanPoint"
+  field :chan_point, 1, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "chanPoint"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelBackup do
+defmodule Lightnex.LNRPC.Lightning.ChannelBackup do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :chan_point, 1, type: Lightnex.RPC.Lightning.ChannelPoint, json_name: "chanPoint"
+  field :chan_point, 1, type: Lightnex.LNRPC.Lightning.ChannelPoint, json_name: "chanPoint"
   field :chan_backup, 2, type: :bytes, json_name: "chanBackup"
 end
 
-defmodule Lightnex.RPC.Lightning.MultiChanBackup do
+defmodule Lightnex.LNRPC.Lightning.MultiChanBackup do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_points, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.ChannelPoint,
+    type: Lightnex.LNRPC.Lightning.ChannelPoint,
     json_name: "chanPoints"
 
   field :multi_chan_backup, 2, type: :bytes, json_name: "multiChanBackup"
 end
 
-defmodule Lightnex.RPC.Lightning.ChanBackupExportRequest do
+defmodule Lightnex.LNRPC.Lightning.ChanBackupExportRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.ChanBackupSnapshot do
+defmodule Lightnex.LNRPC.Lightning.ChanBackupSnapshot do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :single_chan_backups, 1,
-    type: Lightnex.RPC.Lightning.ChannelBackups,
+    type: Lightnex.LNRPC.Lightning.ChannelBackups,
     json_name: "singleChanBackups"
 
   field :multi_chan_backup, 2,
-    type: Lightnex.RPC.Lightning.MultiChanBackup,
+    type: Lightnex.LNRPC.Lightning.MultiChanBackup,
     json_name: "multiChanBackup"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelBackups do
+defmodule Lightnex.LNRPC.Lightning.ChannelBackups do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_backups, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.ChannelBackup,
+    type: Lightnex.LNRPC.Lightning.ChannelBackup,
     json_name: "chanBackups"
 end
 
-defmodule Lightnex.RPC.Lightning.RestoreChanBackupRequest do
+defmodule Lightnex.LNRPC.Lightning.RestoreChanBackupRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :backup, 0
 
   field :chan_backups, 1,
-    type: Lightnex.RPC.Lightning.ChannelBackups,
+    type: Lightnex.LNRPC.Lightning.ChannelBackups,
     json_name: "chanBackups",
     oneof: 0
 
   field :multi_chan_backup, 2, type: :bytes, json_name: "multiChanBackup", oneof: 0
 end
 
-defmodule Lightnex.RPC.Lightning.RestoreBackupResponse do
+defmodule Lightnex.LNRPC.Lightning.RestoreBackupResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :num_restored, 1, type: :uint32, json_name: "numRestored"
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelBackupSubscription do
+defmodule Lightnex.LNRPC.Lightning.ChannelBackupSubscription do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.VerifyChanBackupResponse do
+defmodule Lightnex.LNRPC.Lightning.VerifyChanBackupResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :chan_points, 1, repeated: true, type: :string, json_name: "chanPoints"
 end
 
-defmodule Lightnex.RPC.Lightning.MacaroonPermission do
+defmodule Lightnex.LNRPC.Lightning.MacaroonPermission do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :entity, 1, type: :string
   field :action, 2, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.BakeMacaroonRequest do
+defmodule Lightnex.LNRPC.Lightning.BakeMacaroonRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :permissions, 1, repeated: true, type: Lightnex.RPC.Lightning.MacaroonPermission
+  field :permissions, 1, repeated: true, type: Lightnex.LNRPC.Lightning.MacaroonPermission
   field :root_key_id, 2, type: :uint64, json_name: "rootKeyId"
   field :allow_external_permissions, 3, type: :bool, json_name: "allowExternalPermissions"
 end
 
-defmodule Lightnex.RPC.Lightning.BakeMacaroonResponse do
+defmodule Lightnex.LNRPC.Lightning.BakeMacaroonResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :macaroon, 1, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.ListMacaroonIDsRequest do
+defmodule Lightnex.LNRPC.Lightning.ListMacaroonIDsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.ListMacaroonIDsResponse do
+defmodule Lightnex.LNRPC.Lightning.ListMacaroonIDsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :root_key_ids, 1, repeated: true, type: :uint64, json_name: "rootKeyIds"
 end
 
-defmodule Lightnex.RPC.Lightning.DeleteMacaroonIDRequest do
+defmodule Lightnex.LNRPC.Lightning.DeleteMacaroonIDRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :root_key_id, 1, type: :uint64, json_name: "rootKeyId"
 end
 
-defmodule Lightnex.RPC.Lightning.DeleteMacaroonIDResponse do
+defmodule Lightnex.LNRPC.Lightning.DeleteMacaroonIDResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :deleted, 1, type: :bool
 end
 
-defmodule Lightnex.RPC.Lightning.MacaroonPermissionList do
+defmodule Lightnex.LNRPC.Lightning.MacaroonPermissionList do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :permissions, 1, repeated: true, type: Lightnex.RPC.Lightning.MacaroonPermission
+  field :permissions, 1, repeated: true, type: Lightnex.LNRPC.Lightning.MacaroonPermission
 end
 
-defmodule Lightnex.RPC.Lightning.ListPermissionsRequest do
+defmodule Lightnex.LNRPC.Lightning.ListPermissionsRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 end
 
-defmodule Lightnex.RPC.Lightning.ListPermissionsResponse.MethodPermissionsEntry do
+defmodule Lightnex.LNRPC.Lightning.ListPermissionsResponse.MethodPermissionsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
-  field :value, 2, type: Lightnex.RPC.Lightning.MacaroonPermissionList
+  field :value, 2, type: Lightnex.LNRPC.Lightning.MacaroonPermissionList
 end
 
-defmodule Lightnex.RPC.Lightning.ListPermissionsResponse do
+defmodule Lightnex.LNRPC.Lightning.ListPermissionsResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :method_permissions, 1,
     repeated: true,
-    type: Lightnex.RPC.Lightning.ListPermissionsResponse.MethodPermissionsEntry,
+    type: Lightnex.LNRPC.Lightning.ListPermissionsResponse.MethodPermissionsEntry,
     json_name: "methodPermissions",
     map: true
 end
 
-defmodule Lightnex.RPC.Lightning.Failure do
+defmodule Lightnex.LNRPC.Lightning.Failure do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :code, 1, type: Lightnex.RPC.Lightning.Failure.FailureCode, enum: true
-  field :channel_update, 3, type: Lightnex.RPC.Lightning.ChannelUpdate, json_name: "channelUpdate"
+  field :code, 1, type: Lightnex.LNRPC.Lightning.Failure.FailureCode, enum: true
+
+  field :channel_update, 3,
+    type: Lightnex.LNRPC.Lightning.ChannelUpdate,
+    json_name: "channelUpdate"
+
   field :htlc_msat, 4, type: :uint64, json_name: "htlcMsat"
   field :onion_sha_256, 5, type: :bytes, json_name: "onionSha256"
   field :cltv_expiry, 6, type: :uint32, json_name: "cltvExpiry"
@@ -2723,7 +2741,7 @@ defmodule Lightnex.RPC.Lightning.Failure do
   field :height, 9, type: :uint32
 end
 
-defmodule Lightnex.RPC.Lightning.ChannelUpdate do
+defmodule Lightnex.LNRPC.Lightning.ChannelUpdate do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :signature, 1, type: :bytes
@@ -2740,43 +2758,43 @@ defmodule Lightnex.RPC.Lightning.ChannelUpdate do
   field :extra_opaque_data, 12, type: :bytes, json_name: "extraOpaqueData"
 end
 
-defmodule Lightnex.RPC.Lightning.MacaroonId do
+defmodule Lightnex.LNRPC.Lightning.MacaroonId do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :nonce, 1, type: :bytes
   field :storageId, 2, type: :bytes
-  field :ops, 3, repeated: true, type: Lightnex.RPC.Lightning.Op
+  field :ops, 3, repeated: true, type: Lightnex.LNRPC.Lightning.Op
 end
 
-defmodule Lightnex.RPC.Lightning.Op do
+defmodule Lightnex.LNRPC.Lightning.Op do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :entity, 1, type: :string
   field :actions, 2, repeated: true, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.CheckMacPermRequest do
+defmodule Lightnex.LNRPC.Lightning.CheckMacPermRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :macaroon, 1, type: :bytes
-  field :permissions, 2, repeated: true, type: Lightnex.RPC.Lightning.MacaroonPermission
+  field :permissions, 2, repeated: true, type: Lightnex.LNRPC.Lightning.MacaroonPermission
   field :fullMethod, 3, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.CheckMacPermResponse do
+defmodule Lightnex.LNRPC.Lightning.CheckMacPermResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :valid, 1, type: :bool
 end
 
-defmodule Lightnex.RPC.Lightning.RPCMiddlewareRequest.MetadataPairsEntry do
+defmodule Lightnex.LNRPC.Lightning.RPCMiddlewareRequest.MetadataPairsEntry do
   use Protobuf, map: true, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :key, 1, type: :string
-  field :value, 2, type: Lightnex.RPC.Lightning.MetadataValues
+  field :value, 2, type: Lightnex.LNRPC.Lightning.MetadataValues
 end
 
-defmodule Lightnex.RPC.Lightning.RPCMiddlewareRequest do
+defmodule Lightnex.LNRPC.Lightning.RPCMiddlewareRequest do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :intercept_type, 0
@@ -2786,35 +2804,35 @@ defmodule Lightnex.RPC.Lightning.RPCMiddlewareRequest do
   field :custom_caveat_condition, 3, type: :string, json_name: "customCaveatCondition"
 
   field :stream_auth, 4,
-    type: Lightnex.RPC.Lightning.StreamAuth,
+    type: Lightnex.LNRPC.Lightning.StreamAuth,
     json_name: "streamAuth",
     oneof: 0
 
-  field :request, 5, type: Lightnex.RPC.Lightning.RPCMessage, oneof: 0
-  field :response, 6, type: Lightnex.RPC.Lightning.RPCMessage, oneof: 0
+  field :request, 5, type: Lightnex.LNRPC.Lightning.RPCMessage, oneof: 0
+  field :response, 6, type: Lightnex.LNRPC.Lightning.RPCMessage, oneof: 0
   field :reg_complete, 8, type: :bool, json_name: "regComplete", oneof: 0
   field :msg_id, 7, type: :uint64, json_name: "msgId"
 
   field :metadata_pairs, 9,
     repeated: true,
-    type: Lightnex.RPC.Lightning.RPCMiddlewareRequest.MetadataPairsEntry,
+    type: Lightnex.LNRPC.Lightning.RPCMiddlewareRequest.MetadataPairsEntry,
     json_name: "metadataPairs",
     map: true
 end
 
-defmodule Lightnex.RPC.Lightning.MetadataValues do
+defmodule Lightnex.LNRPC.Lightning.MetadataValues do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :values, 1, repeated: true, type: :string
 end
 
-defmodule Lightnex.RPC.Lightning.StreamAuth do
+defmodule Lightnex.LNRPC.Lightning.StreamAuth do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :method_full_uri, 1, type: :string, json_name: "methodFullUri"
 end
 
-defmodule Lightnex.RPC.Lightning.RPCMessage do
+defmodule Lightnex.LNRPC.Lightning.RPCMessage do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :method_full_uri, 1, type: :string, json_name: "methodFullUri"
@@ -2824,17 +2842,17 @@ defmodule Lightnex.RPC.Lightning.RPCMessage do
   field :is_error, 5, type: :bool, json_name: "isError"
 end
 
-defmodule Lightnex.RPC.Lightning.RPCMiddlewareResponse do
+defmodule Lightnex.LNRPC.Lightning.RPCMiddlewareResponse do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   oneof :middleware_message, 0
 
   field :ref_msg_id, 1, type: :uint64, json_name: "refMsgId"
-  field :register, 2, type: Lightnex.RPC.Lightning.MiddlewareRegistration, oneof: 0
-  field :feedback, 3, type: Lightnex.RPC.Lightning.InterceptFeedback, oneof: 0
+  field :register, 2, type: Lightnex.LNRPC.Lightning.MiddlewareRegistration, oneof: 0
+  field :feedback, 3, type: Lightnex.LNRPC.Lightning.InterceptFeedback, oneof: 0
 end
 
-defmodule Lightnex.RPC.Lightning.MiddlewareRegistration do
+defmodule Lightnex.LNRPC.Lightning.MiddlewareRegistration do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :middleware_name, 1, type: :string, json_name: "middlewareName"
@@ -2842,7 +2860,7 @@ defmodule Lightnex.RPC.Lightning.MiddlewareRegistration do
   field :read_only_mode, 3, type: :bool, json_name: "readOnlyMode"
 end
 
-defmodule Lightnex.RPC.Lightning.InterceptFeedback do
+defmodule Lightnex.LNRPC.Lightning.InterceptFeedback do
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
   field :error, 1, type: :string
@@ -2850,7 +2868,7 @@ defmodule Lightnex.RPC.Lightning.InterceptFeedback do
   field :replacement_serialized, 3, type: :bytes, json_name: "replacementSerialized"
 end
 
-defmodule Lightnex.RPC.Lightning.Service do
+defmodule Lightnex.LNRPC.Lightning.Service do
   @moduledoc """
   Lightning is the main RPC server of the daemon.
   Comments in this file will be directly parsed into the API
@@ -2873,260 +2891,264 @@ defmodule Lightnex.RPC.Lightning.Service do
   use GRPC.Service, name: "lnrpc.Lightning", protoc_gen_elixir_version: "0.15.0"
 
   rpc :WalletBalance,
-      Lightnex.RPC.Lightning.WalletBalanceRequest,
-      Lightnex.RPC.Lightning.WalletBalanceResponse
+      Lightnex.LNRPC.Lightning.WalletBalanceRequest,
+      Lightnex.LNRPC.Lightning.WalletBalanceResponse
 
   rpc :ChannelBalance,
-      Lightnex.RPC.Lightning.ChannelBalanceRequest,
-      Lightnex.RPC.Lightning.ChannelBalanceResponse
+      Lightnex.LNRPC.Lightning.ChannelBalanceRequest,
+      Lightnex.LNRPC.Lightning.ChannelBalanceResponse
 
   rpc :GetTransactions,
-      Lightnex.RPC.Lightning.GetTransactionsRequest,
-      Lightnex.RPC.Lightning.TransactionDetails
+      Lightnex.LNRPC.Lightning.GetTransactionsRequest,
+      Lightnex.LNRPC.Lightning.TransactionDetails
 
   rpc :EstimateFee,
-      Lightnex.RPC.Lightning.EstimateFeeRequest,
-      Lightnex.RPC.Lightning.EstimateFeeResponse
+      Lightnex.LNRPC.Lightning.EstimateFeeRequest,
+      Lightnex.LNRPC.Lightning.EstimateFeeResponse
 
   rpc :SendCoins,
-      Lightnex.RPC.Lightning.SendCoinsRequest,
-      Lightnex.RPC.Lightning.SendCoinsResponse
+      Lightnex.LNRPC.Lightning.SendCoinsRequest,
+      Lightnex.LNRPC.Lightning.SendCoinsResponse
 
   rpc :ListUnspent,
-      Lightnex.RPC.Lightning.ListUnspentRequest,
-      Lightnex.RPC.Lightning.ListUnspentResponse
+      Lightnex.LNRPC.Lightning.ListUnspentRequest,
+      Lightnex.LNRPC.Lightning.ListUnspentResponse
 
   rpc :SubscribeTransactions,
-      Lightnex.RPC.Lightning.GetTransactionsRequest,
-      stream(Lightnex.RPC.Lightning.Transaction)
+      Lightnex.LNRPC.Lightning.GetTransactionsRequest,
+      stream(Lightnex.LNRPC.Lightning.Transaction)
 
-  rpc :SendMany, Lightnex.RPC.Lightning.SendManyRequest, Lightnex.RPC.Lightning.SendManyResponse
+  rpc :SendMany,
+      Lightnex.LNRPC.Lightning.SendManyRequest,
+      Lightnex.LNRPC.Lightning.SendManyResponse
 
   rpc :NewAddress,
-      Lightnex.RPC.Lightning.NewAddressRequest,
-      Lightnex.RPC.Lightning.NewAddressResponse
+      Lightnex.LNRPC.Lightning.NewAddressRequest,
+      Lightnex.LNRPC.Lightning.NewAddressResponse
 
   rpc :SignMessage,
-      Lightnex.RPC.Lightning.SignMessageRequest,
-      Lightnex.RPC.Lightning.SignMessageResponse
+      Lightnex.LNRPC.Lightning.SignMessageRequest,
+      Lightnex.LNRPC.Lightning.SignMessageResponse
 
   rpc :VerifyMessage,
-      Lightnex.RPC.Lightning.VerifyMessageRequest,
-      Lightnex.RPC.Lightning.VerifyMessageResponse
+      Lightnex.LNRPC.Lightning.VerifyMessageRequest,
+      Lightnex.LNRPC.Lightning.VerifyMessageResponse
 
   rpc :ConnectPeer,
-      Lightnex.RPC.Lightning.ConnectPeerRequest,
-      Lightnex.RPC.Lightning.ConnectPeerResponse
+      Lightnex.LNRPC.Lightning.ConnectPeerRequest,
+      Lightnex.LNRPC.Lightning.ConnectPeerResponse
 
   rpc :DisconnectPeer,
-      Lightnex.RPC.Lightning.DisconnectPeerRequest,
-      Lightnex.RPC.Lightning.DisconnectPeerResponse
+      Lightnex.LNRPC.Lightning.DisconnectPeerRequest,
+      Lightnex.LNRPC.Lightning.DisconnectPeerResponse
 
   rpc :ListPeers,
-      Lightnex.RPC.Lightning.ListPeersRequest,
-      Lightnex.RPC.Lightning.ListPeersResponse
+      Lightnex.LNRPC.Lightning.ListPeersRequest,
+      Lightnex.LNRPC.Lightning.ListPeersResponse
 
   rpc :SubscribePeerEvents,
-      Lightnex.RPC.Lightning.PeerEventSubscription,
-      stream(Lightnex.RPC.Lightning.PeerEvent)
+      Lightnex.LNRPC.Lightning.PeerEventSubscription,
+      stream(Lightnex.LNRPC.Lightning.PeerEvent)
 
-  rpc :GetInfo, Lightnex.RPC.Lightning.GetInfoRequest, Lightnex.RPC.Lightning.GetInfoResponse
+  rpc :GetInfo, Lightnex.LNRPC.Lightning.GetInfoRequest, Lightnex.LNRPC.Lightning.GetInfoResponse
 
   rpc :GetDebugInfo,
-      Lightnex.RPC.Lightning.GetDebugInfoRequest,
-      Lightnex.RPC.Lightning.GetDebugInfoResponse
+      Lightnex.LNRPC.Lightning.GetDebugInfoRequest,
+      Lightnex.LNRPC.Lightning.GetDebugInfoResponse
 
   rpc :GetRecoveryInfo,
-      Lightnex.RPC.Lightning.GetRecoveryInfoRequest,
-      Lightnex.RPC.Lightning.GetRecoveryInfoResponse
+      Lightnex.LNRPC.Lightning.GetRecoveryInfoRequest,
+      Lightnex.LNRPC.Lightning.GetRecoveryInfoResponse
 
   rpc :PendingChannels,
-      Lightnex.RPC.Lightning.PendingChannelsRequest,
-      Lightnex.RPC.Lightning.PendingChannelsResponse
+      Lightnex.LNRPC.Lightning.PendingChannelsRequest,
+      Lightnex.LNRPC.Lightning.PendingChannelsResponse
 
   rpc :ListChannels,
-      Lightnex.RPC.Lightning.ListChannelsRequest,
-      Lightnex.RPC.Lightning.ListChannelsResponse
+      Lightnex.LNRPC.Lightning.ListChannelsRequest,
+      Lightnex.LNRPC.Lightning.ListChannelsResponse
 
   rpc :SubscribeChannelEvents,
-      Lightnex.RPC.Lightning.ChannelEventSubscription,
-      stream(Lightnex.RPC.Lightning.ChannelEventUpdate)
+      Lightnex.LNRPC.Lightning.ChannelEventSubscription,
+      stream(Lightnex.LNRPC.Lightning.ChannelEventUpdate)
 
   rpc :ClosedChannels,
-      Lightnex.RPC.Lightning.ClosedChannelsRequest,
-      Lightnex.RPC.Lightning.ClosedChannelsResponse
+      Lightnex.LNRPC.Lightning.ClosedChannelsRequest,
+      Lightnex.LNRPC.Lightning.ClosedChannelsResponse
 
   rpc :OpenChannelSync,
-      Lightnex.RPC.Lightning.OpenChannelRequest,
-      Lightnex.RPC.Lightning.ChannelPoint
+      Lightnex.LNRPC.Lightning.OpenChannelRequest,
+      Lightnex.LNRPC.Lightning.ChannelPoint
 
   rpc :OpenChannel,
-      Lightnex.RPC.Lightning.OpenChannelRequest,
-      stream(Lightnex.RPC.Lightning.OpenStatusUpdate)
+      Lightnex.LNRPC.Lightning.OpenChannelRequest,
+      stream(Lightnex.LNRPC.Lightning.OpenStatusUpdate)
 
   rpc :BatchOpenChannel,
-      Lightnex.RPC.Lightning.BatchOpenChannelRequest,
-      Lightnex.RPC.Lightning.BatchOpenChannelResponse
+      Lightnex.LNRPC.Lightning.BatchOpenChannelRequest,
+      Lightnex.LNRPC.Lightning.BatchOpenChannelResponse
 
   rpc :FundingStateStep,
-      Lightnex.RPC.Lightning.FundingTransitionMsg,
-      Lightnex.RPC.Lightning.FundingStateStepResp
+      Lightnex.LNRPC.Lightning.FundingTransitionMsg,
+      Lightnex.LNRPC.Lightning.FundingStateStepResp
 
   rpc :ChannelAcceptor,
-      stream(Lightnex.RPC.Lightning.ChannelAcceptResponse),
-      stream(Lightnex.RPC.Lightning.ChannelAcceptRequest)
+      stream(Lightnex.LNRPC.Lightning.ChannelAcceptResponse),
+      stream(Lightnex.LNRPC.Lightning.ChannelAcceptRequest)
 
   rpc :CloseChannel,
-      Lightnex.RPC.Lightning.CloseChannelRequest,
-      stream(Lightnex.RPC.Lightning.CloseStatusUpdate)
+      Lightnex.LNRPC.Lightning.CloseChannelRequest,
+      stream(Lightnex.LNRPC.Lightning.CloseStatusUpdate)
 
   rpc :AbandonChannel,
-      Lightnex.RPC.Lightning.AbandonChannelRequest,
-      Lightnex.RPC.Lightning.AbandonChannelResponse
+      Lightnex.LNRPC.Lightning.AbandonChannelRequest,
+      Lightnex.LNRPC.Lightning.AbandonChannelResponse
 
   rpc :SendPayment,
-      stream(Lightnex.RPC.Lightning.SendRequest),
-      stream(Lightnex.RPC.Lightning.SendResponse)
+      stream(Lightnex.LNRPC.Lightning.SendRequest),
+      stream(Lightnex.LNRPC.Lightning.SendResponse)
 
-  rpc :SendPaymentSync, Lightnex.RPC.Lightning.SendRequest, Lightnex.RPC.Lightning.SendResponse
+  rpc :SendPaymentSync,
+      Lightnex.LNRPC.Lightning.SendRequest,
+      Lightnex.LNRPC.Lightning.SendResponse
 
   rpc :SendToRoute,
-      stream(Lightnex.RPC.Lightning.SendToRouteRequest),
-      stream(Lightnex.RPC.Lightning.SendResponse)
+      stream(Lightnex.LNRPC.Lightning.SendToRouteRequest),
+      stream(Lightnex.LNRPC.Lightning.SendResponse)
 
   rpc :SendToRouteSync,
-      Lightnex.RPC.Lightning.SendToRouteRequest,
-      Lightnex.RPC.Lightning.SendResponse
+      Lightnex.LNRPC.Lightning.SendToRouteRequest,
+      Lightnex.LNRPC.Lightning.SendResponse
 
-  rpc :AddInvoice, Lightnex.RPC.Lightning.Invoice, Lightnex.RPC.Lightning.AddInvoiceResponse
+  rpc :AddInvoice, Lightnex.LNRPC.Lightning.Invoice, Lightnex.LNRPC.Lightning.AddInvoiceResponse
 
   rpc :ListInvoices,
-      Lightnex.RPC.Lightning.ListInvoiceRequest,
-      Lightnex.RPC.Lightning.ListInvoiceResponse
+      Lightnex.LNRPC.Lightning.ListInvoiceRequest,
+      Lightnex.LNRPC.Lightning.ListInvoiceResponse
 
-  rpc :LookupInvoice, Lightnex.RPC.Lightning.PaymentHash, Lightnex.RPC.Lightning.Invoice
+  rpc :LookupInvoice, Lightnex.LNRPC.Lightning.PaymentHash, Lightnex.LNRPC.Lightning.Invoice
 
   rpc :SubscribeInvoices,
-      Lightnex.RPC.Lightning.InvoiceSubscription,
-      stream(Lightnex.RPC.Lightning.Invoice)
+      Lightnex.LNRPC.Lightning.InvoiceSubscription,
+      stream(Lightnex.LNRPC.Lightning.Invoice)
 
-  rpc :DecodePayReq, Lightnex.RPC.Lightning.PayReqString, Lightnex.RPC.Lightning.PayReq
+  rpc :DecodePayReq, Lightnex.LNRPC.Lightning.PayReqString, Lightnex.LNRPC.Lightning.PayReq
 
   rpc :ListPayments,
-      Lightnex.RPC.Lightning.ListPaymentsRequest,
-      Lightnex.RPC.Lightning.ListPaymentsResponse
+      Lightnex.LNRPC.Lightning.ListPaymentsRequest,
+      Lightnex.LNRPC.Lightning.ListPaymentsResponse
 
   rpc :DeletePayment,
-      Lightnex.RPC.Lightning.DeletePaymentRequest,
-      Lightnex.RPC.Lightning.DeletePaymentResponse
+      Lightnex.LNRPC.Lightning.DeletePaymentRequest,
+      Lightnex.LNRPC.Lightning.DeletePaymentResponse
 
   rpc :DeleteAllPayments,
-      Lightnex.RPC.Lightning.DeleteAllPaymentsRequest,
-      Lightnex.RPC.Lightning.DeleteAllPaymentsResponse
+      Lightnex.LNRPC.Lightning.DeleteAllPaymentsRequest,
+      Lightnex.LNRPC.Lightning.DeleteAllPaymentsResponse
 
   rpc :DescribeGraph,
-      Lightnex.RPC.Lightning.ChannelGraphRequest,
-      Lightnex.RPC.Lightning.ChannelGraph
+      Lightnex.LNRPC.Lightning.ChannelGraphRequest,
+      Lightnex.LNRPC.Lightning.ChannelGraph
 
   rpc :GetNodeMetrics,
-      Lightnex.RPC.Lightning.NodeMetricsRequest,
-      Lightnex.RPC.Lightning.NodeMetricsResponse
+      Lightnex.LNRPC.Lightning.NodeMetricsRequest,
+      Lightnex.LNRPC.Lightning.NodeMetricsResponse
 
-  rpc :GetChanInfo, Lightnex.RPC.Lightning.ChanInfoRequest, Lightnex.RPC.Lightning.ChannelEdge
+  rpc :GetChanInfo, Lightnex.LNRPC.Lightning.ChanInfoRequest, Lightnex.LNRPC.Lightning.ChannelEdge
 
-  rpc :GetNodeInfo, Lightnex.RPC.Lightning.NodeInfoRequest, Lightnex.RPC.Lightning.NodeInfo
+  rpc :GetNodeInfo, Lightnex.LNRPC.Lightning.NodeInfoRequest, Lightnex.LNRPC.Lightning.NodeInfo
 
   rpc :QueryRoutes,
-      Lightnex.RPC.Lightning.QueryRoutesRequest,
-      Lightnex.RPC.Lightning.QueryRoutesResponse
+      Lightnex.LNRPC.Lightning.QueryRoutesRequest,
+      Lightnex.LNRPC.Lightning.QueryRoutesResponse
 
   rpc :GetNetworkInfo,
-      Lightnex.RPC.Lightning.NetworkInfoRequest,
-      Lightnex.RPC.Lightning.NetworkInfo
+      Lightnex.LNRPC.Lightning.NetworkInfoRequest,
+      Lightnex.LNRPC.Lightning.NetworkInfo
 
-  rpc :StopDaemon, Lightnex.RPC.Lightning.StopRequest, Lightnex.RPC.Lightning.StopResponse
+  rpc :StopDaemon, Lightnex.LNRPC.Lightning.StopRequest, Lightnex.LNRPC.Lightning.StopResponse
 
   rpc :SubscribeChannelGraph,
-      Lightnex.RPC.Lightning.GraphTopologySubscription,
-      stream(Lightnex.RPC.Lightning.GraphTopologyUpdate)
+      Lightnex.LNRPC.Lightning.GraphTopologySubscription,
+      stream(Lightnex.LNRPC.Lightning.GraphTopologyUpdate)
 
   rpc :DebugLevel,
-      Lightnex.RPC.Lightning.DebugLevelRequest,
-      Lightnex.RPC.Lightning.DebugLevelResponse
+      Lightnex.LNRPC.Lightning.DebugLevelRequest,
+      Lightnex.LNRPC.Lightning.DebugLevelResponse
 
   rpc :FeeReport,
-      Lightnex.RPC.Lightning.FeeReportRequest,
-      Lightnex.RPC.Lightning.FeeReportResponse
+      Lightnex.LNRPC.Lightning.FeeReportRequest,
+      Lightnex.LNRPC.Lightning.FeeReportResponse
 
   rpc :UpdateChannelPolicy,
-      Lightnex.RPC.Lightning.PolicyUpdateRequest,
-      Lightnex.RPC.Lightning.PolicyUpdateResponse
+      Lightnex.LNRPC.Lightning.PolicyUpdateRequest,
+      Lightnex.LNRPC.Lightning.PolicyUpdateResponse
 
   rpc :ForwardingHistory,
-      Lightnex.RPC.Lightning.ForwardingHistoryRequest,
-      Lightnex.RPC.Lightning.ForwardingHistoryResponse
+      Lightnex.LNRPC.Lightning.ForwardingHistoryRequest,
+      Lightnex.LNRPC.Lightning.ForwardingHistoryResponse
 
   rpc :ExportChannelBackup,
-      Lightnex.RPC.Lightning.ExportChannelBackupRequest,
-      Lightnex.RPC.Lightning.ChannelBackup
+      Lightnex.LNRPC.Lightning.ExportChannelBackupRequest,
+      Lightnex.LNRPC.Lightning.ChannelBackup
 
   rpc :ExportAllChannelBackups,
-      Lightnex.RPC.Lightning.ChanBackupExportRequest,
-      Lightnex.RPC.Lightning.ChanBackupSnapshot
+      Lightnex.LNRPC.Lightning.ChanBackupExportRequest,
+      Lightnex.LNRPC.Lightning.ChanBackupSnapshot
 
   rpc :VerifyChanBackup,
-      Lightnex.RPC.Lightning.ChanBackupSnapshot,
-      Lightnex.RPC.Lightning.VerifyChanBackupResponse
+      Lightnex.LNRPC.Lightning.ChanBackupSnapshot,
+      Lightnex.LNRPC.Lightning.VerifyChanBackupResponse
 
   rpc :RestoreChannelBackups,
-      Lightnex.RPC.Lightning.RestoreChanBackupRequest,
-      Lightnex.RPC.Lightning.RestoreBackupResponse
+      Lightnex.LNRPC.Lightning.RestoreChanBackupRequest,
+      Lightnex.LNRPC.Lightning.RestoreBackupResponse
 
   rpc :SubscribeChannelBackups,
-      Lightnex.RPC.Lightning.ChannelBackupSubscription,
-      stream(Lightnex.RPC.Lightning.ChanBackupSnapshot)
+      Lightnex.LNRPC.Lightning.ChannelBackupSubscription,
+      stream(Lightnex.LNRPC.Lightning.ChanBackupSnapshot)
 
   rpc :BakeMacaroon,
-      Lightnex.RPC.Lightning.BakeMacaroonRequest,
-      Lightnex.RPC.Lightning.BakeMacaroonResponse
+      Lightnex.LNRPC.Lightning.BakeMacaroonRequest,
+      Lightnex.LNRPC.Lightning.BakeMacaroonResponse
 
   rpc :ListMacaroonIDs,
-      Lightnex.RPC.Lightning.ListMacaroonIDsRequest,
-      Lightnex.RPC.Lightning.ListMacaroonIDsResponse
+      Lightnex.LNRPC.Lightning.ListMacaroonIDsRequest,
+      Lightnex.LNRPC.Lightning.ListMacaroonIDsResponse
 
   rpc :DeleteMacaroonID,
-      Lightnex.RPC.Lightning.DeleteMacaroonIDRequest,
-      Lightnex.RPC.Lightning.DeleteMacaroonIDResponse
+      Lightnex.LNRPC.Lightning.DeleteMacaroonIDRequest,
+      Lightnex.LNRPC.Lightning.DeleteMacaroonIDResponse
 
   rpc :ListPermissions,
-      Lightnex.RPC.Lightning.ListPermissionsRequest,
-      Lightnex.RPC.Lightning.ListPermissionsResponse
+      Lightnex.LNRPC.Lightning.ListPermissionsRequest,
+      Lightnex.LNRPC.Lightning.ListPermissionsResponse
 
   rpc :CheckMacaroonPermissions,
-      Lightnex.RPC.Lightning.CheckMacPermRequest,
-      Lightnex.RPC.Lightning.CheckMacPermResponse
+      Lightnex.LNRPC.Lightning.CheckMacPermRequest,
+      Lightnex.LNRPC.Lightning.CheckMacPermResponse
 
   rpc :RegisterRPCMiddleware,
-      stream(Lightnex.RPC.Lightning.RPCMiddlewareResponse),
-      stream(Lightnex.RPC.Lightning.RPCMiddlewareRequest)
+      stream(Lightnex.LNRPC.Lightning.RPCMiddlewareResponse),
+      stream(Lightnex.LNRPC.Lightning.RPCMiddlewareRequest)
 
   rpc :SendCustomMessage,
-      Lightnex.RPC.Lightning.SendCustomMessageRequest,
-      Lightnex.RPC.Lightning.SendCustomMessageResponse
+      Lightnex.LNRPC.Lightning.SendCustomMessageRequest,
+      Lightnex.LNRPC.Lightning.SendCustomMessageResponse
 
   rpc :SubscribeCustomMessages,
-      Lightnex.RPC.Lightning.SubscribeCustomMessagesRequest,
-      stream(Lightnex.RPC.Lightning.CustomMessage)
+      Lightnex.LNRPC.Lightning.SubscribeCustomMessagesRequest,
+      stream(Lightnex.LNRPC.Lightning.CustomMessage)
 
   rpc :ListAliases,
-      Lightnex.RPC.Lightning.ListAliasesRequest,
-      Lightnex.RPC.Lightning.ListAliasesResponse
+      Lightnex.LNRPC.Lightning.ListAliasesRequest,
+      Lightnex.LNRPC.Lightning.ListAliasesResponse
 
   rpc :LookupHtlcResolution,
-      Lightnex.RPC.Lightning.LookupHtlcResolutionRequest,
-      Lightnex.RPC.Lightning.LookupHtlcResolutionResponse
+      Lightnex.LNRPC.Lightning.LookupHtlcResolutionRequest,
+      Lightnex.LNRPC.Lightning.LookupHtlcResolutionResponse
 end
 
-defmodule Lightnex.RPC.Lightning.Stub do
-  use GRPC.Stub, service: Lightnex.RPC.Lightning.Service
+defmodule Lightnex.LNRPC.Lightning.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.Lightning.Service
 end
