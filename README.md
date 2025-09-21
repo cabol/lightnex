@@ -1,4 +1,4 @@
-# 🔌 𝕃𝕚𝕘𝕙𝕥𝕟𝕖𝕩 ⚡
+# 𝕃𝕚𝕘𝕙𝕥𝕟𝕖𝕩 ⚡
 > **LND (Lightning Network Daemon) client for Elixir.**
 
 ![CI](http://github.com/cabol/lightnex/workflows/CI/badge.svg)

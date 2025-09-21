@@ -3,45 +3,106 @@ defmodule Lightnex do
   Documentation for `Lightnex`.
   """
 
+  alias Lightnex.Conn
+  alias Lightnex.LNRPC.Lightning
+
   ## API
 
   @doc """
-  Connects to a LND node.
-
-  Wrapper for `GRPC.Stub.connect/2`.
+  Connects to a LND node with authentication support.
 
   ## Options
 
-  Same as `GRPC.Stub.connect/2`.
+  #{Conn.conn_opts_docs()}
+
+  > #### Connection options {: .info}
+  >
+  > `GRPC.Stub.connect/2` options are supported.
 
   ## Examples
 
-      iex> {:ok, channel} = Lightnex.connect("localhost:10009")
-      #=> {:ok, %GRPC.Channel{...}}
+      # Simple local connection (regtest, no auth)
+      iex> {:ok, conn} = Lightnex.connect("localhost:10009")
 
-      iex> cred = GRPC.Credential.new(ssl: [
-      ...>   cacertfile: "path/to/cacert.pem",
-      ...>   verify: :verify_none
-      ...> ])
-      iex> {:ok, channel} = Lightnex.connect("localhost:10009", cred: cred)
-      #=> {:ok, %GRPC.Channel{...}}
+      # Authenticated connection with macaroon file
+      iex> {:ok, conn} = Lightnex.connect("localhost:10009",
+      ...>   cred: GRPC.Credential.new(ssl: [cacertfile: "~/.lnd/tls.cert"]),
+      ...>   macaroon: "~/.lnd/data/chain/bitcoin/regtest/admin.macaroon"
+      ...> )
+
+      # Connection with hex macaroon
+      iex> {:ok, conn} = Lightnex.connect("localhost:10009",
+      ...>   macaroon: "0201036c6e64...",
+      ...>   macaroon_type: :hex
+      ...> )
 
   """
-  defdelegate connect(address, opts \\ []), to: GRPC.Stub
+  @spec connect(String.t(), keyword()) :: {:ok, Conn.t()} | {:error, term()}
+  def connect(address, opts \\ []) when is_binary(address) and is_list(opts) do
+    {conn_opts, opts} = Keyword.split(opts, Conn.conn_opts())
+    {should_validate?, opts} = Keyword.pop(opts, :validate, true)
+
+    with {:ok, channel} <- GRPC.Stub.connect(address, opts),
+         {:ok, conn} <- Conn.new(channel, [address: address] ++ conn_opts) do
+      maybe_validate_conn(conn, should_validate?)
+    end
+  end
 
   @doc """
-  Wrapper for `GRPC.Stub.connect/3`.
+  Gets basic information about the LND node.
   """
-  defdelegate connect(host, port, opts), to: GRPC.Stub
+  @spec get_info(Conn.t()) :: {:ok, Lightning.GetInfoResponse.t()} | {:error, any()}
+  def get_info(%Conn{} = conn) do
+    request = %Lightning.GetInfoRequest{}
+    metadata = Conn.grpc_metadata(conn)
+
+    with {:ok, response} <- Lightning.Stub.get_info(conn.channel, request, metadata: metadata) do
+      info = %{
+        identity_pubkey: response.identity_pubkey,
+        alias: response.alias,
+        num_active_channels: response.num_active_channels,
+        num_peers: response.num_peers,
+        block_height: response.block_height,
+        synced_to_chain: response.synced_to_chain,
+        synced_to_graph: response.synced_to_graph,
+        version: response.version,
+        chains: Enum.map(response.chains, &chain_to_map/1)
+      }
+
+      {:ok, info}
+    end
+  end
 
   @doc """
   Wrapper for `GRPC.Stub.disconnect/1`.
 
   ## Examples
 
-      iex> Lightnex.disconnect(channel)
+      iex> Lightnex.disconnect(conn)
       #=> {:ok, %GRPC.Channel{...}}
 
   """
-  defdelegate disconnect(channel), to: GRPC.Stub
+  @spec disconnect(Conn.t()) :: {:ok, GRPC.Channel.t()} | {:error, any()}
+  def disconnect(%Conn{channel: channel}) do
+    GRPC.Stub.disconnect(channel)
+  end
+
+  # Private functions
+
+  defp maybe_validate_conn(conn, false) do
+    {:ok, conn}
+  end
+
+  defp maybe_validate_conn(conn, true) do
+    with {:ok, info} <- get_info(conn) do
+      {:ok, Conn.put_node_info(conn, info)}
+    end
+  end
+
+  defp chain_to_map(chain) do
+    %{
+      chain: chain.chain,
+      network: chain.network
+    }
+  end
 end
