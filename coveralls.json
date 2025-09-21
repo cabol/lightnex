@@ -4,7 +4,6 @@
     "html_filter_full_covered": true
   },
   "skip_files": [
-    "lib/lightnex.ex",
     "lib/mix/lightnex.ex",
     "lib/lightnex/lnrpc/*",
     "test/support/*"
