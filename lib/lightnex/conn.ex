@@ -5,15 +5,41 @@ defmodule Lightnex.Conn do
   This struct holds all necessary information for authenticated communication
   with an LND node, including the gRPC channel, macaroon for authentication,
   and connection metadata.
+
+  ## Fields
+
+    * `:channel` - The underlying gRPC channel
+    * `:macaroon_hex` - Hex-encoded macaroon for authentication
+    * `:timeout` - Request timeout in milliseconds
+    * `:address` - LND node address (e.g., "localhost:10009")
+    * `:node_info` - Node information from `get_info` (if validated)
+    * `:connected_at` - Connection timestamp
+
+  ## Examples
+
+      # Create connection
+      {:ok, channel} = GRPC.Stub.connect("localhost:10009")
+      {:ok, conn} = Lightnex.Conn.new(channel,
+        address: "localhost:10009",
+        macaroon: "~/.lnd/admin.macaroon"
+      )
+
+      # Check authentication
+      Lightnex.Conn.authenticated?(conn)
+      #=> true
+
+      # Get connection summary
+      Lightnex.Conn.summary(conn)
+      #=> %{address: "localhost:10009", authenticated: true, ...}
+
   """
+
+  alias Lightnex.Conn.NodeInfo
 
   ## Types & Schemas
 
   @typedoc "Type of macaroon to extract"
   @type macaroon_type() :: :file | :hex | :bin
-
-  @typedoc "Type of node information"
-  @type node_info() :: %{optional(atom()) => any()}
 
   @typedoc "Connection struct"
   @type t() :: %__MODULE__{
@@ -21,7 +47,7 @@ defmodule Lightnex.Conn do
           macaroon_hex: String.t() | nil,
           timeout: non_neg_integer(),
           address: String.t(),
-          node_info: node_info() | nil,
+          node_info: NodeInfo.t() | nil,
           connected_at: DateTime.t()
         }
 
@@ -70,7 +96,7 @@ defmodule Lightnex.Conn do
       """
     ],
     node_info: [
-      type: {:or, [{:map, :atom, :any}, nil]},
+      type: {:or, [:any, nil]},
       required: false,
       default: nil,
       doc: """
@@ -142,6 +168,14 @@ defmodule Lightnex.Conn do
 
   @doc """
   Creates a new Lightnex connection struct.
+
+  Raises on error.
+
+  ## Examples
+
+      iex> Lightnex.Conn.new!(channel, macaroon: "path/to/macaroon")
+      #=> %Lightnex.Conn{...}
+
   """
   @spec new!(GRPC.Channel.t(), keyword()) :: t()
   def new!(channel, opts \\ []) do
@@ -156,8 +190,26 @@ defmodule Lightnex.Conn do
 
   @doc """
   Extracts macaroon from various input formats and converts to hex.
+
+  ## Parameters
+
+    * `macaroon` - Macaroon in various formats (file path, hex string, or binary)
+    * `type` - Format type (`:file`, `:hex`, or `:bin`)
+
+  ## Examples
+
+      # From file
+      {:ok, hex} = Lightnex.Conn.extract_macaroon("/path/to/macaroon", :file)
+
+      # From hex string
+      {:ok, hex} = Lightnex.Conn.extract_macaroon("0201036c6e64...", :hex)
+
+      # From binary
+      {:ok, hex} = Lightnex.Conn.extract_macaroon(<<2, 1, 3, ...>>, :bin)
+
   """
-  @spec extract_macaroon(String.t(), macaroon_type() | nil) :: {:ok, String.t()} | {:error, any()}
+  @spec extract_macaroon(String.t() | binary() | nil, macaroon_type() | nil) ::
+          {:ok, String.t() | nil} | {:error, any()}
   def extract_macaroon(macaroon, type)
 
   # sobelow_skip ["Traversal.FileModule"]
@@ -185,11 +237,25 @@ defmodule Lightnex.Conn do
 
   @doc """
   Gets gRPC metadata headers including macaroon authentication.
+
+  Returns a map with the macaroon header if authenticated, or an empty
+  map if no authentication is configured.
+
+  ## Examples
+
+      iex> Lightnex.Conn.grpc_metadata(conn)
+      %{macaroon: "0201036c6e64..."}
+
+      iex> Lightnex.Conn.grpc_metadata(unauthenticated_conn)
+      %{}
+
   """
   @spec grpc_metadata(t()) :: map()
   def grpc_metadata(conn)
 
-  def grpc_metadata(%__MODULE__{macaroon_hex: nil}), do: []
+  def grpc_metadata(%__MODULE__{macaroon_hex: nil}) do
+    %{}
+  end
 
   def grpc_metadata(%__MODULE__{macaroon_hex: macaroon_hex}) do
     %{macaroon: macaroon_hex}
@@ -197,14 +263,37 @@ defmodule Lightnex.Conn do
 
   @doc """
   Updates the connection with node information.
+
+  Typically called after `Lightnex.get_info/1` to populate node details.
+
+  ## Examples
+
+      {:ok, info} = Lightnex.get_info(conn)
+      conn = Lightnex.Conn.put_node_info(conn, info)
+
   """
-  @spec put_node_info(t(), node_info()) :: t()
-  def put_node_info(%__MODULE__{} = conn, node_info) when is_map(node_info) do
+  @spec put_node_info(t(), NodeInfo.t() | map()) :: t()
+  def put_node_info(conn, node_info)
+
+  def put_node_info(%__MODULE__{} = conn, %NodeInfo{} = node_info) do
     %{conn | node_info: node_info}
+  end
+
+  def put_node_info(%__MODULE__{} = conn, %{} = node_info) do
+    put_node_info(conn, struct(NodeInfo, node_info))
   end
 
   @doc """
   Checks if the connection is authenticated (has macaroon).
+
+  ## Examples
+
+      iex> Lightnex.Conn.authenticated?(conn)
+      true
+
+      iex> Lightnex.Conn.authenticated?(unauthenticated_conn)
+      false
+
   """
   @spec authenticated?(t()) :: boolean()
   def authenticated?(conn)
@@ -214,6 +303,19 @@ defmodule Lightnex.Conn do
 
   @doc """
   Returns connection summary for logging/debugging.
+
+  ## Examples
+
+      iex> Lightnex.Conn.summary(conn)
+      %{
+        address: "localhost:10009",
+        authenticated: true,
+        timeout: 30000,
+        connected_at: ~U[2024-01-01 00:00:00Z],
+        node_alias: "alice",
+        node_pubkey: "02abc..."
+      }
+
   """
   @spec summary(t()) :: map()
   def summary(%__MODULE__{} = conn) do
@@ -222,8 +324,16 @@ defmodule Lightnex.Conn do
       authenticated: authenticated?(conn),
       timeout: conn.timeout,
       connected_at: conn.connected_at,
-      node_alias: conn.node_info[:alias],
-      node_pubkey: conn.node_info[:identity_pubkey]
+      node_alias: node_alias(conn.node_info),
+      node_pubkey: node_pubkey(conn.node_info)
     }
   end
+
+  ## Private helpers
+
+  defp node_alias(nil), do: nil
+  defp node_alias(%NodeInfo{alias: alias}), do: alias
+
+  defp node_pubkey(nil), do: nil
+  defp node_pubkey(%NodeInfo{identity_pubkey: pubkey}), do: pubkey
 end

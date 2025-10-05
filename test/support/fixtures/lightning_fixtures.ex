@@ -2,6 +2,7 @@ defmodule Lightnex.LightningFixtures do
   @moduledoc false
 
   alias Lightnex.Conn
+  alias Lightnex.Conn.NodeInfo
   alias Lightnex.LNRPC.Lightning
 
   @port 10_009
@@ -76,26 +77,15 @@ defmodule Lightnex.LightningFixtures do
   """
   def get_info_response(opts \\ []) do
     defaults = [
-      identity_pubkey: "02a5c1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-      alias: "alice",
-      color: "#33cc99",
-      num_pending_channels: 0,
-      num_active_channels: 3,
-      num_inactive_channels: 1,
-      num_peers: 2,
+      identity_pubkey: "03b2c2c5c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4",
+      alias: "test-node",
+      num_active_channels: 5,
+      num_peers: 3,
       block_height: 100_000,
-      block_hash: "00000000000000000007316856900e76b4f7a9139cfbfba89842c8d196cd5f91",
-      best_header_timestamp: DateTime.utc_now() |> DateTime.to_unix(),
       synced_to_chain: true,
       synced_to_graph: true,
-      testnet: false,
-      chains: [chain()],
-      uris: ["02a5c1234567890abcdef@localhost:9735"],
-      version: "0.19.3-beta",
-      commit_hash: "v0.19.3-beta",
-      features: %{},
-      require_htlc_interceptor: false,
-      store_final_htlc_resolutions: false
+      version: "0.18.0-beta",
+      chains: [chain()]
     ]
 
     attrs = Keyword.merge(defaults, opts)
@@ -116,24 +106,15 @@ defmodule Lightnex.LightningFixtures do
   end
 
   @doc """
-  Creates a WalletBalanceResponse.
+  Creates a NodeInfo struct from a GetInfoResponse.
   """
-  def wallet_balance_response(opts \\ []) do
-    defaults = [
-      total_balance: 5_000_000,
-      confirmed_balance: 5_000_000,
-      unconfirmed_balance: 0,
-      locked_balance: 0,
-      reserved_balance_anchor_chan: 0,
-      account_balance: %{}
-    ]
-
-    attrs = Keyword.merge(defaults, opts)
-    struct(Lightning.WalletBalanceResponse, attrs)
+  def node_info(opts \\ []) do
+    response = get_info_response(opts)
+    response_to_node_info(response)
   end
 
   @doc """
-  Creates a NewAddressResponse.
+  Creates a NewAddressResponse message.
   """
   def new_address_response(opts \\ []) do
     defaults = [
@@ -256,7 +237,10 @@ defmodule Lightnex.LightningFixtures do
   """
   def list_peers_response(opts \\ []) do
     defaults = [
-      peers: [peer()]
+      peers: [
+        peer(),
+        peer(pub_key: "03c2c2c5c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4")
+      ]
     ]
 
     attrs = Keyword.merge(defaults, opts)
@@ -271,12 +255,12 @@ defmodule Lightnex.LightningFixtures do
       memo: "Test invoice",
       r_preimage: random_bytes(32),
       r_hash: random_bytes(32),
-      value: 1000,
-      value_msat: 1_000_000,
+      value: 10_000,
+      value_msat: 10_000_000,
       settled: false,
       creation_date: DateTime.utc_now() |> DateTime.to_unix(),
       settle_date: 0,
-      payment_request: "lnbcrt10u1p0...",
+      payment_request: "lnbc100n1...",
       description_hash: <<>>,
       expiry: 3600,
       fallback_addr: "",
@@ -294,9 +278,7 @@ defmodule Lightnex.LightningFixtures do
       is_keysend: false,
       payment_addr: random_bytes(32),
       is_amp: false,
-      amp_invoice_state: %{},
-      is_blinded: false,
-      blinded_path_config: nil
+      amp_invoice_state: %{}
     ]
 
     attrs = Keyword.merge(defaults, opts)
@@ -304,139 +286,17 @@ defmodule Lightnex.LightningFixtures do
   end
 
   @doc """
-  Creates a settled invoice.
+  Creates a settled Invoice.
   """
   def settled_invoice(opts \\ []) do
-    settle_time = DateTime.utc_now() |> DateTime.to_unix()
-
     defaults = [
       settled: true,
-      settle_date: settle_time,
-      amt_paid_sat: 1000,
-      amt_paid_msat: 1_000_000,
+      settle_date: DateTime.utc_now() |> DateTime.to_unix(),
       state: :SETTLED,
-      settle_index: 1
+      amt_paid_sat: 10_000
     ]
 
     invoice(Keyword.merge(defaults, opts))
-  end
-
-  @doc """
-  Creates an AddInvoiceResponse.
-  """
-  def add_invoice_response(opts \\ []) do
-    defaults = [
-      r_hash: random_bytes(32),
-      payment_request: "lnbcrt10u1p0...",
-      add_index: 1,
-      payment_addr: random_bytes(32)
-    ]
-
-    attrs = Keyword.merge(defaults, opts)
-    struct(Lightning.AddInvoiceResponse, attrs)
-  end
-
-  @doc """
-  Creates a Payment message.
-  """
-  def payment(opts \\ []) do
-    defaults = [
-      payment_hash: payment_hash(),
-      value: 0,
-      creation_date: 0,
-      fee: 0,
-      payment_preimage: "",
-      value_sat: 1000,
-      value_msat: 1_000_000,
-      payment_request: "lnbcrt10u1p0...",
-      status: :SUCCEEDED,
-      fee_sat: 1,
-      fee_msat: 1000,
-      creation_time_ns: DateTime.utc_now() |> DateTime.to_unix(:nanosecond),
-      htlcs: [],
-      payment_index: 1,
-      failure_reason: :FAILURE_REASON_NONE,
-      first_hop_custom_records: %{}
-    ]
-
-    attrs = Keyword.merge(defaults, opts)
-    struct(Lightning.Payment, attrs)
-  end
-
-  @doc """
-  Creates a failed payment.
-  """
-  def failed_payment(opts \\ []) do
-    defaults = [
-      status: :FAILED,
-      failure_reason: :FAILURE_REASON_NO_ROUTE
-    ]
-
-    payment(Keyword.merge(defaults, opts))
-  end
-
-  @doc """
-  Creates an HTLC attempt.
-  """
-  def htlc_attempt(opts \\ []) do
-    defaults = [
-      attempt_id: 1,
-      status: :SUCCEEDED,
-      route: route(),
-      attempt_time_ns: DateTime.utc_now() |> DateTime.to_unix(:nanosecond),
-      resolve_time_ns: DateTime.utc_now() |> DateTime.to_unix(:nanosecond),
-      failure: nil,
-      preimage: random_bytes(32)
-    ]
-
-    attrs = Keyword.merge(defaults, opts)
-    struct(Lightning.HTLCAttempt, attrs)
-  end
-
-  @doc """
-  Creates a Route message.
-  """
-  def route(opts \\ []) do
-    defaults = [
-      total_time_lock: 640_144,
-      total_fees: 0,
-      total_amt: 0,
-      hops: [hop()],
-      total_fees_msat: 1000,
-      total_amt_msat: 1_000_000,
-      first_hop_amount_msat: 1_001_000,
-      custom_channel_data: <<>>
-    ]
-
-    attrs = Keyword.merge(defaults, opts)
-    struct(Lightning.Route, attrs)
-  end
-
-  @doc """
-  Creates a Hop message.
-  """
-  def hop(opts \\ []) do
-    defaults = [
-      chan_id: 123_456_789_012_345,
-      chan_capacity: 0,
-      amt_to_forward: 0,
-      fee: 0,
-      expiry: 640_000,
-      amt_to_forward_msat: 1_000_000,
-      fee_msat: 1000,
-      pub_key: "03b2c2c5c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4",
-      tlv_payload: false,
-      mpp_record: nil,
-      amp_record: nil,
-      custom_records: %{},
-      metadata: <<>>,
-      blinding_point: <<>>,
-      encrypted_data: <<>>,
-      total_amt_msat: 1_000_000
-    ]
-
-    attrs = Keyword.merge(defaults, opts)
-    struct(Lightning.Hop, attrs)
   end
 
   @doc """
@@ -490,10 +350,12 @@ defmodule Lightnex.LightningFixtures do
   # Private helper functions
 
   @doc """
-  Converts a GetInfoResponse to node info map format.
+  Converts a GetInfoResponse to NodeInfo struct.
+
+  This is the key function that needs to create NodeInfo structs instead of maps.
   """
   def response_to_node_info(%Lightning.GetInfoResponse{} = response) do
-    %{
+    %NodeInfo{
       identity_pubkey: response.identity_pubkey,
       alias: response.alias,
       num_active_channels: response.num_active_channels,
@@ -517,10 +379,6 @@ defmodule Lightnex.LightningFixtures do
     random_bytes(32) |> Base.encode16(case: :lower)
   end
 
-  defp payment_hash do
-    random_bytes(32) |> Base.encode16(case: :lower)
-  end
-
   @doc """
   Creates test scenarios with multiple related objects.
   """
@@ -531,7 +389,7 @@ defmodule Lightnex.LightningFixtures do
           address: "localhost:10019",
           macaroon_hex: valid_macaroon_hex()
         ),
-      info: get_info_response(alias: "alice", color: "#33cc99"),
+      info: node_info(alias: "alice", color: "#33cc99"),
       channels: [
         channel(peer_alias: "bob", active: true),
         channel(peer_alias: "charlie", active: false)
@@ -556,7 +414,7 @@ defmodule Lightnex.LightningFixtures do
           address: "localhost:10029",
           macaroon_hex: valid_macaroon_hex()
         ),
-      info: get_info_response(alias: "bob", color: "#3366ff"),
+      info: node_info(alias: "bob", color: "#3366ff"),
       channels: [
         channel(peer_alias: "alice", active: true)
       ],
