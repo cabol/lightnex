@@ -33,6 +33,7 @@ services:
   lnd-alice:
     image: ${LND_IMAGE}
     container_name: ${COMPOSE_PROJECT_NAME}-lnd-alice
+    user: "${UID:-1000}:${GID:-1000}"
     depends_on:
       bitcoind:
         condition: service_healthy
@@ -50,17 +51,24 @@ services:
       - --listen=0.0.0.0:9735
       - --alias=alice
       - --color=#33cc99
+      - --lnddir=/lnd/.lnd
     ports:
       - "${ALICE_GRPC}:10009"
       - "${ALICE_REST}:8080"
       - "${ALICE_P2P}:9735"
     volumes:
-      - ./lnd/lnd-alice.conf:/root/.lnd/lnd.conf:ro
-      - ./data/lnd-alice:/root/.lnd
+      - ./lnd/lnd-alice.conf:/lnd/.lnd/lnd.conf:ro
+      - ./data/lnd-alice:/lnd/.lnd
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /lnd/.lnd/tls.cert"]
+      interval: 2s
+      timeout: 2s
+      retries: 60
 
   lnd-bob:
     image: ${LND_IMAGE}
     container_name: ${COMPOSE_PROJECT_NAME}-lnd-bob
+    user: "${UID:-1000}:${GID:-1000}"
     depends_on:
       bitcoind:
         condition: service_healthy
@@ -78,13 +86,19 @@ services:
       - --listen=0.0.0.0:9735
       - --alias=bob
       - --color=#3366ff
+      - --lnddir=/lnd/.lnd
     ports:
       - "${BOB_GRPC}:10009"
       - "${BOB_REST}:8080"
       - "${BOB_P2P}:9735"
     volumes:
-      - ./lnd/lnd-bob.conf:/root/.lnd/lnd.conf:ro
-      - ./data/lnd-bob:/root/.lnd
+      - ./lnd/lnd-bob.conf:/lnd/.lnd/lnd.conf:ro
+      - ./data/lnd-bob:/lnd/.lnd
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /lnd/.lnd/tls.cert"]
+      interval: 2s
+      timeout: 2s
+      retries: 60
 
 networks:
   default:

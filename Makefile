@@ -1,7 +1,7 @@
 # Makefile for Lightnex (LND client) local testing
 
 PROJECT_NAME=lightnex
-DOCKER_COMPOSE=docker-compose -f docker/docker-compose.yml
+DOCKER_COMPOSE=UID=$(id -u) GID=$(id -g) docker-compose -f docker/docker-compose.yml
 
 SHELL := /bin/bash
 .SILENT:
@@ -21,7 +21,7 @@ build:
 	$(DOCKER_COMPOSE) build
 
 up:
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE) up -d --wait
 
 down:
 	$(DOCKER_COMPOSE) down

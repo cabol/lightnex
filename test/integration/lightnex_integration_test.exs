@@ -1,119 +1,197 @@
 defmodule LightnexIntegrationTest do
-  # These tests require Docker containers to be running
-  # Run with: mix test --only integration
+  @moduledoc """
+  Integration tests for Lightnex with real LND nodes.
+
+  These tests automatically handle wallet creation and unlocking.
+  No manual intervention required - perfect for CI/CD!
+
+  Run with: `mix test --only integration`
+  """
   use ExUnit.Case, async: false
   @moduletag :integration
 
-  # alias Lightnex.Conn
+  alias Lightnex.Conn
 
-  # @alice_address "localhost:10009"
-  # @bob_address "localhost:10010"
+  import Lightnex.WalletHelper
 
-  # setup_all do
-  #   # Wait for containers to be ready
-  #   wait_for_lnd(@alice_address)
-  #   wait_for_lnd(@bob_address)
+  @alice_address "localhost:10009"
+  @bob_address "localhost:10010"
 
-  #   :ok
-  # end
+  @alice_tls_cert "docker/data/lnd-alice/tls.cert"
+  @bob_tls_cert "docker/data/lnd-bob/tls.cert"
 
-  # describe "real LND connection" do
-  #   test "connect to Alice node without authentication" do
-  #     assert {:ok, %Conn{} = conn} = Lightnex.connect(@alice_address, validate: false)
-  #     assert conn.address == @alice_address
-  #     refute Conn.authenticated?(conn)
+  @alice_macaroon "docker/data/lnd-alice/data/chain/bitcoin/regtest/admin.macaroon"
+  @bob_macaroon "docker/data/lnd-bob/data/chain/bitcoin/regtest/admin.macaroon"
 
-  #     # Should have node info from validation
-  #     assert is_map(conn.node_info)
-  #     assert conn.node_info[:alias] == "alice"
+  setup_all do
+    IO.puts("\n🚀 Setting up LND nodes for integration tests...")
 
-  #     # Clean up
-  #     :ok = Lightnex.disconnect(conn)
-  #   end
+    # Automatically create and unlock wallets
+    {:ok, _} = ensure_wallet_ready(@alice_address, @alice_tls_cert, "Alice")
+    {:ok, _} = ensure_wallet_ready(@bob_address, @bob_tls_cert, "Bob")
 
-  #   test "connect to Bob node without authentication" do
-  #     assert {:ok, %Conn{} = conn} = Lightnex.connect(@bob_address)
-  #     assert conn.address == @bob_address
-  #     assert conn.node_info[:alias] == "bob"
+    IO.puts("✅ All nodes ready!\n")
+    :ok
+  end
 
-  #     :ok = Lightnex.disconnect(conn)
-  #   end
+  describe "connect/2" do
+    test "connection validation works with macaroon" do
+      assert {:ok, %Conn{} = conn} =
+               Lightnex.connect(@alice_address,
+                 cred:
+                   GRPC.Credential.new(
+                     ssl: [
+                       cacertfile: @alice_tls_cert,
+                       verify: :verify_none
+                     ]
+                   ),
+                 validate: true,
+                 macaroon: @alice_macaroon,
+                 macaroon_type: :file
+               )
 
-  #   test "get_info from Alice" do
-  #     {:ok, conn} = Lightnex.connect(@alice_address)
+      assert is_map(conn.node_info)
+      assert conn.node_info.alias == "alice"
+      assert Conn.authenticated?(conn)
 
-  #     assert {:ok, info} = Lightnex.get_info(conn)
-  #     assert is_binary(info.identity_pubkey)
-  #     assert info.alias == "alice"
-  #     assert is_integer(info.block_height)
-  #     assert info.block_height > 0
-  #     assert is_boolean(info.synced_to_chain)
+      {:ok, _} = Lightnex.disconnect(conn)
+    end
 
-  #     :ok = Lightnex.disconnect(conn)
-  #   end
+    test "connect to Alice node without authentication" do
+      assert {:ok, %Conn{} = conn} =
+               Lightnex.connect(@alice_address,
+                 cred:
+                   GRPC.Credential.new(
+                     ssl: [
+                       cacertfile: @alice_tls_cert,
+                       verify: :verify_none
+                     ]
+                   ),
+                 validate: false
+               )
 
-  #   test "get_info from Bob" do
-  #     {:ok, conn} = Lightnex.connect(@bob_address)
+      assert conn.address == @alice_address
+      refute Conn.authenticated?(conn)
 
-  #     assert {:ok, info} = Lightnex.get_info(conn)
-  #     assert is_binary(info.identity_pubkey)
-  #     assert info.alias == "bob"
+      {:ok, _} = Lightnex.disconnect(conn)
+    end
 
-  #     :ok = Lightnex.disconnect(conn)
-  #   end
+    test "connect to Bob node with authentication" do
+      assert {:ok, %Conn{} = conn} =
+               Lightnex.connect(@bob_address,
+                 cred:
+                   GRPC.Credential.new(
+                     ssl: [
+                       cacertfile: @bob_tls_cert,
+                       verify: :verify_none
+                     ]
+                   ),
+                 macaroon: @bob_macaroon,
+                 macaroon_type: :file
+               )
 
-  #   test "connection validation works" do
-  #     # This should validate and populate node_info
-  #     assert {:ok, %Conn{} = conn} = Lightnex.connect(@alice_address, validate: true)
-  #     assert is_map(conn.node_info)
-  #     assert conn.node_info[:alias] == "alice"
+      assert conn.address == @bob_address
+      assert conn.node_info.alias == "bob"
+      assert Conn.authenticated?(conn)
 
-  #     :ok = Lightnex.disconnect(conn)
-  #   end
+      {:ok, _} = Lightnex.disconnect(conn)
+    end
 
-  #   test "connection without validation" do
-  #     # This should not populate node_info
-  #     assert {:ok, %Conn{} = conn} = Lightnex.connect(@alice_address, validate: false)
-  #     assert is_nil(conn.node_info)
+    test "get_info from Alice" do
+      {:ok, conn} =
+        Lightnex.connect(@alice_address,
+          cred:
+            GRPC.Credential.new(
+              ssl: [
+                cacertfile: @alice_tls_cert,
+                verify: :verify_none
+              ]
+            ),
+          macaroon: @alice_macaroon,
+          macaroon_type: :file,
+          validate: false
+        )
 
-  #     :ok = Lightnex.disconnect(conn)
-  #   end
+      assert {:ok, info} = Lightnex.get_info(conn)
+      assert is_binary(info.identity_pubkey)
+      assert info.alias == "alice"
+      assert is_integer(info.block_height)
+      assert info.block_height >= 0
+      assert is_boolean(info.synced_to_chain)
 
-  #   test "connection to invalid address fails" do
-  #     assert {:error, _reason} = Lightnex.connect("localhost:99999")
-  #   end
+      {:ok, _} = Lightnex.disconnect(conn)
+    end
 
-  #   test "connection summary includes expected fields" do
-  #     {:ok, conn} = Lightnex.connect(@alice_address)
+    test "get_info from Bob" do
+      {:ok, conn} =
+        Lightnex.connect(@bob_address,
+          cred:
+            GRPC.Credential.new(
+              ssl: [
+                cacertfile: @bob_tls_cert,
+                verify: :verify_none
+              ]
+            ),
+          macaroon: @bob_macaroon,
+          macaroon_type: :file,
+          validate: false
+        )
 
-  #     summary = Conn.summary(conn)
-  #     assert summary.address == @alice_address
-  #     assert summary.authenticated == false
-  #     assert is_integer(summary.timeout)
-  #     assert %DateTime{} = summary.connected_at
-  #     assert summary.node_alias == "alice"
-  #     assert is_binary(summary.node_pubkey)
+      assert {:ok, info} = Lightnex.get_info(conn)
+      assert is_binary(info.identity_pubkey)
+      assert info.alias == "bob"
 
-  #     :ok = Lightnex.disconnect(conn)
-  #   end
-  # end
+      {:ok, _} = Lightnex.disconnect(conn)
+    end
 
-  # # Helper functions
+    test "connection without macaroon fails get_info" do
+      {:ok, conn} =
+        Lightnex.connect(@alice_address,
+          cred:
+            GRPC.Credential.new(
+              ssl: [
+                cacertfile: @alice_tls_cert,
+                verify: :verify_none
+              ]
+            ),
+          validate: false
+        )
 
-  # defp wait_for_lnd(address, retries \\ 10) do
-  #   case Lightnex.connect(address, validate: false) do
-  #     {:ok, conn} ->
-  #       Lightnex.disconnect(conn)
+      # Should fail because no macaroon provided
+      assert {:error, %GRPC.RPCError{status: 2, message: msg}} = Lightnex.get_info(conn)
+      assert msg =~ "expected 1 macaroon"
 
-  #       :ok
+      {:ok, _} = Lightnex.disconnect(conn)
+    end
 
-  #     {:error, _} when retries > 0 ->
-  #       Process.sleep(1000)
+    @tag :capture_log
+    test "connection to invalid address fails" do
+      assert {:error, _reason} = Lightnex.connect("localhost:99999")
+    end
 
-  #       wait_for_lnd(address, retries - 1)
+    test "connection summary includes expected fields" do
+      {:ok, conn} =
+        Lightnex.connect(@alice_address,
+          cred:
+            GRPC.Credential.new(
+              ssl: [
+                cacertfile: @alice_tls_cert,
+                verify: :verify_none
+              ]
+            ),
+          macaroon: @alice_macaroon,
+          macaroon_type: :file
+        )
 
-  #     {:error, reason} ->
-  #       raise "LND at #{address} not available after 30 seconds: #{inspect(reason)}"
-  #   end
-  # end
+      summary = Conn.summary(conn)
+      assert summary.address == @alice_address
+      assert summary.authenticated == true
+      assert is_integer(summary.timeout)
+      assert %DateTime{} = summary.connected_at
+      assert summary.node_alias == "alice"
+      assert is_binary(summary.node_pubkey)
+
+      {:ok, _} = Lightnex.disconnect(conn)
+    end
+  end
 end
