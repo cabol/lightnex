@@ -31,7 +31,7 @@ defmodule Mix.Lightnex do
   Formats the code.
   """
   @spec format_code() :: :ok
-  def format_code do
-    Mix.Task.run("format")
+  def format_code(inputs \\ ["lib/lightnex/lnrpc/**/*.ex"]) do
+    Mix.Tasks.Format.run(inputs)
   end
 end

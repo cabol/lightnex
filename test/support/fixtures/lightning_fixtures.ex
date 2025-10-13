@@ -342,6 +342,12 @@ defmodule Lightnex.LightningFixtures do
       :unauthenticated ->
         {:error, %GRPC.RPCError{status: 16, message: "unauthenticated"}}
 
+      :already_exists ->
+        {:error, %GRPC.RPCError{status: 6, message: "already connected to peer"}}
+
+      :deadline_exceeded ->
+        {:error, %GRPC.RPCError{status: 4, message: "deadline exceeded"}}
+
       _ ->
         {:error, %GRPC.RPCError{status: 2, message: "unknown"}}
     end
@@ -434,5 +440,44 @@ defmodule Lightnex.LightningFixtures do
       invalid_macaroon: grpc_error(:unauthenticated),
       not_found: grpc_error(:not_found)
     }
+  end
+
+  @doc """
+  Creates a ConnectPeerResponse.
+  """
+  def connect_peer_response(opts \\ []) do
+    defaults = [
+      status: "connected"
+    ]
+
+    attrs = Keyword.merge(defaults, opts)
+    struct(Lightning.ConnectPeerResponse, attrs)
+  end
+
+  @doc """
+  Creates a LightningAddress.
+  """
+  def lightning_address(opts \\ []) do
+    defaults = [
+      pubkey: "03b2c2c5c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4",
+      host: "localhost:9735"
+    ]
+
+    attrs = Keyword.merge(defaults, opts)
+    struct(Lightning.LightningAddress, attrs)
+  end
+
+  @doc """
+  Creates a ConnectPeerRequest for testing.
+  """
+  def connect_peer_request(opts \\ []) do
+    defaults = [
+      addr: lightning_address(),
+      perm: false,
+      timeout: 0
+    ]
+
+    attrs = Keyword.merge(defaults, opts)
+    struct(Lightning.ConnectPeerRequest, attrs)
   end
 end

@@ -29,7 +29,7 @@ defmodule Lightnex.LNRPC.State.GetStateResponse do
   field :state, 1, type: Lightnex.LNRPC.State.WalletState, enum: true
 end
 
-defmodule Lightnex.LNRPC.State.State.Service do
+defmodule Lightnex.LNRPC.State.Service do
   @moduledoc """
   State service is a always running service that exposes the current state of
   the wallet and RPC server.
@@ -59,6 +59,6 @@ defmodule Lightnex.LNRPC.State.State.Service do
   rpc :GetState, Lightnex.LNRPC.State.GetStateRequest, Lightnex.LNRPC.State.GetStateResponse
 end
 
-defmodule Lightnex.LNRPC.State.State.Stub do
-  use GRPC.Stub, service: Lightnex.LNRPC.State.State.Service
+defmodule Lightnex.LNRPC.State.Stub do
+  use GRPC.Stub, service: Lightnex.LNRPC.State.Service
 end

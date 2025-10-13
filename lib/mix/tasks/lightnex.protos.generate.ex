@@ -89,7 +89,7 @@ defmodule Mix.Tasks.Lightnex.Protos.Generate do
     transform_modules(output_dir, verbose: verbose?)
 
     # Format code
-    format_code(verbose?)
+    format_code(verbose?, output_dir)
 
     # List generated files
     list_generated_files(output_dir)
@@ -221,7 +221,7 @@ defmodule Mix.Tasks.Lightnex.Protos.Generate do
     end
   end
 
-  defp format_code(verbose?) do
+  defp format_code(verbose?, output_dir) do
     if verbose? do
       Mix.shell().info("""
 
@@ -229,7 +229,7 @@ defmodule Mix.Tasks.Lightnex.Protos.Generate do
       """)
     end
 
-    Mix.Lightnex.format_code()
+    Mix.Lightnex.format_code([output_dir <> "/**/*.ex"])
   end
 
   ## Module transformation
@@ -240,7 +240,10 @@ defmodule Mix.Tasks.Lightnex.Protos.Generate do
       {"Lnrpc", "Lightnex.LNRPC.Lightning"},
       {"Lightning.Lightning", "Lightning"}
     ],
-    "stateservice.pb.ex" => [{"Lnrpc", "Lightnex.LNRPC.State"}],
+    "stateservice.pb.ex" => [
+      {"Lnrpc", "Lightnex.LNRPC.State"},
+      {"State.State", "State"}
+    ],
     "walletunlocker.pb.ex" => [
       {"Lnrpc.ChanBackupSnapshot", "Lightnex.LNRPC.Lightning.ChanBackupSnapshot"},
       {"Lnrpc", "Lightnex.LNRPC.WalletUnlocker"},

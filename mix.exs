@@ -70,7 +70,8 @@ defmodule Lightnex.MixProject do
       {:benchee_html, "~> 1.0", only: [:dev, :test]},
 
       # Docs
-      {:ex_doc, "~> 0.38", only: [:dev, :test], runtime: false}
+      {:ex_doc, "~> 0.38", only: [:dev, :test], runtime: false},
+      {:usage_rules, "~> 0.1", only: [:dev, :test], runtime: false}
     ]
   end
 

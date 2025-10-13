@@ -418,6 +418,6 @@ defmodule Mix.Tasks.Lightnex.Protos.GenerateTest do
 
   defp mock_mix_format do
     Mix.Lightnex
-    |> expect(:format_code, fn -> :ok end)
+    |> expect(:format_code, fn _ -> :ok end)
   end
 end

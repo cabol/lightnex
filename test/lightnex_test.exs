@@ -649,34 +649,33 @@ defmodule LightnexTest do
     end
   end
 
-  describe "normalize_pubkey/1 edge cases" do
+  describe "format_pubkey/1 edge cases" do
     setup :verify_on_exit!
 
-    test "converts 66-char valid hex pubkey to binary" do
+    test "converts 66-char valid hex pubkey to binary when calling connect_peer" do
       conn = authenticated_connection()
       # Valid 66-char hex string (33 bytes)
       pubkey_hex = String.duplicate("02", 33)
-      expected_binary = Base.decode16!(pubkey_hex, case: :mixed)
 
       Lightning.Stub
       |> expect(:connect_peer, fn _channel, request, metadata: _ ->
-        # Should be converted to binary (covers line 771)
-        assert request.addr.pubkey == expected_binary
+        # Should be converted to binary
+        assert request.addr.pubkey == pubkey_hex
         {:ok, %Lightning.ConnectPeerResponse{}}
       end)
 
       assert {:ok, _} = Lightnex.connect_peer(conn, pubkey_hex, "host:9735")
     end
 
-    test "passes through non-hex binary unchanged" do
+    test "passes through binary pubkey unchanged" do
       conn = authenticated_connection()
-      # Binary that's not valid hex
+      # Binary input
       pubkey_binary = <<2, 171, 193, 35>>
 
       Lightning.Stub
       |> expect(:connect_peer, fn _channel, request, metadata: _ ->
-        # Should pass through unchanged (covers line 772)
-        assert request.addr.pubkey == pubkey_binary
+        # Should pass through unchanged
+        assert request.addr.pubkey == Base.encode16(pubkey_binary, case: :lower)
         {:ok, %Lightning.ConnectPeerResponse{}}
       end)
 
@@ -691,8 +690,8 @@ defmodule LightnexTest do
 
       Lightning.Stub
       |> expect(:connect_peer, fn _channel, request, metadata: _ ->
-        # Should pass through unchanged (covers line 772 - decode error)
-        assert request.addr.pubkey == invalid_hex
+        # Should pass through unchanged
+        assert request.addr.pubkey == Base.encode16(invalid_hex, case: :lower)
         {:ok, %Lightning.ConnectPeerResponse{}}
       end)
 
@@ -706,7 +705,7 @@ defmodule LightnexTest do
 
       Lightning.Stub
       |> expect(:connect_peer, fn _channel, request, metadata: _ ->
-        # Should pass through unchanged (length check fails)
+        # Should pass through unchanged
         assert request.addr.pubkey == short_hex
         {:ok, %Lightning.ConnectPeerResponse{}}
       end)
@@ -714,20 +713,17 @@ defmodule LightnexTest do
       assert {:ok, _} = Lightnex.connect_peer(conn, short_hex, "host:9735")
     end
 
-    test "handles uppercase hex correctly" do
+    test "handles empty string" do
       conn = authenticated_connection()
-      # Uppercase hex, 66 chars
-      pubkey_hex_upper = String.duplicate("02", 33) |> String.upcase()
-      expected_binary = Base.decode16!(pubkey_hex_upper, case: :mixed)
 
       Lightning.Stub
       |> expect(:connect_peer, fn _channel, request, metadata: _ ->
-        # Should be converted to binary (covers line 771 with uppercase)
-        assert request.addr.pubkey == expected_binary
+        # Empty string should be passed through
+        assert request.addr.pubkey == ""
         {:ok, %Lightning.ConnectPeerResponse{}}
       end)
 
-      assert {:ok, _} = Lightnex.connect_peer(conn, pubkey_hex_upper, "host:9735")
+      assert {:ok, _} = Lightnex.connect_peer(conn, "", "host:9735")
     end
   end
 end

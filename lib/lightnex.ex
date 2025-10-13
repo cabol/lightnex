@@ -65,7 +65,8 @@ defmodule Lightnex do
   alias Lightnex.Conn.NodeInfo
   alias Lightnex.LNRPC.Lightning
 
-  require Logger
+  # Default timeout for connections
+  @default_timeout :timer.seconds(60)
 
   ## ===========================================================================
   ## Connection Management
@@ -238,10 +239,13 @@ defmodule Lightnex do
   def connect_peer(%Conn{} = conn, pubkey, host, opts \\ [])
       when is_binary(pubkey) and is_binary(host) do
     perm = Keyword.get(opts, :perm, false)
-    timeout = Keyword.get(opts, :timeout, 60_000)
+    timeout = Keyword.get(opts, :timeout, @default_timeout)
+
+    # Convert pubkey to hex string if it's binary
+    pubkey_hex = format_pubkey(pubkey)
 
     addr = %Lightning.LightningAddress{
-      pubkey: normalize_pubkey(pubkey),
+      pubkey: pubkey_hex,
       host: host
     }
 
@@ -283,7 +287,7 @@ defmodule Lightnex do
           {:ok, Lightning.DisconnectPeerResponse.t()} | {:error, any()}
   def disconnect_peer(%Conn{} = conn, pubkey) when is_binary(pubkey) do
     request = %Lightning.DisconnectPeerRequest{
-      pub_key: normalize_pubkey(pubkey)
+      pub_key: format_pubkey(pubkey)
     }
 
     metadata = Conn.grpc_metadata(conn)
@@ -669,19 +673,29 @@ defmodule Lightnex do
     }
   end
 
-  defp normalize_pubkey(pubkey) when is_binary(pubkey) do
-    # If it looks like hex, decode it
-    if String.match?(pubkey, ~r/^[0-9a-fA-F]+$/) and String.length(pubkey) == 66 do
-      # We already validated it's valid hex, so decode will always succeed
-      Base.decode16!(pubkey, case: :mixed)
-    else
+  # defp normalize_pubkey(pubkey) when is_binary(pubkey) do
+  #   # If it looks like hex, decode it
+  #   if String.match?(pubkey, ~r/^[0-9a-fA-F]+$/) and String.length(pubkey) == 66 do
+  #     # We already validated it's valid hex, so decode will always succeed
+  #     Base.decode16!(pubkey, case: :mixed)
+  #   else
+  #     pubkey
+  #   end
+  # end
+
+  defp format_pubkey(pubkey) when is_binary(pubkey) do
+    # Check if it's already a hex string (only contains hex characters)
+    if String.match?(pubkey, ~r/^[0-9a-fA-F]+$/) do
       pubkey
+    else
+      # It's binary data, convert to hex
+      Base.encode16(pubkey, case: :lower)
     end
   end
 
   defp build_open_channel_request(node_pubkey, local_funding_amount, opts) do
     %Lightning.OpenChannelRequest{
-      node_pubkey: normalize_pubkey(node_pubkey),
+      node_pubkey: node_pubkey,
       local_funding_amount: local_funding_amount,
       push_sat: Keyword.get(opts, :push_sat, 0),
       target_conf: Keyword.get(opts, :target_conf, 6),

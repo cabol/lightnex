@@ -1,14 +1,87 @@
-defmodule Lightnex.WalletHelper do
+defmodule Lightnex.LNHelpers do
   @moduledoc """
-  Helper module for automated LND wallet creation and unlocking in tests.
+  Helper module for:
+
+    - Connecting to LND.
+    - Automated LND wallet creation and unlocking in tests.
+
   Works in CI/CD environments without manual intervention.
   """
 
   alias Lightnex.LNRPC.WalletUnlocker
 
+  ## Constants
+
+  @alice_address "localhost:10009"
+  @bob_address "localhost:10010"
+
+  @alice_tls_cert "docker/data/lnd-alice/tls.cert"
+  @bob_tls_cert "docker/data/lnd-bob/tls.cert"
+
+  @alice_macaroon "docker/data/lnd-alice/data/chain/bitcoin/regtest/admin.macaroon"
+  @bob_macaroon "docker/data/lnd-bob/data/chain/bitcoin/regtest/admin.macaroon"
+
   @wallet_password "integration_test_password_123"
   @max_retries 60
   @retry_delay 1_000
+
+  ## Lightning
+
+  @doc """
+  Returns the Alice LND node address.
+  """
+  def alice_address, do: @alice_address
+
+  @doc """
+  Returns the Bob LND node address.
+  """
+  def bob_address, do: @bob_address
+
+  @doc """
+  Returns the Alice LND node TLS certificate.
+  """
+  def alice_tls_cert, do: @alice_tls_cert
+
+  @doc """
+  Returns the Bob LND node TLS certificate.
+  """
+  def bob_tls_cert, do: @bob_tls_cert
+
+  @doc """
+  Returns the Alice LND node macaroon.
+  """
+  def alice_macaroon, do: @alice_macaroon
+
+  @doc """
+  Returns the Bob LND node macaroon.
+  """
+  def bob_macaroon, do: @bob_macaroon
+
+  @doc """
+  Connects to the Alice LND node.
+  """
+  def connect_alice(validate? \\ false) do
+    Lightnex.connect(@alice_address,
+      cred: build_credentials(@alice_tls_cert),
+      macaroon: @alice_macaroon,
+      macaroon_type: :file,
+      validate: validate?
+    )
+  end
+
+  @doc """
+  Connects to the Bob LND node.
+  """
+  def connect_bob(validate? \\ false) do
+    Lightnex.connect(@bob_address,
+      cred: build_credentials(@bob_tls_cert),
+      macaroon: @bob_macaroon,
+      macaroon_type: :file,
+      validate: validate?
+    )
+  end
+
+  ## Wallets
 
   @doc """
   Ensures an LND node's wallet is created and unlocked.
@@ -22,22 +95,28 @@ defmodule Lightnex.WalletHelper do
   def ensure_wallet_ready(address, tls_cert, node_name) do
     cred = build_credentials(tls_cert)
 
-    case check_wallet_status(address, cred) do
-      :ready ->
-        IO.puts("✅ #{node_name} wallet already ready")
-        {:ok, :already_ready}
+    {:ok, conn, status} = check_wallet_status(address, cred)
 
-      :locked ->
-        IO.puts("🔓 Unlocking #{node_name} wallet...")
-        unlock_wallet(address, cred)
-        wait_for_ready(address, cred, node_name)
-        {:ok, :unlocked}
+    try do
+      case status do
+        :ready ->
+          IO.puts("✅ #{node_name} wallet already ready")
+          {:ok, :already_ready}
 
-      :not_created ->
-        IO.puts("🔑 Creating #{node_name} wallet...")
-        create_wallet(address, cred, node_name)
-        wait_for_ready(address, cred, node_name)
-        {:ok, :created}
+        :locked ->
+          IO.puts("🔓 Unlocking #{node_name} wallet...")
+          unlock_wallet(conn)
+          wait_for_ready(conn, node_name)
+          {:ok, :unlocked}
+
+        :not_created ->
+          IO.puts("🔑 Creating #{node_name} wallet...")
+          create_wallet(conn, node_name)
+          wait_for_ready(conn, node_name)
+          {:ok, :created}
+      end
+    after
+      Lightnex.disconnect(conn)
     end
   end
 
@@ -51,11 +130,9 @@ defmodule Lightnex.WalletHelper do
   end
 
   defp check_wallet_status(address, cred, retries \\ @max_retries) do
-    case GRPC.Stub.connect(address, cred: cred) do
-      {:ok, channel} ->
-        status = determine_status(channel)
-        GRPC.Stub.disconnect(channel)
-        status
+    case Lightnex.connect(address, cred: cred, validate: false) do
+      {:ok, conn} ->
+        {:ok, conn, determine_status(conn)}
 
       {:error, _} when retries > 0 ->
         Process.sleep(@retry_delay)
@@ -66,11 +143,8 @@ defmodule Lightnex.WalletHelper do
     end
   end
 
-  defp determine_status(channel) do
-    # Try Lightning.GetInfo first - if it works, wallet is ready
-    request = %Lightnex.LNRPC.Lightning.GetInfoRequest{}
-
-    case Lightnex.LNRPC.Lightning.Stub.get_info(channel, request) do
+  defp determine_status(conn) do
+    case Lightnex.get_info(conn) do
       {:ok, _} ->
         :ready
 
@@ -98,22 +172,18 @@ defmodule Lightnex.WalletHelper do
     end
   end
 
-  defp create_wallet(address, cred, node_name) do
-    {:ok, channel} = GRPC.Stub.connect(address, cred: cred)
-
+  defp create_wallet(conn, node_name) do
     # Step 1: Generate a new seed
     IO.puts("  Generating seed for #{node_name}...")
     gen_seed_request = %WalletUnlocker.GenSeedRequest{}
 
-    case WalletUnlocker.Stub.gen_seed(channel, gen_seed_request) do
+    case WalletUnlocker.Stub.gen_seed(conn.channel, gen_seed_request) do
       {:ok, response} ->
         IO.puts("  ✓ Seed generated (#{length(response.cipher_seed_mnemonic)} words)")
         # Continue to step 2
-        initialize_wallet(channel, response.cipher_seed_mnemonic, node_name)
+        initialize_wallet(conn, response.cipher_seed_mnemonic, node_name)
 
       {:error, %GRPC.RPCError{status: 2, message: msg}} ->
-        GRPC.Stub.disconnect(channel)
-
         if msg =~ "already unlocked" do
           # Wallet is already unlocked, we're done
           IO.puts("  ✓ Wallet already exists and is unlocked")
@@ -123,12 +193,11 @@ defmodule Lightnex.WalletHelper do
         end
 
       {:error, reason} ->
-        GRPC.Stub.disconnect(channel)
         raise "Failed to generate seed: #{inspect(reason)}"
     end
   end
 
-  defp initialize_wallet(channel, seed_mnemonic, node_name) do
+  defp initialize_wallet(conn, seed_mnemonic, node_name) do
     # Step 2: Create wallet with the generated seed
     IO.puts("  Initializing wallet for #{node_name}...")
 
@@ -138,17 +207,14 @@ defmodule Lightnex.WalletHelper do
       recovery_window: 0
     }
 
-    case WalletUnlocker.Stub.init_wallet(channel, init_request) do
+    case WalletUnlocker.Stub.init_wallet(conn.channel, init_request) do
       {:ok, _response} ->
-        GRPC.Stub.disconnect(channel)
         IO.puts("  ✓ Wallet created, waiting for LND to restart...")
         # LND restarts after wallet creation, wait longer
         Process.sleep(5000)
         :ok
 
       {:error, %GRPC.RPCError{message: msg} = reason} ->
-        GRPC.Stub.disconnect(channel)
-
         if msg =~ "already exists" or msg =~ "already unlocked" do
           # Wallet already exists, that's fine
           IO.puts("  ✓ Wallet already exists")
@@ -159,24 +225,19 @@ defmodule Lightnex.WalletHelper do
     end
   end
 
-  defp unlock_wallet(address, cred) do
-    {:ok, channel} = GRPC.Stub.connect(address, cred: cred)
-
+  defp unlock_wallet(conn) do
     request = %WalletUnlocker.UnlockWalletRequest{
       wallet_password: @wallet_password
     }
 
-    case WalletUnlocker.Stub.unlock_wallet(channel, request) do
+    case WalletUnlocker.Stub.unlock_wallet(conn.channel, request) do
       {:ok, _response} ->
-        GRPC.Stub.disconnect(channel)
         IO.puts("  ✓ Wallet unlocked")
         # Wait for LND to finish unlocking
         Process.sleep(2000)
         :ok
 
       {:error, %GRPC.RPCError{message: msg} = reason} ->
-        GRPC.Stub.disconnect(channel)
-
         cond do
           msg =~ "invalid passphrase" ->
             raise """
@@ -202,8 +263,8 @@ defmodule Lightnex.WalletHelper do
     end
   end
 
-  defp wait_for_ready(address, cred, node_name, retries \\ @max_retries) do
-    status = check_wallet_status(address, cred, 1)
+  defp wait_for_ready(conn, node_name, retries \\ @max_retries) do
+    status = determine_status(conn)
 
     case status do
       :ready ->
@@ -218,7 +279,7 @@ defmodule Lightnex.WalletHelper do
         end
 
         Process.sleep(@retry_delay)
-        wait_for_ready(address, cred, node_name, retries - 1)
+        wait_for_ready(conn, node_name, retries - 1)
 
       other_status ->
         raise """

@@ -38,7 +38,8 @@ shell:
 prime:
 	echo "⛓️  Generating initial regtest blocks for spendable coins..."
 	@docker exec $(BITCOIND) bitcoin-cli $(RPC) -rpcwallet=miner getwalletinfo >/dev/null 2>&1 || \
-	  docker exec $(BITCOIND) bitcoin-cli $(RPC) createwallet miner >/dev/null
+	  docker exec $(BITCOIND) bitcoin-cli $(RPC) loadwallet miner >/dev/null 2>&1 || \
+	  docker exec $(BITCOIND) bitcoin-cli $(RPC) createwallet miner >/dev/null 2>&1
 	@ADDR=$$(docker exec $(BITCOIND) bitcoin-cli $(RPC) -rpcwallet=miner getnewaddress); \
 	docker exec $(BITCOIND) bitcoin-cli $(RPC) generatetoaddress 101 $$ADDR >/dev/null
 	echo "✓ Chain primed."

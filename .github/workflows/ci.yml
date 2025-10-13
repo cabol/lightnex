@@ -59,6 +59,10 @@ jobs:
           GID: ${{ env.GID }}
         if: ${{ matrix.integration }}
 
+      - name: Prime chain for spendable coins
+        run: make prime
+        if: ${{ matrix.integration }}
+
       - name: Install OTP and Elixir
         uses: erlef/setup-beam@v1
         with:
