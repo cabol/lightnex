@@ -64,6 +64,7 @@ defmodule Lightnex.MixProject do
       {:sobelow, "~> 0.14", only: [:dev, :test], runtime: false},
       {:mimic, "~> 2.1", only: :test},
       {:briefly, "~> 0.5", only: :test},
+      {:btx, github: "cabol/btx", only: [:dev, :test]},
 
       # Benchmark Test
       {:benchee, "~> 1.4", only: [:dev, :test]},

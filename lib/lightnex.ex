@@ -559,6 +559,53 @@ defmodule Lightnex do
     Lightning.Stub.closed_channels(conn.channel, request, metadata: metadata)
   end
 
+  @doc """
+  Closes a Lightning channel cooperatively.
+
+  Initiates a cooperative close of a channel with the specified peer.
+  This is a streaming RPC that returns close status updates.
+
+  ## Parameters
+
+    * `conn` - Active LND connection.
+    * `channel_point` - Channel point identifying the channel to close.
+    * `opts` - Optional keyword list for close parameters.
+
+  ## Options
+
+    * `:force` - Force close the channel (default: `false`).
+    * `:target_conf` - Confirmation target in blocks (default: `0`).
+    * `:sat_per_vbyte` - Fee rate in sat/vbyte (default: `0`).
+    * `:delivery_address` - Address to send funds (default: `""`).
+
+  ## Examples
+
+      # Cooperative close
+      {:ok, stream} = Lightnex.close_channel(conn, channel_point)
+
+      # Force close with custom fee
+      {:ok, stream} = Lightnex.close_channel(conn, channel_point,
+        force: true,
+        sat_per_vbyte: 10
+      )
+
+  """
+  @spec close_channel(Conn.t(), Lightning.ChannelPoint.t(), keyword()) ::
+          {:ok, Enumerable.t()} | {:error, any()}
+  def close_channel(%Conn{} = conn, %Lightning.ChannelPoint{} = channel_point, opts \\ []) do
+    request = %Lightning.CloseChannelRequest{
+      channel_point: channel_point,
+      force: Keyword.get(opts, :force, false),
+      target_conf: Keyword.get(opts, :target_conf, 0),
+      sat_per_vbyte: Keyword.get(opts, :sat_per_vbyte, 0),
+      delivery_address: Keyword.get(opts, :delivery_address, "")
+    }
+
+    metadata = Conn.grpc_metadata(conn)
+
+    Lightning.Stub.close_channel(conn.channel, request, metadata: metadata)
+  end
+
   ## ===========================================================================
   ## Wallet Management
   ## ===========================================================================
@@ -673,15 +720,15 @@ defmodule Lightnex do
     }
   end
 
-  # defp normalize_pubkey(pubkey) when is_binary(pubkey) do
-  #   # If it looks like hex, decode it
-  #   if String.match?(pubkey, ~r/^[0-9a-fA-F]+$/) and String.length(pubkey) == 66 do
-  #     # We already validated it's valid hex, so decode will always succeed
-  #     Base.decode16!(pubkey, case: :mixed)
-  #   else
-  #     pubkey
-  #   end
-  # end
+  defp normalize_pubkey(pubkey) when is_binary(pubkey) do
+    # If it looks like hex, decode it
+    if String.match?(pubkey, ~r/^[0-9a-fA-F]+$/) and String.length(pubkey) == 66 do
+      # We already validated it's valid hex, so decode will always succeed
+      Base.decode16!(pubkey, case: :mixed)
+    else
+      pubkey
+    end
+  end
 
   defp format_pubkey(pubkey) when is_binary(pubkey) do
     # Check if it's already a hex string (only contains hex characters)
@@ -695,7 +742,7 @@ defmodule Lightnex do
 
   defp build_open_channel_request(node_pubkey, local_funding_amount, opts) do
     %Lightning.OpenChannelRequest{
-      node_pubkey: node_pubkey,
+      node_pubkey: normalize_pubkey(node_pubkey),
       local_funding_amount: local_funding_amount,
       push_sat: Keyword.get(opts, :push_sat, 0),
       target_conf: Keyword.get(opts, :target_conf, 6),

@@ -81,6 +81,28 @@ defmodule Lightnex.LNHelpers do
     )
   end
 
+  @doc """
+  Disconnects from an LND node.
+  """
+  def safe_disconnect(conn) do
+    case Lightnex.disconnect(conn) do
+      {:ok, _} -> :ok
+      {:error, %GRPC.RPCError{status: 2}} -> :ok
+      other -> other
+    end
+  end
+
+  @doc """
+  Disconnects from a Lightning Network peer.
+  """
+  def safe_disconnect_peer(conn, pubkey) do
+    case Lightnex.disconnect_peer(conn, pubkey) do
+      {:ok, _} -> :ok
+      {:error, %GRPC.RPCError{status: 2}} -> :ok
+      other -> other
+    end
+  end
+
   ## Wallets
 
   @doc """
@@ -273,9 +295,7 @@ defmodule Lightnex.LNHelpers do
 
       other_status when retries > 0 ->
         if rem(retries, 10) == 0 do
-          IO.puts(
-            "  Waiting for #{node_name}... (status: #{other_status}, #{retries}s remaining)"
-          )
+          IO.puts("  Waiting for #{node_name}... (status: #{other_status}, #{retries}s remaining)")
         end
 
         Process.sleep(@retry_delay)

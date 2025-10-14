@@ -86,7 +86,7 @@
          [
            priority: :low,
            excluded_namespaces: ~w[File IO Inspect Kernel Macro Supervisor Task Version Mix GRPC],
-           if_nested_deeper_than: 2
+           if_nested_deeper_than: 3
          ]},
         # You can also customize the exit_status of each check.
         # If you don't want TODO comments to cause `mix credo` to fail, just
